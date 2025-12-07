@@ -13,22 +13,33 @@ namespace HotelBookingSystem
         private readonly string connectionString =
              "server=localhost;database=hotel_system;user=root;password=Hrrg2906_;";
 
-        public void Register(string username, string password)
+        public bool RegisterCustomer(string name, string username, string email, string password)
+        {
+            string sql = "INSERT INTO customers (name, username, email, password) VALUES (@n, @u, @e, @p)";
+
+            try
             {
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
                     conn.Open();
-
-                    string sql = "INSERT INTO customers (username, password) VALUES (@u, @p)";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@u", username);
-                    cmd.Parameters.AddWithValue("@p", password);
-
-                    cmd.ExecuteNonQuery();
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@n", name);
+                        cmd.Parameters.AddWithValue("@u", username);
+                        cmd.Parameters.AddWithValue("@e", email);
+                        cmd.Parameters.AddWithValue("@p", password);
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+                return true;
             }
+            catch (MySqlException ex) when (ex.Number == 1062)
+            {
+                return false; // usuario o email duplicado
+            }
+        }
 
-            public DataTable GetAllCustomers()
+        public DataTable GetAllCustomers()
             {
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {

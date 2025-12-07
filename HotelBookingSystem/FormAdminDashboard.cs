@@ -40,5 +40,14 @@ namespace HotelBookingSystem
             // Si quieres cargar algo al iniciar, hazlo aquí. Si no, déjalo vacío.
         }
 
+        private void btnFloors_Click(object sender, EventArgs e)
+        {
+            LoadControl(new FloorsControl());
+        }
+
+        private void btnRooms_Click(object sender, EventArgs e)
+        {
+            LoadControl(new RoomsControl());
+        }
     }
 }

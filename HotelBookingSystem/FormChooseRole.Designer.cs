@@ -32,24 +32,31 @@
             btnCustomer = new Button();
             btnAdmin = new Button();
             label1 = new Label();
+            label2 = new Label();
+            pictureBox1 = new PictureBox();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridRoles).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // dataGridRoles
             // 
-            dataGridRoles.BackgroundColor = Color.Azure;
+            dataGridRoles.BackgroundColor = Color.White;
             dataGridRoles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridRoles.Location = new Point(215, 72);
+            dataGridRoles.Dock = DockStyle.Right;
+            dataGridRoles.Location = new Point(296, 0);
             dataGridRoles.Name = "dataGridRoles";
             dataGridRoles.RowHeadersWidth = 51;
-            dataGridRoles.Size = new Size(382, 252);
+            dataGridRoles.Size = new Size(304, 450);
             dataGridRoles.TabIndex = 0;
             dataGridRoles.CellContentClick += dataGridRoles_CellContentClick;
             // 
             // btnCustomer
             // 
-            btnCustomer.BackColor = Color.MintCream;
-            btnCustomer.Location = new Point(340, 178);
+            btnCustomer.BackColor = Color.White;
+            btnCustomer.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnCustomer.ForeColor = Color.Black;
+            btnCustomer.Location = new Point(69, 292);
             btnCustomer.Name = "btnCustomer";
             btnCustomer.Size = new Size(123, 29);
             btnCustomer.TabIndex = 1;
@@ -59,8 +66,10 @@
             // 
             // btnAdmin
             // 
-            btnAdmin.BackColor = Color.Linen;
-            btnAdmin.Location = new Point(340, 236);
+            btnAdmin.BackColor = SystemColors.ControlText;
+            btnAdmin.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAdmin.ForeColor = Color.White;
+            btnAdmin.Location = new Point(374, 292);
             btnAdmin.Name = "btnAdmin";
             btnAdmin.Size = new Size(123, 29);
             btnAdmin.TabIndex = 2;
@@ -71,25 +80,65 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.BackColor = Color.Azure;
-            label1.Location = new Point(349, 131);
+            label1.BackColor = Color.White;
+            label1.Font = new Font("Arial Rounded MT Bold", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(339, 112);
             label1.Name = "label1";
-            label1.Size = new Size(104, 20);
+            label1.Size = new Size(188, 27);
             label1.TabIndex = 3;
-            label1.Text = "What are you?";
+            label1.Text = "Welcome Back!";
+            label1.Click += label1_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.White;
+            label2.Font = new Font("Arial Rounded MT Bold", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(324, 198);
+            label2.Name = "label2";
+            label2.Size = new Size(203, 27);
+            label2.TabIndex = 4;
+            label2.Text = "Choose your role";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.Bookily__1__removebg_preview;
+            pictureBox1.Location = new Point(42, 27);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(195, 198);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.White;
+            label3.Font = new Font("Arial Rounded MT Bold", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(385, 157);
+            label3.Name = "label3";
+            label3.Size = new Size(94, 27);
+            label3.TabIndex = 6;
+            label3.Text = "Please,";
             // 
             // FormChooseRole
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = SystemColors.ControlText;
+            ClientSize = new Size(600, 450);
+            Controls.Add(label3);
+            Controls.Add(pictureBox1);
+            Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(btnAdmin);
             Controls.Add(btnCustomer);
             Controls.Add(dataGridRoles);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "FormChooseRole";
             Text = "FormChooseRole";
             ((System.ComponentModel.ISupportInitialize)dataGridRoles).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -100,5 +149,8 @@
         private Button btnCustomer;
         private Button btnAdmin;
         private Label label1;
+        private Label label2;
+        private PictureBox pictureBox1;
+        private Label label3;
     }
 }

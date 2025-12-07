@@ -38,5 +38,10 @@ namespace HotelBookingSystem
             this.Hide();
             new FormAdminHotel().Show();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

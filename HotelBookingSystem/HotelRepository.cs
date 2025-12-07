@@ -45,6 +45,35 @@ namespace HotelBookingSystem.Repository
             return success;
         }
 
+        public bool CustomerLogin(string username, string password)
+        {
+            bool success = false;
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(_connectionString))
+                {
+                    // Only check username and password
+                    string query = "SELECT COUNT(*) FROM customers WHERE username = @username AND password = @password";
+                    MySqlCommand cmd = new MySqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@password", password);
+
+                    con.Open();
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    success = count > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Connection error: " + ex.Message);
+            }
+
+            return success;
+        }
+
+
+
         // Obtener todos los hoteles
         public DataTable GetHotels()
         {

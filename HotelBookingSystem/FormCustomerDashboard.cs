@@ -10,20 +10,11 @@ using System.Windows.Forms;
 
 namespace HotelBookingSystem
 {
-    public partial class FormAdminRegister : Form
+    public partial class FormCustomerDashboard : Form
     {
-        public FormAdminRegister()
+        public FormCustomerDashboard()
         {
             InitializeComponent();
         }
-
-        private void btnAdminRegister_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Admin registered successfully!");
-
-            this.Hide();
-            new FormAdminHotel().Show();
-        }
-
     }
 }

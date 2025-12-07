@@ -28,7 +28,7 @@ namespace HotelBookingSystem
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Por favor ingrese usuario y contraseña.");
+                MessageBox.Show("Please enter a user and password.");
                 return;
             }
 
@@ -36,16 +36,17 @@ namespace HotelBookingSystem
 
             if (loggedIn)
             {
-                MessageBox.Show("Inicio de sesión exitoso.");
+                MessageBox.Show("Successfull login.");
 
                 // Abrir formulario principal del admin
                 FormAdminDashboard dashboard = new FormAdminDashboard();
                 dashboard.Show();
                 this.Hide();
+
             }
             else
             {
-                MessageBox.Show("Usuario o contraseña incorrectos.");
+                MessageBox.Show("Incorrect user or password.");
             }
 
         }
@@ -55,15 +56,29 @@ namespace HotelBookingSystem
 
         }
 
-        private void btnAdminRegister_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            new FormAdminRegister().Show();
-        }
-
         private void textUsername_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            textPassword.PasswordChar = checkBox1.Checked ? '\0' : '•';
+        }
+
+        private void Close_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -63,6 +63,16 @@ namespace HotelBookingSystem.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Bookily__1__removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("Bookily__1_-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Bookily_removebg_preview {
             get {
                 object obj = ResourceManager.GetObject("Bookily-removebg-preview", resourceCulture);

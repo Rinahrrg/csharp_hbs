@@ -13,12 +13,37 @@ namespace HotelBookingSystem
 {
     public partial class FormCustomerRegister : Form
     {
-        // Reemplaza la declaración de txtPassword y asegúrate de que sea del tipo TextBox
-        private TextBox txtPassword;
-
+        private CustomerRepository customerRepo = new CustomerRepository();
         public FormCustomerRegister()
         {
             InitializeComponent();
+
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            string name = textName.Text.Trim();
+            string username = textUsername.Text.Trim();
+            string email = textEmail.Text.Trim();
+            string password = textPassword.Text;
+            string confirmPassword = textConfirmPassword.Text;
+
+            // validaciones (las tienes bien)
+
+            bool success = customerRepo.RegisterCustomer(name, username, email, password);
+
+            if (success)
+            {
+                MessageBox.Show("Registration successful! You can now log in.");
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+                FormCustomerHotel loginForm = new FormCustomerHotel();
+                loginForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Username or email already exists.");
+            }
         }
 
         private void FormCustomerRegister_Load(object sender, EventArgs e)
@@ -40,24 +65,20 @@ namespace HotelBookingSystem
         {
 
         }
-
-        // En el método btnCustomerRegister_Click, asegúrate de que txtPassword es un TextBox y accede a su propiedad Text
-        private void btnCustomerRegister_Click(object sender, EventArgs e)
-        {
-            FormCustomerHotel customer = new FormCustomerHotel()
-            {
-                
-            };
-
-            CustomerRepository repo = new CustomerRepository();
-            repo.AddCustomer(customer);
-
-            MessageBox.Show("Cliente registrado con éxito");
-        }
-
         private void textName_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            textPassword.PasswordChar = checkBox1.Checked ? '\0' : '•';
+            textConfirmPassword.PasswordChar = checkBox1.Checked ? '\0' : '•';
+        }
+
+        private void Close_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
