@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            comboBoxStatus = new ComboBox();
             checkBoxCoffeeMachine = new CheckBox();
             checkBoxTelephone = new CheckBox();
             checkBoxHairDryer = new CheckBox();
@@ -43,7 +42,6 @@
             comboBoxCategory = new ComboBox();
             textBoxRoomNumber = new TextBox();
             label8 = new Label();
-            label7 = new Label();
             label5 = new Label();
             label4 = new Label();
             label2 = new Label();
@@ -65,7 +63,6 @@
             // panel1
             // 
             panel1.BackColor = Color.Black;
-            panel1.Controls.Add(comboBoxStatus);
             panel1.Controls.Add(checkBoxCoffeeMachine);
             panel1.Controls.Add(checkBoxTelephone);
             panel1.Controls.Add(checkBoxHairDryer);
@@ -79,7 +76,6 @@
             panel1.Controls.Add(comboBoxCategory);
             panel1.Controls.Add(textBoxRoomNumber);
             panel1.Controls.Add(label8);
-            panel1.Controls.Add(label7);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label2);
@@ -97,14 +93,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(815, 642);
             panel1.TabIndex = 13;
-            // 
-            // comboBoxStatus
-            // 
-            comboBoxStatus.FormattingEnabled = true;
-            comboBoxStatus.Location = new Point(187, 303);
-            comboBoxStatus.Name = "comboBoxStatus";
-            comboBoxStatus.Size = new Size(151, 28);
-            comboBoxStatus.TabIndex = 31;
             // 
             // checkBoxCoffeeMachine
             // 
@@ -248,17 +236,6 @@
             label8.Text = "Assets:";
             label8.Click += label8_Click;
             // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.ForeColor = Color.White;
-            label7.Location = new Point(67, 314);
-            label7.Name = "label7";
-            label7.Size = new Size(112, 17);
-            label7.TabIndex = 17;
-            label7.Text = "Booking Time:";
-            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -316,7 +293,7 @@
             // 
             dataGridViewRooms.BackgroundColor = Color.White;
             dataGridViewRooms.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewRooms.Location = new Point(36, 428);
+            dataGridViewRooms.Location = new Point(29, 359);
             dataGridViewRooms.Name = "dataGridViewRooms";
             dataGridViewRooms.RowHeadersWidth = 51;
             dataGridViewRooms.Size = new Size(740, 198);
@@ -325,7 +302,7 @@
             // btnEditRoom
             // 
             btnEditRoom.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnEditRoom.Location = new Point(211, 382);
+            btnEditRoom.Location = new Point(196, 313);
             btnEditRoom.Name = "btnEditRoom";
             btnEditRoom.Size = new Size(94, 29);
             btnEditRoom.TabIndex = 11;
@@ -336,7 +313,7 @@
             // btnRefresh
             // 
             btnRefresh.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnRefresh.Location = new Point(496, 382);
+            btnRefresh.Location = new Point(485, 313);
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(94, 29);
             btnRefresh.TabIndex = 8;
@@ -347,7 +324,7 @@
             // btnDeleteRoom
             // 
             btnDeleteRoom.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnDeleteRoom.Location = new Point(349, 382);
+            btnDeleteRoom.Location = new Point(614, 313);
             btnDeleteRoom.Name = "btnDeleteRoom";
             btnDeleteRoom.Size = new Size(94, 29);
             btnDeleteRoom.TabIndex = 7;
@@ -367,7 +344,7 @@
             // btnUpdateRoom
             // 
             btnUpdateRoom.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnUpdateRoom.Location = new Point(641, 382);
+            btnUpdateRoom.Location = new Point(336, 313);
             btnUpdateRoom.Name = "btnUpdateRoom";
             btnUpdateRoom.Size = new Size(94, 29);
             btnUpdateRoom.TabIndex = 6;
@@ -389,7 +366,7 @@
             // btnAddRoom
             // 
             btnAddRoom.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnAddRoom.Location = new Point(67, 382);
+            btnAddRoom.Location = new Point(67, 313);
             btnAddRoom.Name = "btnAddRoom";
             btnAddRoom.Size = new Size(94, 29);
             btnAddRoom.TabIndex = 5;
@@ -429,7 +406,6 @@
         private Label label5;
         private Label label4;
         private Label label8;
-        private Label label7;
         private NumericUpDown numericUpDownBeds;
         private ComboBox comboBoxCategory;
         private TextBox textBoxRoomNumber;
@@ -442,6 +418,5 @@
         private CheckBox checkBoxCoffeeMachine;
         private CheckBox checkBoxTelephone;
         private CheckBox checkBoxHairDryer;
-        private ComboBox comboBoxStatus;
     }
 }

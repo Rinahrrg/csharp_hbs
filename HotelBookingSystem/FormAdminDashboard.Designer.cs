@@ -61,6 +61,7 @@
             btnReports.TabIndex = 8;
             btnReports.Text = "Reports";
             btnReports.UseVisualStyleBackColor = true;
+            btnReports.Click += btnReports_Click;
             // 
             // btnCustomers
             // 
@@ -71,6 +72,7 @@
             btnCustomers.TabIndex = 7;
             btnCustomers.Text = "Customers";
             btnCustomers.UseVisualStyleBackColor = true;
+            btnCustomers.Click += btnCustomers_Click;
             // 
             // btnFoodOrder
             // 
@@ -81,6 +83,7 @@
             btnFoodOrder.TabIndex = 6;
             btnFoodOrder.Text = "Food Orders";
             btnFoodOrder.UseVisualStyleBackColor = true;
+            btnFoodOrder.Click += btnFoodOrder_Click;
             // 
             // btnBookings
             // 
@@ -91,6 +94,7 @@
             btnBookings.TabIndex = 5;
             btnBookings.Text = "Bookings";
             btnBookings.UseVisualStyleBackColor = true;
+            btnBookings.Click += btnBookings_Click;
             // 
             // button1
             // 
@@ -101,6 +105,7 @@
             button1.TabIndex = 0;
             button1.Text = "Logout";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // btnAddHotel
             // 
@@ -148,6 +153,7 @@
             btnAssets.TabIndex = 3;
             btnAssets.Text = "Assets";
             btnAssets.UseVisualStyleBackColor = false;
+            btnAssets.Click += btnAssets_Click;
             // 
             // pictureLogo
             // 

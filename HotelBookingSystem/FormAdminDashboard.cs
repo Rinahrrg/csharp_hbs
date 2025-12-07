@@ -49,5 +49,35 @@ namespace HotelBookingSystem
         {
             LoadControl(new RoomsControl());
         }
+
+        private void btnAssets_Click(object sender, EventArgs e)
+        {
+            LoadControl(new AssetsControl());
+        }
+
+        private void btnBookings_Click(object sender, EventArgs e)
+        {
+            LoadControl(new BookingsControl());
+        }
+
+        private void btnFoodOrder_Click(object sender, EventArgs e)
+        {
+            LoadControl(new FoodOrdersControl());
+        }
+
+        private void btnCustomers_Click(object sender, EventArgs e)
+        {
+            LoadControl(new CustomerControl());
+        }
+
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            LoadControl(new ReportsControl());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
