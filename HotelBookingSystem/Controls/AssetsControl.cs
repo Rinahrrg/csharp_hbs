@@ -29,12 +29,16 @@ namespace HotelBookingSystem
             using (MySqlConnection c = new MySqlConnection(conn))
             {
                 c.Open();
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, type, description, status FROM asset_types", c);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, type FROM asset_types", c);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                dataGridViewAssets.DataSource = dt;
+
+                comboBoxAssetType.DisplayMember = "type";  
+                comboBoxAssetType.ValueMember = "id";     
+                comboBoxAssetType.DataSource = dt;        
             }
         }
+
 
         private void LoadAssets()
         {
@@ -81,11 +85,12 @@ namespace HotelBookingSystem
             {
                 c.Open();
                 MySqlCommand cmd = new MySqlCommand(
-                    "INSERT INTO assets (name, description, brand, asset_type) VALUES (@name, @desc, @brand, @type)", c);
+                    "INSERT INTO assets (name, description, brand, asset_type, status) VALUES (@name, @desc, @brand, @type, @status)", c);
                 cmd.Parameters.AddWithValue("@name", txtAssetName.Text.Trim());
                 cmd.Parameters.AddWithValue("@desc", txtDescription.Text.Trim());
                 cmd.Parameters.AddWithValue("@brand", txtBrand.Text.Trim());
                 cmd.Parameters.AddWithValue("@type", Convert.ToInt32(comboBoxAssetType.SelectedValue));
+                cmd.Parameters.AddWithValue("@status", comboBoxStatus.SelectedItem.ToString()); // Aseguramos que se usa el estado seleccionado
                 cmd.ExecuteNonQuery();
             }
 
@@ -93,7 +98,6 @@ namespace HotelBookingSystem
             LoadAssets();
             ClearForm();
         }
-
         private void btnEditAsset_Click(object sender, EventArgs e)
         {
             if (dataGridViewAssets.SelectedRows.Count == 0) return;
@@ -104,8 +108,8 @@ namespace HotelBookingSystem
             txtDescription.Text = row.Cells["Description"].Value?.ToString() ?? "";
             txtBrand.Text = row.Cells["Brand"].Value?.ToString() ?? "";
             comboBoxAssetType.Text = row.Cells["Type"].Value.ToString();
+            comboBoxStatus.SelectedItem = row.Cells["Status"].Value.ToString(); // Cargar el estado del asset
         }
-
         private void btnUpdateAsset_Click(object sender, EventArgs e)
         {
             if (editingAssetId == -1) return;
@@ -113,14 +117,23 @@ namespace HotelBookingSystem
             using (MySqlConnection c = new MySqlConnection(conn))
             {
                 c.Open();
-                MySqlCommand cmd = new MySqlCommand(
+
+                // Primero, actualizamos la tabla assets, sin tocar el campo status.
+                MySqlCommand cmdUpdateAsset = new MySqlCommand(
                     "UPDATE assets SET name=@name, description=@desc, brand=@brand, asset_type=@type WHERE id=@id", c);
-                cmd.Parameters.AddWithValue("@name", txtAssetName.Text.Trim());
-                cmd.Parameters.AddWithValue("@desc", txtDescription.Text.Trim());
-                cmd.Parameters.AddWithValue("@brand", txtBrand.Text.Trim());
-                cmd.Parameters.AddWithValue("@type", Convert.ToInt32(comboBoxAssetType.SelectedValue));
-                cmd.Parameters.AddWithValue("@id", editingAssetId);
-                cmd.ExecuteNonQuery();
+                cmdUpdateAsset.Parameters.AddWithValue("@name", txtAssetName.Text.Trim());
+                cmdUpdateAsset.Parameters.AddWithValue("@desc", txtDescription.Text.Trim());
+                cmdUpdateAsset.Parameters.AddWithValue("@brand", txtBrand.Text.Trim());
+                cmdUpdateAsset.Parameters.AddWithValue("@type", Convert.ToInt32(comboBoxAssetType.SelectedValue));
+                cmdUpdateAsset.Parameters.AddWithValue("@id", editingAssetId);
+                cmdUpdateAsset.ExecuteNonQuery();
+
+                // Luego, actualizamos el campo status en la tabla asset_types.
+                MySqlCommand cmdUpdateStatus = new MySqlCommand(
+                    "UPDATE asset_types SET status=@status WHERE id=@typeId", c);
+                cmdUpdateStatus.Parameters.AddWithValue("@status", comboBoxStatus.SelectedItem.ToString()); // Usamos el estado seleccionado
+                cmdUpdateStatus.Parameters.AddWithValue("@typeId", Convert.ToInt32(comboBoxAssetType.SelectedValue)); // ID del tipo de asset
+                cmdUpdateStatus.ExecuteNonQuery();
             }
 
             MessageBox.Show("Asset updated!");
@@ -162,6 +175,7 @@ namespace HotelBookingSystem
             txtAssetName.Clear();
             txtDescription.Clear();
             txtBrand.Clear();
+            comboBoxAssetType.SelectedIndex = -1;  
         }
     }
 }

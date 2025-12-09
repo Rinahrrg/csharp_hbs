@@ -67,7 +67,7 @@ namespace HotelBookingSystem
 
         private void btnCustomers_Click(object sender, EventArgs e)
         {
-            LoadControl(new CustomerControl());
+            LoadControl(new ViewHotelControl());
         }
 
         private void btnReports_Click(object sender, EventArgs e)
@@ -77,7 +77,14 @@ namespace HotelBookingSystem
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            this.Close();
+            FormAdminHotel loginForm = new FormAdminHotel();
+            loginForm.Show();
+        }
+
+        private void pictureLogo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

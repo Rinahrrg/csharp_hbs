@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btnDeleteAsset = new Button();
+            btnUpdateAsset = new Button();
+            btnEditAsset = new Button();
+            dataGridViewAssets = new DataGridView();
             comboBoxStatus = new ComboBox();
             comboBoxAssetType = new ComboBox();
             txtDescription = new TextBox();
@@ -41,10 +45,6 @@
             btnRefresh = new Button();
             label3 = new Label();
             btnAddAsset = new Button();
-            dataGridViewAssets = new DataGridView();
-            btnEditAsset = new Button();
-            btnUpdateAsset = new Button();
-            btnDeleteAsset = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAssets).BeginInit();
             SuspendLayout();
@@ -72,6 +72,50 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(815, 642);
             panel1.TabIndex = 14;
+            // 
+            // btnDeleteAsset
+            // 
+            btnDeleteAsset.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnDeleteAsset.Location = new Point(625, 313);
+            btnDeleteAsset.Name = "btnDeleteAsset";
+            btnDeleteAsset.Size = new Size(94, 29);
+            btnDeleteAsset.TabIndex = 38;
+            btnDeleteAsset.Text = "Delete";
+            btnDeleteAsset.UseVisualStyleBackColor = true;
+            btnDeleteAsset.Click += btnDeleteAsset_Click;
+            // 
+            // btnUpdateAsset
+            // 
+            btnUpdateAsset.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnUpdateAsset.Location = new Point(336, 313);
+            btnUpdateAsset.Name = "btnUpdateAsset";
+            btnUpdateAsset.Size = new Size(94, 29);
+            btnUpdateAsset.TabIndex = 37;
+            btnUpdateAsset.Text = "Update";
+            btnUpdateAsset.UseVisualStyleBackColor = true;
+            btnUpdateAsset.Click += btnUpdateAsset_Click;
+            // 
+            // btnEditAsset
+            // 
+            btnEditAsset.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnEditAsset.Location = new Point(193, 313);
+            btnEditAsset.Name = "btnEditAsset";
+            btnEditAsset.Size = new Size(94, 29);
+            btnEditAsset.TabIndex = 36;
+            btnEditAsset.Text = "Edit";
+            btnEditAsset.UseVisualStyleBackColor = true;
+            btnEditAsset.Click += btnEditAsset_Click;
+            // 
+            // dataGridViewAssets
+            // 
+            dataGridViewAssets.BackgroundColor = Color.White;
+            dataGridViewAssets.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewAssets.GridColor = Color.White;
+            dataGridViewAssets.Location = new Point(18, 364);
+            dataGridViewAssets.Name = "dataGridViewAssets";
+            dataGridViewAssets.RowHeadersWidth = 51;
+            dataGridViewAssets.Size = new Size(769, 260);
+            dataGridViewAssets.TabIndex = 35;
             // 
             // comboBoxStatus
             // 
@@ -163,6 +207,7 @@
             btnRefresh.TabIndex = 8;
             btnRefresh.Text = "Refresh";
             btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // label3
             // 
@@ -184,47 +229,7 @@
             btnAddAsset.TabIndex = 5;
             btnAddAsset.Text = "Add ";
             btnAddAsset.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewAssets
-            // 
-            dataGridViewAssets.BackgroundColor = Color.White;
-            dataGridViewAssets.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewAssets.GridColor = Color.White;
-            dataGridViewAssets.Location = new Point(18, 364);
-            dataGridViewAssets.Name = "dataGridViewAssets";
-            dataGridViewAssets.RowHeadersWidth = 51;
-            dataGridViewAssets.Size = new Size(769, 260);
-            dataGridViewAssets.TabIndex = 35;
-            // 
-            // btnEditAsset
-            // 
-            btnEditAsset.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnEditAsset.Location = new Point(193, 313);
-            btnEditAsset.Name = "btnEditAsset";
-            btnEditAsset.Size = new Size(94, 29);
-            btnEditAsset.TabIndex = 36;
-            btnEditAsset.Text = "Edit";
-            btnEditAsset.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdateAsset
-            // 
-            btnUpdateAsset.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnUpdateAsset.Location = new Point(336, 313);
-            btnUpdateAsset.Name = "btnUpdateAsset";
-            btnUpdateAsset.Size = new Size(94, 29);
-            btnUpdateAsset.TabIndex = 37;
-            btnUpdateAsset.Text = "Update";
-            btnUpdateAsset.UseVisualStyleBackColor = true;
-            // 
-            // btnDeleteAsset
-            // 
-            btnDeleteAsset.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnDeleteAsset.Location = new Point(625, 313);
-            btnDeleteAsset.Name = "btnDeleteAsset";
-            btnDeleteAsset.Size = new Size(94, 29);
-            btnDeleteAsset.TabIndex = 38;
-            btnDeleteAsset.Text = "Delete";
-            btnDeleteAsset.UseVisualStyleBackColor = true;
+            btnAddAsset.Click += btnAddAsset_Click;
             // 
             // AssetsControl
             // 

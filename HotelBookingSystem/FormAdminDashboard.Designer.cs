@@ -17,7 +17,7 @@
         {
             panelMenu = new Panel();
             btnReports = new Button();
-            btnCustomers = new Button();
+            btnViewHotels = new Button();
             btnFoodOrder = new Button();
             btnBookings = new Button();
             button1 = new Button();
@@ -37,7 +37,7 @@
             // 
             panelMenu.BackColor = Color.Black;
             panelMenu.Controls.Add(btnReports);
-            panelMenu.Controls.Add(btnCustomers);
+            panelMenu.Controls.Add(btnViewHotels);
             panelMenu.Controls.Add(btnFoodOrder);
             panelMenu.Controls.Add(btnBookings);
             panelMenu.Controls.Add(button1);
@@ -55,7 +55,7 @@
             // btnReports
             // 
             btnReports.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnReports.Location = new Point(12, 492);
+            btnReports.Location = new Point(12, 527);
             btnReports.Name = "btnReports";
             btnReports.Size = new Size(150, 40);
             btnReports.TabIndex = 8;
@@ -63,21 +63,21 @@
             btnReports.UseVisualStyleBackColor = true;
             btnReports.Click += btnReports_Click;
             // 
-            // btnCustomers
+            // btnViewHotels
             // 
-            btnCustomers.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCustomers.Location = new Point(12, 446);
-            btnCustomers.Name = "btnCustomers";
-            btnCustomers.Size = new Size(150, 40);
-            btnCustomers.TabIndex = 7;
-            btnCustomers.Text = "Customers";
-            btnCustomers.UseVisualStyleBackColor = true;
-            btnCustomers.Click += btnCustomers_Click;
+            btnViewHotels.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnViewHotels.Location = new Point(12, 481);
+            btnViewHotels.Name = "btnViewHotels";
+            btnViewHotels.Size = new Size(150, 40);
+            btnViewHotels.TabIndex = 7;
+            btnViewHotels.Text = "View Hotels";
+            btnViewHotels.UseVisualStyleBackColor = true;
+            btnViewHotels.Click += btnCustomers_Click;
             // 
             // btnFoodOrder
             // 
             btnFoodOrder.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnFoodOrder.Location = new Point(12, 400);
+            btnFoodOrder.Location = new Point(12, 435);
             btnFoodOrder.Name = "btnFoodOrder";
             btnFoodOrder.Size = new Size(150, 40);
             btnFoodOrder.TabIndex = 6;
@@ -88,7 +88,7 @@
             // btnBookings
             // 
             btnBookings.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnBookings.Location = new Point(12, 354);
+            btnBookings.Location = new Point(12, 389);
             btnBookings.Name = "btnBookings";
             btnBookings.Size = new Size(150, 40);
             btnBookings.TabIndex = 5;
@@ -111,7 +111,7 @@
             // 
             btnAddHotel.BackColor = Color.White;
             btnAddHotel.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnAddHotel.Location = new Point(12, 170);
+            btnAddHotel.Location = new Point(12, 205);
             btnAddHotel.Name = "btnAddHotel";
             btnAddHotel.Size = new Size(150, 40);
             btnAddHotel.TabIndex = 0;
@@ -123,7 +123,7 @@
             // 
             btnFloors.BackColor = Color.White;
             btnFloors.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnFloors.Location = new Point(12, 216);
+            btnFloors.Location = new Point(12, 251);
             btnFloors.Name = "btnFloors";
             btnFloors.Size = new Size(150, 40);
             btnFloors.TabIndex = 1;
@@ -135,7 +135,7 @@
             // 
             btnRooms.BackColor = Color.White;
             btnRooms.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnRooms.Location = new Point(12, 262);
+            btnRooms.Location = new Point(12, 297);
             btnRooms.Name = "btnRooms";
             btnRooms.Size = new Size(150, 40);
             btnRooms.TabIndex = 2;
@@ -147,7 +147,7 @@
             // 
             btnAssets.BackColor = Color.White;
             btnAssets.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnAssets.Location = new Point(12, 308);
+            btnAssets.Location = new Point(12, 343);
             btnAssets.Name = "btnAssets";
             btnAssets.Size = new Size(150, 40);
             btnAssets.TabIndex = 3;
@@ -165,6 +165,7 @@
             pictureLogo.SizeMode = PictureBoxSizeMode.Zoom;
             pictureLogo.TabIndex = 4;
             pictureLogo.TabStop = false;
+            pictureLogo.Click += pictureLogo_Click;
             // 
             // panelCentral
             // 
@@ -226,7 +227,7 @@
         private DateTimePicker dateTimePicker1;
         private Button button1;
         private Button btnReports;
-        private Button btnCustomers;
+        private Button btnViewHotels;
         private Button btnFoodOrder;
         private Button btnBookings;
     }

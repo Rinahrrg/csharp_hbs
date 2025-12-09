@@ -30,8 +30,17 @@ namespace HotelBookingSystem
         private void LoadHotels()
         {
             DataTable dt = _repo.GetHotels();
-            dataGridViewHotels.DataSource = dt;
+         //   dataGridViewHotel.DataSource = dt;
         }
 
+        private void dataGridViewFoodOrders_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
