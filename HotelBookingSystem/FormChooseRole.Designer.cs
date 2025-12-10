@@ -134,7 +134,6 @@
             Controls.Add(btnAdmin);
             Controls.Add(btnCustomer);
             Controls.Add(dataGridRoles);
-            FormBorderStyle = FormBorderStyle.None;
             Name = "FormChooseRole";
             Text = "FormChooseRole";
             ((System.ComponentModel.ISupportInitialize)dataGridRoles).EndInit();

@@ -54,7 +54,7 @@ namespace HotelBookingSystem
             {
                 MessageBox.Show("Successfull login.");
 
-                FormCustomerDashboard dashboard = new FormCustomerDashboard();
+                FormCustomerDashboard dashboard = new FormCustomerDashboard(username);
                 dashboard.Show();
                 this.Hide();
 

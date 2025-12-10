@@ -28,229 +28,223 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            txtSearch = new TextBox();
-            dtpCheckIn = new DateTimePicker();
-            dtpCheckOut = new DateTimePicker();
+            lblTitle = new Label();
+            txtDestination = new TextBox();
             btnSearch = new Button();
-            label2 = new Label();
-            dataGridViewMyBookings = new DataGridView();
-            label3 = new Label();
-            label4 = new Label();
-            txtBookingCode = new TextBox();
-            btnViewBooking = new Button();
             flowLayoutPanelHotels = new FlowLayoutPanel();
-            pictureBox1 = new PictureBox();
-            lblHotelName = new Label();
-            lblPrice = new Label();
-            btnViewRooms = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewMyBookings).BeginInit();
-            flowLayoutPanelHotels.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panelSearch = new Panel();
+            lblDestination = new Label();
+            lblCheckIn = new Label();
+            dateCheckIn = new DateTimePicker();
+            lblCheckOut = new Label();
+            dateCheckOut = new DateTimePicker();
+            lblHotelsTitle = new Label();
+            lblMyBookings = new Label();
+            dataGridViewBookings = new DataGridView();
+            panelSearch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewBookings).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // lblTitle
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(30, 65);
-            label1.Name = "label1";
-            label1.Size = new Size(168, 17);
-            label1.TabIndex = 0;
-            label1.Text = "Where are you going?";
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Arial Rounded MT Bold", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTitle.Location = new Point(16, 14);
+            lblTitle.Margin = new Padding(4, 0, 4, 0);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(153, 34);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "BOOKIFY";
             // 
-            // txtSearch
+            // txtDestination
             // 
-            txtSearch.Location = new Point(30, 95);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(245, 27);
-            txtSearch.TabIndex = 1;
-            // 
-            // dtpCheckIn
-            // 
-            dtpCheckIn.Location = new Point(332, 93);
-            dtpCheckIn.Name = "dtpCheckIn";
-            dtpCheckIn.Size = new Size(109, 27);
-            dtpCheckIn.TabIndex = 2;
-            // 
-            // dtpCheckOut
-            // 
-            dtpCheckOut.Location = new Point(471, 93);
-            dtpCheckOut.Name = "dtpCheckOut";
-            dtpCheckOut.Size = new Size(109, 27);
-            dtpCheckOut.TabIndex = 3;
+            txtDestination.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtDestination.Location = new Point(13, 49);
+            txtDestination.Margin = new Padding(4, 5, 4, 5);
+            txtDestination.Name = "txtDestination";
+            txtDestination.Size = new Size(265, 26);
+            txtDestination.TabIndex = 1;
             // 
             // btnSearch
             // 
-            btnSearch.BackColor = Color.Black;
-            btnSearch.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnSearch.ForeColor = Color.White;
-            btnSearch.Location = new Point(627, 94);
+            btnSearch.BackColor = Color.White;
+            btnSearch.FlatStyle = FlatStyle.Flat;
+            btnSearch.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnSearch.ForeColor = Color.Black;
+            btnSearch.Location = new Point(745, 32);
+            btnSearch.Margin = new Padding(4, 5, 4, 5);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(94, 29);
-            btnSearch.TabIndex = 4;
-            btnSearch.Text = "Search";
+            btnSearch.Size = new Size(155, 49);
+            btnSearch.TabIndex = 6;
+            btnSearch.Text = "Search Hotels";
             btnSearch.UseVisualStyleBackColor = false;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(30, 149);
-            label2.Name = "label2";
-            label2.Size = new Size(125, 17);
-            label2.TabIndex = 6;
-            label2.Text = "Available Hotels";
-            // 
-            // dataGridViewMyBookings
-            // 
-            dataGridViewMyBookings.BackgroundColor = Color.Black;
-            dataGridViewMyBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewMyBookings.Location = new Point(12, 462);
-            dataGridViewMyBookings.Name = "dataGridViewMyBookings";
-            dataGridViewMyBookings.RowHeadersWidth = 51;
-            dataGridViewMyBookings.Size = new Size(776, 188);
-            dataGridViewMyBookings.TabIndex = 7;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(30, 442);
-            label3.Name = "label3";
-            label3.Size = new Size(100, 17);
-            label3.TabIndex = 8;
-            label3.Text = "My Bookings";
-            label3.Click += label3_Click;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(30, 686);
-            label4.Name = "label4";
-            label4.Size = new Size(175, 17);
-            label4.TabIndex = 9;
-            label4.Text = "View Booking by Code:";
-            label4.Click += label4_Click;
-            // 
-            // txtBookingCode
-            // 
-            txtBookingCode.Location = new Point(211, 676);
-            txtBookingCode.Name = "txtBookingCode";
-            txtBookingCode.Size = new Size(248, 27);
-            txtBookingCode.TabIndex = 10;
-            // 
-            // btnViewBooking
-            // 
-            btnViewBooking.BackColor = Color.Black;
-            btnViewBooking.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnViewBooking.ForeColor = Color.White;
-            btnViewBooking.Location = new Point(504, 674);
-            btnViewBooking.Name = "btnViewBooking";
-            btnViewBooking.Size = new Size(170, 29);
-            btnViewBooking.TabIndex = 11;
-            btnViewBooking.Text = "View Details";
-            btnViewBooking.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
             // 
             // flowLayoutPanelHotels
             // 
-            flowLayoutPanelHotels.BackColor = Color.Black;
-            flowLayoutPanelHotels.Controls.Add(pictureBox1);
-            flowLayoutPanelHotels.Controls.Add(lblHotelName);
-            flowLayoutPanelHotels.Controls.Add(lblPrice);
-            flowLayoutPanelHotels.Controls.Add(btnViewRooms);
-            flowLayoutPanelHotels.Location = new Point(30, 187);
+            flowLayoutPanelHotels.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            flowLayoutPanelHotels.AutoScroll = true;
+            flowLayoutPanelHotels.BackColor = Color.WhiteSmoke;
+            flowLayoutPanelHotels.Location = new Point(16, 265);
+            flowLayoutPanelHotels.Margin = new Padding(4, 5, 4, 5);
             flowLayoutPanelHotels.Name = "flowLayoutPanelHotels";
-            flowLayoutPanelHotels.Size = new Size(200, 222);
-            flowLayoutPanelHotels.TabIndex = 12;
+            flowLayoutPanelHotels.Padding = new Padding(13, 15, 13, 15);
+            flowLayoutPanelHotels.Size = new Size(1028, 431);
+            flowLayoutPanelHotels.TabIndex = 3;
             // 
-            // pictureBox1
+            // panelSearch
             // 
-            pictureBox1.Location = new Point(3, 3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(197, 130);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            panelSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panelSearch.BackColor = Color.Black;
+            panelSearch.BorderStyle = BorderStyle.FixedSingle;
+            panelSearch.Controls.Add(lblDestination);
+            panelSearch.Controls.Add(txtDestination);
+            panelSearch.Controls.Add(lblCheckIn);
+            panelSearch.Controls.Add(dateCheckIn);
+            panelSearch.Controls.Add(lblCheckOut);
+            panelSearch.Controls.Add(dateCheckOut);
+            panelSearch.Controls.Add(btnSearch);
+            panelSearch.Location = new Point(16, 77);
+            panelSearch.Margin = new Padding(4, 5, 4, 5);
+            panelSearch.Name = "panelSearch";
+            panelSearch.Size = new Size(1028, 114);
+            panelSearch.TabIndex = 4;
             // 
-            // lblHotelName
+            // lblDestination
             // 
-            lblHotelName.AutoSize = true;
-            lblHotelName.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblHotelName.ForeColor = Color.White;
-            lblHotelName.Location = new Point(3, 136);
-            lblHotelName.Name = "lblHotelName";
-            lblHotelName.Size = new Size(52, 17);
-            lblHotelName.TabIndex = 1;
-            lblHotelName.Text = "label5";
+            lblDestination.AutoSize = true;
+            lblDestination.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDestination.ForeColor = Color.White;
+            lblDestination.Location = new Point(13, 18);
+            lblDestination.Margin = new Padding(4, 0, 4, 0);
+            lblDestination.Name = "lblDestination";
+            lblDestination.Size = new Size(90, 17);
+            lblDestination.TabIndex = 0;
+            lblDestination.Text = "Destination";
             // 
-            // lblPrice
+            // lblCheckIn
             // 
-            lblPrice.AutoSize = true;
-            lblPrice.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPrice.ForeColor = Color.White;
-            lblPrice.Location = new Point(61, 136);
-            lblPrice.Name = "lblPrice";
-            lblPrice.Size = new Size(52, 17);
-            lblPrice.TabIndex = 2;
-            lblPrice.Text = "label5";
+            lblCheckIn.AutoSize = true;
+            lblCheckIn.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCheckIn.ForeColor = Color.White;
+            lblCheckIn.Location = new Point(293, 18);
+            lblCheckIn.Margin = new Padding(4, 0, 4, 0);
+            lblCheckIn.Name = "lblCheckIn";
+            lblCheckIn.Size = new Size(74, 17);
+            lblCheckIn.TabIndex = 2;
+            lblCheckIn.Text = "Check-In";
             // 
-            // btnViewRooms
+            // dateCheckIn
             // 
-            btnViewRooms.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnViewRooms.Location = new Point(3, 156);
-            btnViewRooms.Name = "btnViewRooms";
-            btnViewRooms.Size = new Size(94, 29);
-            btnViewRooms.TabIndex = 3;
-            btnViewRooms.Text = "Book";
-            btnViewRooms.UseVisualStyleBackColor = true;
+            dateCheckIn.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dateCheckIn.Format = DateTimePickerFormat.Short;
+            dateCheckIn.Location = new Point(293, 49);
+            dateCheckIn.Margin = new Padding(4, 5, 4, 5);
+            dateCheckIn.Name = "dateCheckIn";
+            dateCheckIn.Size = new Size(199, 26);
+            dateCheckIn.TabIndex = 3;
+            // 
+            // lblCheckOut
+            // 
+            lblCheckOut.AutoSize = true;
+            lblCheckOut.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCheckOut.ForeColor = Color.White;
+            lblCheckOut.Location = new Point(507, 18);
+            lblCheckOut.Margin = new Padding(4, 0, 4, 0);
+            lblCheckOut.Name = "lblCheckOut";
+            lblCheckOut.Size = new Size(86, 17);
+            lblCheckOut.TabIndex = 4;
+            lblCheckOut.Text = "Check-Out";
+            // 
+            // dateCheckOut
+            // 
+            dateCheckOut.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dateCheckOut.Format = DateTimePickerFormat.Short;
+            dateCheckOut.Location = new Point(507, 49);
+            dateCheckOut.Margin = new Padding(4, 5, 4, 5);
+            dateCheckOut.Name = "dateCheckOut";
+            dateCheckOut.Size = new Size(199, 26);
+            dateCheckOut.TabIndex = 5;
+            // 
+            // lblHotelsTitle
+            // 
+            lblHotelsTitle.AutoSize = true;
+            lblHotelsTitle.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblHotelsTitle.Location = new Point(16, 215);
+            lblHotelsTitle.Margin = new Padding(4, 0, 4, 0);
+            lblHotelsTitle.Name = "lblHotelsTitle";
+            lblHotelsTitle.Size = new Size(225, 23);
+            lblHotelsTitle.TabIndex = 5;
+            lblHotelsTitle.Text = "Recommended Hotels";
+            // 
+            // lblMyBookings
+            // 
+            lblMyBookings.AutoSize = true;
+            lblMyBookings.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMyBookings.Location = new Point(16, 723);
+            lblMyBookings.Margin = new Padding(4, 0, 4, 0);
+            lblMyBookings.Name = "lblMyBookings";
+            lblMyBookings.Size = new Size(133, 23);
+            lblMyBookings.TabIndex = 6;
+            lblMyBookings.Text = "My Bookings";
+            // 
+            // dataGridViewBookings
+            // 
+            dataGridViewBookings.AllowUserToAddRows = false;
+            dataGridViewBookings.AllowUserToDeleteRows = false;
+            dataGridViewBookings.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridViewBookings.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewBookings.BackgroundColor = Color.Black;
+            dataGridViewBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewBookings.Location = new Point(16, 769);
+            dataGridViewBookings.Margin = new Padding(4, 5, 4, 5);
+            dataGridViewBookings.Name = "dataGridViewBookings";
+            dataGridViewBookings.ReadOnly = true;
+            dataGridViewBookings.RowHeadersVisible = false;
+            dataGridViewBookings.RowHeadersWidth = 51;
+            dataGridViewBookings.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewBookings.Size = new Size(1028, 277);
+            dataGridViewBookings.TabIndex = 7;
             // 
             // FormCustomerDashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(800, 750);
+            ClientSize = new Size(1060, 1055);
+            Controls.Add(dataGridViewBookings);
+            Controls.Add(lblMyBookings);
+            Controls.Add(lblHotelsTitle);
+            Controls.Add(panelSearch);
             Controls.Add(flowLayoutPanelHotels);
-            Controls.Add(btnViewBooking);
-            Controls.Add(txtBookingCode);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(dataGridViewMyBookings);
-            Controls.Add(label2);
-            Controls.Add(btnSearch);
-            Controls.Add(dtpCheckOut);
-            Controls.Add(dtpCheckIn);
-            Controls.Add(txtSearch);
-            Controls.Add(label1);
-            FormBorderStyle = FormBorderStyle.None;
+            Controls.Add(lblTitle);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "FormCustomerDashboard";
-            Text = "FormCustomerDashboard";
-            ((System.ComponentModel.ISupportInitialize)dataGridViewMyBookings).EndInit();
-            flowLayoutPanelHotels.ResumeLayout(false);
-            flowLayoutPanelHotels.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Customer Dashboard - Hotel Booking System";
+            Load += FormCustomerDashboard_Load;
+            panelSearch.ResumeLayout(false);
+            panelSearch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewBookings).EndInit();
             ResumeLayout(false);
             PerformLayout();
+
         }
 
         #endregion
 
-        private Label label1;
-        private TextBox txtSearch;
-        private DateTimePicker dtpCheckIn;
-        private DateTimePicker dtpCheckOut;
-        private Button btnSearch;
-        private Label label2;
-        private DataGridView dataGridViewMyBookings;
-        private Label label3;
-        private Label label4;
-        private TextBox txtBookingCode;
-        private Button btnViewBooking;
-        private FlowLayoutPanel flowLayoutPanelHotels;
-        private PictureBox pictureBox1;
-        private Label lblHotelName;
-        private Label lblPrice;
-        private Button btnViewRooms;
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblDestination;
+        private System.Windows.Forms.TextBox txtDestination;
+        private System.Windows.Forms.Label lblCheckIn;
+        private System.Windows.Forms.DateTimePicker dateCheckIn;
+        private System.Windows.Forms.Label lblCheckOut;
+        private System.Windows.Forms.DateTimePicker dateCheckOut;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelHotels;
+        private System.Windows.Forms.Panel panelSearch;
+        private System.Windows.Forms.Label lblHotelsTitle;
+        private System.Windows.Forms.Label lblMyBookings;
+        private System.Windows.Forms.DataGridView dataGridViewBookings;
     }
 }

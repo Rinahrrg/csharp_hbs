@@ -159,7 +159,6 @@ namespace HotelBookingSystem
             Controls.Add(label1);
             Controls.Add(btnLogin);
             Controls.Add(dataGridView1);
-            FormBorderStyle = FormBorderStyle.None;
             Name = "FormAdminHotel";
             Text = "Form2";
             Load += FormAdminHotel_Load;

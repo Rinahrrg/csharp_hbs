@@ -40,38 +40,84 @@ namespace HotelBookingSystem
         }
 
         public DataTable GetAllCustomers()
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                using (MySqlConnection conn = new MySqlConnection(connectionString))
-                {
-                    conn.Open();
-                    string sql = "SELECT * FROM customers";
+                conn.Open();
+                string sql = "SELECT * FROM customers";
 
-                    MySqlDataAdapter da = new MySqlDataAdapter(sql, conn);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    return dt;
-                }
+                MySqlDataAdapter da = new MySqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
             }
+        }
 
-            public bool Login(string username, string password)
+        public bool Login(string username, string password)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                using (MySqlConnection conn = new MySqlConnection(connectionString))
-                {
-                    conn.Open();
-                    string sql = "SELECT COUNT(*) FROM customers WHERE username=@u AND password=@p";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                conn.Open();
+                string sql = "SELECT COUNT(*) FROM customers WHERE username=@u AND password=@p";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
 
-                    cmd.Parameters.AddWithValue("@u", username);
-                    cmd.Parameters.AddWithValue("@p", password);
+                cmd.Parameters.AddWithValue("@u", username);
+                cmd.Parameters.AddWithValue("@p", password);
 
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-                    return count > 0;
-                }
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                return count > 0;
             }
+        }
 
         internal void AddCustomer(FormCustomerHotel customer)
         {
             throw new NotImplementedException();
+        }
+
+        public DataTable GetCustomerBookings(string username)
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    // Query to get bookings for a specific customer
+                    // Note: This assumes a bookings table exists with customer_id foreign key
+                    // If the bookings table doesn't exist yet, this will return an empty DataTable
+                    string sql = @"SELECT
+                                    b.id AS 'Booking ID',
+                                    h.name AS 'Hotel Name',
+                                    h.address AS 'Address',
+                                    b.check_in AS 'Check-In Date',
+                                    b.check_out AS 'Check-Out Date',
+                                    b.status AS 'Status'
+                                FROM bookings b
+                                INNER JOIN hotels h ON b.hotel_id = h.id
+                                INNER JOIN customers c ON b.customer_id = c.id
+                                WHERE c.username = @username
+                                ORDER BY b.check_in DESC";
+
+                    MySqlDataAdapter da = new MySqlDataAdapter(sql, conn);
+                    da.SelectCommand.Parameters.AddWithValue("@username", username);
+                    da.Fill(dt);
+                }
+            }
+            catch (MySqlException ex)
+            {
+                // If the bookings table doesn't exist or has different schema, return empty DataTable
+                // This allows the application to work even without the proper bookings table structure
+                if (ex.Number == 1146 || // Table doesn't exist
+                    ex.Number == 1054)   // Unknown column
+                {
+                    return dt; // Return empty DataTable
+                }
+                throw; // Re-throw other exceptions
+            }
+
+            return dt;
         }
     }
 }

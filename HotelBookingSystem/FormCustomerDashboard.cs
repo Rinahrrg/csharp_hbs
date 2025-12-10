@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,149 +7,234 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HotelBookingSystem.Repository;
 
 namespace HotelBookingSystem
 {
     public partial class FormCustomerDashboard : Form
     {
-        private readonly string conn = "server=localhost;database=hotel_system;user=root;password=Hrrg2906_;";
-        private int customerId = 1; // Cambiar por el cliente logueado
+        private HotelRepository hotelRepository;
+        private CustomerRepository customerRepository;
+        private DataTable allHotels;
+        private string currentUsername;
 
-        public FormCustomerDashboard()
+        public FormCustomerDashboard(string username = "Guest")
         {
             InitializeComponent();
+            hotelRepository = new HotelRepository();
+            customerRepository = new CustomerRepository();
+            currentUsername = username;
+        }
+
+        private void FormCustomerDashboard_Load(object sender, EventArgs e)
+        {
+            dateCheckIn.MinDate = DateTime.Today;
+            dateCheckOut.MinDate = DateTime.Today.AddDays(1);
+            dateCheckIn.Value = DateTime.Today;
+            dateCheckOut.Value = DateTime.Today.AddDays(1);
+
             LoadHotels();
+
             LoadMyBookings();
         }
 
-        private void LoadHotels()
+        private void LoadHotels(string destination = "")
         {
-            flowLayoutPanelHotels.Controls.Clear();
-
-            using (MySqlConnection c = new MySqlConnection(conn))
+            try
             {
-                c.Open();
-                string sql = "SELECT id, name, address, photo, default_booking_time FROM hotels ORDER BY name";
-                MySqlCommand cmd = new MySqlCommand(sql, c);
-                MySqlDataReader r = cmd.ExecuteReader();
+                // Get all hotels from database
+                allHotels = hotelRepository.GetHotels();
 
-                while (r.Read())
+                // Clear existing cards
+                flowLayoutPanelHotels.Controls.Clear();
+
+                // Filter hotels if destination is provided
+                DataRow[] filteredHotels;
+                if (string.IsNullOrWhiteSpace(destination))
                 {
-                    CreateHotelCard(
-                        r.GetInt32("id"),
-                        r.GetString("name"),
-                        r.GetString("address"),
-                        r["photo"] as byte[],
-                        r.GetInt32("default_booking_time")
-                    );
+                    // Show all hotels as "Recommended"
+                    filteredHotels = allHotels.Select();
+                    lblHotelsTitle.Text = "Recommended Hotels";
                 }
+                else
+                {
+                    // Filter by destination/location
+                    filteredHotels = allHotels.Select(
+                        $"address LIKE '%{destination}%'"
+                    );
+                    lblHotelsTitle.Text = $"Hotels in '{destination}'";
+                }
+
+                // Display message if no hotels found
+                if (filteredHotels.Length == 0)
+                {
+                    Label noResultsLabel = new Label();
+                    noResultsLabel.Text = "No hotels found in this destination. Try searching for another location!";
+                    noResultsLabel.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Italic);
+                    noResultsLabel.ForeColor = Color.Gray;
+                    noResultsLabel.AutoSize = true;
+                    noResultsLabel.Padding = new Padding(20);
+                    flowLayoutPanelHotels.Controls.Add(noResultsLabel);
+                    return;
+                }
+
+                // Create a card for each hotel
+                foreach (DataRow row in filteredHotels)
+                {
+                    Panel card = CreateHotelCard(row);
+                    flowLayoutPanelHotels.Controls.Add(card);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading hotels: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void CreateHotelCard(int hotelId, string name, string address, byte[] photo, int bookingTime)
+        private Panel CreateHotelCard(DataRow hotelData)
         {
-            Panel card = new Panel { Width = 320, Height = 400, Margin = new Padding(20) };
+            // Create card panel
+            Panel card = new Panel();
+            card.Width = 300;
+            card.Height = 170;
+            card.BorderStyle = BorderStyle.FixedSingle;
+            card.BackColor = Color.White;
+            card.Margin = new Padding(10);
+            card.Padding = new Padding(15);
 
-            PictureBox pic = new PictureBox
-            {
-                Width = 300,
-                Height = 180,
-                Location = new Point(10, 10),
-                SizeMode = PictureBoxSizeMode.Zoom,
-                BorderStyle = BorderStyle.FixedSingle
-            };
-
-            if (photo != null)
-            {
-                using (MemoryStream ms = new MemoryStream(photo))
-                    pic.Image = Image.FromStream(ms);
-            }
-
-            Label lblName = new Label
-            {
-                Text = name,
-                Location = new Point(10, 200),
-                Font = new Font("Segoe UI", 14, FontStyle.Bold),
-                AutoSize = true
-            };
-
-            Label lblAddress = new Label
-            {
-                Text = address,
-                Location = new Point(10, 230),
-                AutoSize = true
-            };
-
-            Label lblPrice = new Label
-            {
-                Text = $"Desde ${(bookingTime * 10)}/noche",
-                Location = new Point(10, 260),
-                Font = new Font("Segoe UI", 11, FontStyle.Bold),
-                ForeColor = Color.Green,
-                AutoSize = true
-            };
-
-            Button btnBook = new Button
-            {
-                Text = "Ver Habitaciones",
-                Location = new Point(10, 310),
-                Size = new Size(300, 50),
-                BackColor = Color.FromArgb(0, 123, 255),
-                ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat
-            };
-            btnBook.Tag = hotelId;
-            btnBook.Click += (s, e) =>
-            {
-                FormRoomSelection frm = new FormRoomSelection(hotelId, customerId);
-                frm.ShowDialog();
-                LoadMyBookings();
-            };
-
-            card.Controls.Add(pic);
+            // Hotel name label
+            Label lblName = new Label();
+            lblName.Text = hotelData["name"].ToString();
+            lblName.Font = new Font("AerArial Rounded MT", 13F, FontStyle.Bold);
+            lblName.ForeColor = Color.Black;
+            lblName.AutoSize = true;
+            lblName.MaximumSize = new Size(270, 0);
+            lblName.Location = new Point(10, 10);
             card.Controls.Add(lblName);
-            card.Controls.Add(lblAddress);
-            card.Controls.Add(lblPrice);
+
+            // Location label
+            Label lblLocationIcon = new Label();
+            lblLocationIcon.Text = "📍";
+            lblLocationIcon.Font = new Font("AerArial Rounded MT", 10F);
+            lblLocationIcon.AutoSize = true;
+            lblLocationIcon.Location = new Point(10, 50);
+            card.Controls.Add(lblLocationIcon);
+
+            Label lblLocation = new Label();
+            lblLocation.Text = hotelData["address"].ToString();
+            lblLocation.Font = new Font("AerArial Rounded MT", 9F);
+            lblLocation.AutoSize = true;
+            lblLocation.MaximumSize = new Size(240, 0);
+            lblLocation.Location = new Point(30, 52);
+            card.Controls.Add(lblLocation);
+
+            // Divider line
+            Panel divider = new Panel();
+            divider.Height = 1;
+            divider.Width = 270;
+            divider.BackColor = Color.LightGray;
+            divider.Location = new Point(10, 90);
+            card.Controls.Add(divider);
+
+            // Hotel ID (hidden, for future booking functionality)
+            Label lblId = new Label();
+            lblId.Text = hotelData["id"].ToString();
+            lblId.Visible = false;
+            lblId.Name = "hotelId";
+            card.Controls.Add(lblId);
+
+            // Book button
+            Button btnBook = new Button();
+            btnBook.Text = "Book Now";
+            btnBook.Font = new Font("AerArial Rounded MT", 10F, FontStyle.Bold);
+            btnBook.Size = new Size(270, 38);
+            btnBook.Location = new Point(10, 110);
+            btnBook.BackColor = Color.FromArgb(0, 122, 204);
+            btnBook.ForeColor = Color.White;
+            btnBook.FlatStyle = FlatStyle.Flat;
+            btnBook.Cursor = Cursors.Hand;
+            btnBook.Click += (sender, e) => {
+                BookHotel(hotelData);
+            };
             card.Controls.Add(btnBook);
 
-            flowLayoutPanelHotels.Controls.Add(card);
+            // Add hover effect
+            card.MouseEnter += (sender, e) => {
+                card.BackColor = Color.FromArgb(240, 248, 255);
+            };
+            card.MouseLeave += (sender, e) => {
+                card.BackColor = Color.White;
+            };
+
+            return card;
+        }
+
+        private void BookHotel(DataRow hotelData)
+        {
+            string hotelName = hotelData["name"].ToString();
+            string checkIn = dateCheckIn.Value.ToString("yyyy-MM-dd");
+            string checkOut = dateCheckOut.Value.ToString("yyyy-MM-dd");
+
+            // Validate dates
+            if (dateCheckOut.Value <= dateCheckIn.Value)
+            {
+                MessageBox.Show("Check-out date must be after check-in date!", "Invalid Dates",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Calculate number of nights
+            int nights = (dateCheckOut.Value - dateCheckIn.Value).Days;
+
+            string message = $"Hotel: {hotelName}\n" +
+                           $"Check-in: {dateCheckIn.Value.ToShortDateString()}\n" +
+                           $"Check-out: {dateCheckOut.Value.ToShortDateString()}\n" +
+                           $"Number of nights: {nights}\n\n" +
+                           $"Booking functionality will be fully implemented soon!\n" +
+                           $"This will create a reservation in the database.";
+
+            MessageBox.Show(message, "Booking Preview", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void LoadMyBookings()
         {
-            using (MySqlConnection c = new MySqlConnection(conn))
+            try
             {
-                c.Open();
-                string sql = @"
-                    SELECT b.booking_code, h.name AS hotel, r.id AS room, b.start_time, b.end_time, b.food_option
-                    FROM bookings b
-                    JOIN rooms r ON b.room_id = r.id
-                    JOIN floors f ON r.floor_id = f.id
-                    JOIN hotels h ON f.hotel_id = h.id
-                    WHERE b.customer_id = @cid";
+                DataTable bookings = customerRepository.GetCustomerBookings(currentUsername);
 
-                MySqlCommand cmd = new MySqlCommand(sql, c);
-                cmd.Parameters.AddWithValue("@cid", customerId);
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dataGridViewMyBookings.DataSource = dt;
+                if (bookings.Rows.Count == 0)
+                {
+                    // Show a message in the grid
+                    bookings.Columns.Add("Message");
+                    bookings.Rows.Add("You don't have any bookings yet. Search for hotels above to make your first booking!");
+                }
+
+                dataGridViewBookings.DataSource = bookings;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading bookings: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
+            string destination = txtDestination.Text.Trim();
 
-        }
+            // Validate dates
+            if (dateCheckOut.Value <= dateCheckIn.Value)
+            {
+                MessageBox.Show("Check-out date must be after check-in date!", "Invalid Dates",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
+            // Update minimum date for check-out based on check-in
+            dateCheckOut.MinDate = dateCheckIn.Value.AddDays(1);
 
-        }
-
-        private void lblHotelName_Click(object sender, EventArgs e)
-        {
-
+            LoadHotels(destination);
         }
     }
 }

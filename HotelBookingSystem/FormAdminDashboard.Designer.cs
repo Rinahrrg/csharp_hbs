@@ -205,7 +205,6 @@
             Controls.Add(label1);
             Controls.Add(panelCentral);
             Controls.Add(panelMenu);
-            FormBorderStyle = FormBorderStyle.None;
             Name = "FormAdminDashboard";
             Text = "Admin Dashboard";
             panelMenu.ResumeLayout(false);
