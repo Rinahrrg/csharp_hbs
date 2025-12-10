@@ -184,16 +184,19 @@ namespace HotelBookingSystem
             btnBook.ForeColor = Color.White;
             btnBook.FlatStyle = FlatStyle.Flat;
             btnBook.Cursor = Cursors.Hand;
-            btnBook.Click += (sender, e) => {
+            btnBook.Click += (sender, e) =>
+            {
                 BookHotel(hotelData);
             };
             card.Controls.Add(btnBook);
 
             // Add hover effect
-            card.MouseEnter += (sender, e) => {
+            card.MouseEnter += (sender, e) =>
+            {
                 card.BackColor = Color.FromArgb(240, 248, 255);
             };
-            card.MouseLeave += (sender, e) => {
+            card.MouseLeave += (sender, e) =>
+            {
                 card.BackColor = Color.White;
             };
 
@@ -269,6 +272,28 @@ namespace HotelBookingSystem
             dateCheckOut.MinDate = dateCheckIn.Value.AddDays(1);
 
             LoadHotels(destination);
+        }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to log out?",
+                "Logout",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+
+                FormCustomerHotel loginForm = new FormCustomerHotel();
+                loginForm.Show();
+            }
         }
     }
 }

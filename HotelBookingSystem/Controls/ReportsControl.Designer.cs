@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btnHotelRevenue = new Button();
             Refresh = new Button();
             btnAssetsStatus = new Button();
             dataGridViewReports = new DataGridView();
-            btnRoomsByStatus = new Button();
             btnMostBookedRoom = new Button();
-            btnHotelRevenue = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewReports).BeginInit();
             SuspendLayout();
@@ -46,19 +45,29 @@
             panel1.Controls.Add(Refresh);
             panel1.Controls.Add(btnAssetsStatus);
             panel1.Controls.Add(dataGridViewReports);
-            panel1.Controls.Add(btnRoomsByStatus);
             panel1.Controls.Add(btnMostBookedRoom);
-            panel1.Location = new Point(3, 25);
+            panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(815, 642);
             panel1.TabIndex = 15;
             // 
+            // btnHotelRevenue
+            // 
+            btnHotelRevenue.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnHotelRevenue.Location = new Point(339, 45);
+            btnHotelRevenue.Name = "btnHotelRevenue";
+            btnHotelRevenue.Size = new Size(221, 29);
+            btnHotelRevenue.TabIndex = 39;
+            btnHotelRevenue.Text = "Hotel With Most Revenue";
+            btnHotelRevenue.UseVisualStyleBackColor = true;
+            btnHotelRevenue.Click += btnHotelRevenue_Click;
+            // 
             // Refresh
             // 
             Refresh.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Refresh.Location = new Point(571, 103);
+            Refresh.Location = new Point(339, 103);
             Refresh.Name = "Refresh";
-            Refresh.Size = new Size(197, 29);
+            Refresh.Size = new Size(221, 29);
             Refresh.TabIndex = 38;
             Refresh.Text = "Refresh";
             Refresh.UseVisualStyleBackColor = true;
@@ -67,7 +76,7 @@
             // btnAssetsStatus
             // 
             btnAssetsStatus.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnAssetsStatus.Location = new Point(339, 103);
+            btnAssetsStatus.Location = new Point(85, 103);
             btnAssetsStatus.Name = "btnAssetsStatus";
             btnAssetsStatus.Size = new Size(197, 29);
             btnAssetsStatus.TabIndex = 36;
@@ -86,17 +95,6 @@
             dataGridViewReports.Size = new Size(769, 469);
             dataGridViewReports.TabIndex = 35;
             // 
-            // btnRoomsByStatus
-            // 
-            btnRoomsByStatus.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnRoomsByStatus.Location = new Point(85, 103);
-            btnRoomsByStatus.Name = "btnRoomsByStatus";
-            btnRoomsByStatus.Size = new Size(191, 29);
-            btnRoomsByStatus.TabIndex = 8;
-            btnRoomsByStatus.Text = "Rooms By Status";
-            btnRoomsByStatus.UseVisualStyleBackColor = true;
-            btnRoomsByStatus.Click += btnRoomsStatus_Click;
-            // 
             // btnMostBookedRoom
             // 
             btnMostBookedRoom.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -107,17 +105,6 @@
             btnMostBookedRoom.Text = "Most Booked Room";
             btnMostBookedRoom.UseVisualStyleBackColor = true;
             btnMostBookedRoom.Click += btnMostBookedRoom_Click;
-            // 
-            // btnHotelRevenue
-            // 
-            btnHotelRevenue.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnHotelRevenue.Location = new Point(339, 45);
-            btnHotelRevenue.Name = "btnHotelRevenue";
-            btnHotelRevenue.Size = new Size(221, 29);
-            btnHotelRevenue.TabIndex = 39;
-            btnHotelRevenue.Text = "Hotel With Most Revenue";
-            btnHotelRevenue.UseVisualStyleBackColor = true;
-            btnHotelRevenue.Click += btnHotelRevenue_Click;
             // 
             // ReportsControl
             // 
@@ -148,7 +135,6 @@
         private Label label4;
         private Label label2;
         private Label label1;
-        private Button btnRoomsByStatus;
         private Label label3;
         private Button btnMostBookedRoom;
         private Button Refresh;

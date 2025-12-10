@@ -28,192 +28,223 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.txtDestination = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.flowLayoutPanelHotels = new System.Windows.Forms.FlowLayoutPanel();
-            this.panelSearch = new System.Windows.Forms.Panel();
-            this.lblDestination = new System.Windows.Forms.Label();
-            this.lblCheckIn = new System.Windows.Forms.Label();
-            this.lblCheckOut = new System.Windows.Forms.Label();
-            this.dateCheckIn = new System.Windows.Forms.DateTimePicker();
-            this.dateCheckOut = new System.Windows.Forms.DateTimePicker();
-            this.lblHotelsTitle = new System.Windows.Forms.Label();
-            this.lblMyBookings = new System.Windows.Forms.Label();
-            this.dataGridViewBookings = new System.Windows.Forms.DataGridView();
-            this.panelSearch.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBookings)).BeginInit();
-            this.SuspendLayout();
-            //
+            lblTitle = new Label();
+            txtDestination = new TextBox();
+            btnSearch = new Button();
+            flowLayoutPanelHotels = new FlowLayoutPanel();
+            panelSearch = new Panel();
+            lblDestination = new Label();
+            lblCheckIn = new Label();
+            dateCheckIn = new DateTimePicker();
+            lblCheckOut = new Label();
+            dateCheckOut = new DateTimePicker();
+            lblHotelsTitle = new Label();
+            lblMyBookings = new Label();
+            dataGridViewBookings = new DataGridView();
+            btnLogout = new Button();
+            panelSearch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewBookings).BeginInit();
+            SuspendLayout();
+            // 
             // lblTitle
-            //
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(12, 9);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(316, 29);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Hotel Booking Dashboard";
-            //
-            // lblDestination
-            //
-            this.lblDestination.AutoSize = true;
-            this.lblDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDestination.Location = new System.Drawing.Point(10, 12);
-            this.lblDestination.Name = "lblDestination";
-            this.lblDestination.Size = new System.Drawing.Size(79, 15);
-            this.lblDestination.TabIndex = 0;
-            this.lblDestination.Text = "Destination";
-            //
+            // 
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Arial Rounded MT Bold", 13.8F);
+            lblTitle.Location = new Point(16, 14);
+            lblTitle.Margin = new Padding(4, 0, 4, 0);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(117, 27);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "BOOKIFY";
+            lblTitle.Click += lblTitle_Click;
+            // 
             // txtDestination
-            //
-            this.txtDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDestination.Location = new System.Drawing.Point(10, 32);
-            this.txtDestination.Name = "txtDestination";
-            this.txtDestination.Size = new System.Drawing.Size(200, 23);
-            this.txtDestination.TabIndex = 1;
-            //
-            // lblCheckIn
-            //
-            this.lblCheckIn.AutoSize = true;
-            this.lblCheckIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckIn.Location = new System.Drawing.Point(220, 12);
-            this.lblCheckIn.Name = "lblCheckIn";
-            this.lblCheckIn.Size = new System.Drawing.Size(63, 15);
-            this.lblCheckIn.TabIndex = 2;
-            this.lblCheckIn.Text = "Check-In";
-            //
-            // dateCheckIn
-            //
-            this.dateCheckIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateCheckIn.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateCheckIn.Location = new System.Drawing.Point(220, 32);
-            this.dateCheckIn.Name = "dateCheckIn";
-            this.dateCheckIn.Size = new System.Drawing.Size(150, 23);
-            this.dateCheckIn.TabIndex = 3;
-            //
-            // lblCheckOut
-            //
-            this.lblCheckOut.AutoSize = true;
-            this.lblCheckOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheckOut.Location = new System.Drawing.Point(380, 12);
-            this.lblCheckOut.Name = "lblCheckOut";
-            this.lblCheckOut.Size = new System.Drawing.Size(74, 15);
-            this.lblCheckOut.TabIndex = 4;
-            this.lblCheckOut.Text = "Check-Out";
-            //
-            // dateCheckOut
-            //
-            this.dateCheckOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateCheckOut.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateCheckOut.Location = new System.Drawing.Point(380, 32);
-            this.dateCheckOut.Name = "dateCheckOut";
-            this.dateCheckOut.Size = new System.Drawing.Size(150, 23);
-            this.dateCheckOut.TabIndex = 5;
-            //
+            // 
+            txtDestination.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtDestination.Location = new Point(13, 49);
+            txtDestination.Margin = new Padding(4, 5, 4, 5);
+            txtDestination.Name = "txtDestination";
+            txtDestination.Size = new Size(265, 26);
+            txtDestination.TabIndex = 1;
+            // 
             // btnSearch
-            //
-            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(545, 27);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(120, 32);
-            this.btnSearch.TabIndex = 6;
-            this.btnSearch.Text = "Search Hotels";
-            this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            //
+            // 
+            btnSearch.BackColor = Color.Black;
+            btnSearch.FlatStyle = FlatStyle.Flat;
+            btnSearch.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnSearch.ForeColor = Color.White;
+            btnSearch.Location = new Point(732, 26);
+            btnSearch.Margin = new Padding(4, 5, 4, 5);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(160, 49);
+            btnSearch.TabIndex = 6;
+            btnSearch.Text = "Search Hotels";
+            btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
+            // 
             // flowLayoutPanelHotels
-            //
-            this.flowLayoutPanelHotels.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanelHotels.AutoScroll = true;
-            this.flowLayoutPanelHotels.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.flowLayoutPanelHotels.Location = new System.Drawing.Point(12, 172);
-            this.flowLayoutPanelHotels.Name = "flowLayoutPanelHotels";
-            this.flowLayoutPanelHotels.Padding = new System.Windows.Forms.Padding(10);
-            this.flowLayoutPanelHotels.Size = new System.Drawing.Size(976, 280);
-            this.flowLayoutPanelHotels.TabIndex = 3;
-            //
+            // 
+            flowLayoutPanelHotels.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            flowLayoutPanelHotels.AutoScroll = true;
+            flowLayoutPanelHotels.BackColor = Color.White;
+            flowLayoutPanelHotels.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            flowLayoutPanelHotels.Location = new Point(16, 265);
+            flowLayoutPanelHotels.Margin = new Padding(4, 5, 4, 5);
+            flowLayoutPanelHotels.Name = "flowLayoutPanelHotels";
+            flowLayoutPanelHotels.Padding = new Padding(13, 15, 13, 15);
+            flowLayoutPanelHotels.Size = new Size(1301, 431);
+            flowLayoutPanelHotels.TabIndex = 3;
+            // 
             // panelSearch
-            //
-            this.panelSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelSearch.BackColor = System.Drawing.Color.White;
-            this.panelSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelSearch.Controls.Add(this.lblDestination);
-            this.panelSearch.Controls.Add(this.txtDestination);
-            this.panelSearch.Controls.Add(this.lblCheckIn);
-            this.panelSearch.Controls.Add(this.dateCheckIn);
-            this.panelSearch.Controls.Add(this.lblCheckOut);
-            this.panelSearch.Controls.Add(this.dateCheckOut);
-            this.panelSearch.Controls.Add(this.btnSearch);
-            this.panelSearch.Location = new System.Drawing.Point(12, 50);
-            this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(976, 75);
-            this.panelSearch.TabIndex = 4;
-            //
+            // 
+            panelSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panelSearch.BackColor = Color.White;
+            panelSearch.BorderStyle = BorderStyle.FixedSingle;
+            panelSearch.Controls.Add(lblDestination);
+            panelSearch.Controls.Add(txtDestination);
+            panelSearch.Controls.Add(lblCheckIn);
+            panelSearch.Controls.Add(dateCheckIn);
+            panelSearch.Controls.Add(lblCheckOut);
+            panelSearch.Controls.Add(dateCheckOut);
+            panelSearch.Controls.Add(btnSearch);
+            panelSearch.Font = new Font("Arial Rounded MT Bold", 13.8F);
+            panelSearch.Location = new Point(16, 77);
+            panelSearch.Margin = new Padding(4, 5, 4, 5);
+            panelSearch.Name = "panelSearch";
+            panelSearch.Size = new Size(1301, 114);
+            panelSearch.TabIndex = 4;
+            // 
+            // lblDestination
+            // 
+            lblDestination.AutoSize = true;
+            lblDestination.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDestination.Location = new Point(13, 18);
+            lblDestination.Margin = new Padding(4, 0, 4, 0);
+            lblDestination.Name = "lblDestination";
+            lblDestination.Size = new Size(93, 18);
+            lblDestination.TabIndex = 0;
+            lblDestination.Text = "Destination";
+            // 
+            // lblCheckIn
+            // 
+            lblCheckIn.AutoSize = true;
+            lblCheckIn.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCheckIn.Location = new Point(293, 18);
+            lblCheckIn.Margin = new Padding(4, 0, 4, 0);
+            lblCheckIn.Name = "lblCheckIn";
+            lblCheckIn.Size = new Size(75, 18);
+            lblCheckIn.TabIndex = 2;
+            lblCheckIn.Text = "Check-In";
+            // 
+            // dateCheckIn
+            // 
+            dateCheckIn.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dateCheckIn.Format = DateTimePickerFormat.Short;
+            dateCheckIn.Location = new Point(293, 49);
+            dateCheckIn.Margin = new Padding(4, 5, 4, 5);
+            dateCheckIn.Name = "dateCheckIn";
+            dateCheckIn.Size = new Size(199, 26);
+            dateCheckIn.TabIndex = 3;
+            // 
+            // lblCheckOut
+            // 
+            lblCheckOut.AutoSize = true;
+            lblCheckOut.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCheckOut.Location = new Point(507, 18);
+            lblCheckOut.Margin = new Padding(4, 0, 4, 0);
+            lblCheckOut.Name = "lblCheckOut";
+            lblCheckOut.Size = new Size(89, 18);
+            lblCheckOut.TabIndex = 4;
+            lblCheckOut.Text = "Check-Out";
+            // 
+            // dateCheckOut
+            // 
+            dateCheckOut.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dateCheckOut.Format = DateTimePickerFormat.Short;
+            dateCheckOut.Location = new Point(507, 49);
+            dateCheckOut.Margin = new Padding(4, 5, 4, 5);
+            dateCheckOut.Name = "dateCheckOut";
+            dateCheckOut.Size = new Size(199, 26);
+            dateCheckOut.TabIndex = 5;
+            // 
             // lblHotelsTitle
-            //
-            this.lblHotelsTitle.AutoSize = true;
-            this.lblHotelsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHotelsTitle.Location = new System.Drawing.Point(12, 140);
-            this.lblHotelsTitle.Name = "lblHotelsTitle";
-            this.lblHotelsTitle.Size = new System.Drawing.Size(174, 20);
-            this.lblHotelsTitle.TabIndex = 5;
-            this.lblHotelsTitle.Text = "Recommended Hotels";
-            //
+            // 
+            lblHotelsTitle.AutoSize = true;
+            lblHotelsTitle.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblHotelsTitle.Location = new Point(16, 215);
+            lblHotelsTitle.Margin = new Padding(4, 0, 4, 0);
+            lblHotelsTitle.Name = "lblHotelsTitle";
+            lblHotelsTitle.Size = new Size(222, 25);
+            lblHotelsTitle.TabIndex = 5;
+            lblHotelsTitle.Text = "Recommended Hotels";
+            // 
             // lblMyBookings
-            //
-            this.lblMyBookings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblMyBookings.AutoSize = true;
-            this.lblMyBookings.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMyBookings.Location = new System.Drawing.Point(12, 470);
-            this.lblMyBookings.Name = "lblMyBookings";
-            this.lblMyBookings.Size = new System.Drawing.Size(115, 20);
-            this.lblMyBookings.TabIndex = 6;
-            this.lblMyBookings.Text = "My Bookings";
-            //
+            // 
+            lblMyBookings.AutoSize = true;
+            lblMyBookings.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMyBookings.Location = new Point(16, 723);
+            lblMyBookings.Margin = new Padding(4, 0, 4, 0);
+            lblMyBookings.Name = "lblMyBookings";
+            lblMyBookings.Size = new Size(133, 23);
+            lblMyBookings.TabIndex = 6;
+            lblMyBookings.Text = "My Bookings";
+            // 
             // dataGridViewBookings
-            //
-            this.dataGridViewBookings.AllowUserToAddRows = false;
-            this.dataGridViewBookings.AllowUserToDeleteRows = false;
-            this.dataGridViewBookings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewBookings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewBookings.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridViewBookings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewBookings.Location = new System.Drawing.Point(12, 500);
-            this.dataGridViewBookings.Name = "dataGridViewBookings";
-            this.dataGridViewBookings.ReadOnly = true;
-            this.dataGridViewBookings.RowHeadersVisible = false;
-            this.dataGridViewBookings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewBookings.Size = new System.Drawing.Size(976, 180);
-            this.dataGridViewBookings.TabIndex = 7;
-            //
+            // 
+            dataGridViewBookings.AllowUserToAddRows = false;
+            dataGridViewBookings.AllowUserToDeleteRows = false;
+            dataGridViewBookings.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridViewBookings.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewBookings.BackgroundColor = Color.White;
+            dataGridViewBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewBookings.Location = new Point(16, 769);
+            dataGridViewBookings.Margin = new Padding(4, 5, 4, 5);
+            dataGridViewBookings.Name = "dataGridViewBookings";
+            dataGridViewBookings.ReadOnly = true;
+            dataGridViewBookings.RowHeadersVisible = false;
+            dataGridViewBookings.RowHeadersWidth = 51;
+            dataGridViewBookings.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewBookings.Size = new Size(1301, 277);
+            dataGridViewBookings.TabIndex = 7;
+            // 
+            // btnLogout
+            // 
+            btnLogout.BackColor = Color.White;
+            btnLogout.FlatStyle = FlatStyle.Flat;
+            btnLogout.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnLogout.ForeColor = Color.Black;
+            btnLogout.Location = new Point(1041, 18);
+            btnLogout.Margin = new Padding(4, 5, 4, 5);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(101, 37);
+            btnLogout.TabIndex = 7;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = false;
+            btnLogout.Click += btnLogout_Click;
+            // 
             // FormCustomerDashboard
-            //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 700);
-            this.Controls.Add(this.dataGridViewBookings);
-            this.Controls.Add(this.lblMyBookings);
-            this.Controls.Add(this.lblHotelsTitle);
-            this.Controls.Add(this.panelSearch);
-            this.Controls.Add(this.flowLayoutPanelHotels);
-            this.Controls.Add(this.lblTitle);
-            this.Name = "FormCustomerDashboard";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Customer Dashboard - Hotel Booking System";
-            this.Load += new System.EventHandler(this.FormCustomerDashboard_Load);
-            this.panelSearch.ResumeLayout(false);
-            this.panelSearch.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBookings)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.AliceBlue;
+            ClientSize = new Size(1333, 1055);
+            Controls.Add(btnLogout);
+            Controls.Add(dataGridViewBookings);
+            Controls.Add(lblMyBookings);
+            Controls.Add(lblHotelsTitle);
+            Controls.Add(panelSearch);
+            Controls.Add(flowLayoutPanelHotels);
+            Controls.Add(lblTitle);
+            Margin = new Padding(4, 5, 4, 5);
+            Name = "FormCustomerDashboard";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Customer Dashboard - Hotel Booking System";
+            Load += FormCustomerDashboard_Load;
+            panelSearch.ResumeLayout(false);
+            panelSearch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewBookings).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -232,5 +263,6 @@
         private System.Windows.Forms.Label lblHotelsTitle;
         private System.Windows.Forms.Label lblMyBookings;
         private System.Windows.Forms.DataGridView dataGridViewBookings;
+        private Button btnLogout;
     }
 }

@@ -84,21 +84,24 @@ namespace HotelBookingSystem
                 {
                     conn.Open();
 
-                    // Query to get bookings for a specific customer
-                    // Note: This assumes a bookings table exists with customer_id foreign key
-                    // If the bookings table doesn't exist yet, this will return an empty DataTable
+                    // Query to get bookings for a specific customer using your exact table structure
                     string sql = @"SELECT
-                                    b.id AS 'Booking ID',
+                                    b.booking_code AS 'Booking Code',
                                     h.name AS 'Hotel Name',
                                     h.address AS 'Address',
-                                    b.check_in AS 'Check-In Date',
-                                    b.check_out AS 'Check-Out Date',
-                                    b.status AS 'Status'
+                                    DATE(b.start_time) AS 'Check-In',
+                                    DATE(b.end_time) AS 'Check-Out',
+                                    CASE
+                                        WHEN b.food_option = 'BB' THEN 'Bed & Breakfast'
+                                        WHEN b.food_option = 'HB' THEN 'Half Board'
+                                        WHEN b.food_option = 'FB' THEN 'Full Board'
+                                        ELSE 'Room Only'
+                                    END AS 'Food Plan'
                                 FROM bookings b
                                 INNER JOIN hotels h ON b.hotel_id = h.id
                                 INNER JOIN customers c ON b.customer_id = c.id
                                 WHERE c.username = @username
-                                ORDER BY b.check_in DESC";
+                                ORDER BY b.start_time DESC";
 
                     MySqlDataAdapter da = new MySqlDataAdapter(sql, conn);
                     da.SelectCommand.Parameters.AddWithValue("@username", username);

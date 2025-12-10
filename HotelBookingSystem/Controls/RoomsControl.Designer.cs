@@ -89,7 +89,7 @@
             panel1.Controls.Add(btnUpdateRoom);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(btnAddRoom);
-            panel1.Location = new Point(3, 33);
+            panel1.Location = new Point(6, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(815, 642);
             panel1.TabIndex = 13;

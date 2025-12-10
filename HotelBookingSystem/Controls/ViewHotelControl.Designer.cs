@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            flowLayoutPanel1 = new FlowLayoutPanel();
             dataGridViewHotel = new DataGridView();
             btnRefresh = new Button();
-            flowLayoutPanel1 = new FlowLayoutPanel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewHotel).BeginInit();
             SuspendLayout();
@@ -42,10 +42,18 @@
             panel1.Controls.Add(flowLayoutPanel1);
             panel1.Controls.Add(dataGridViewHotel);
             panel1.Controls.Add(btnRefresh);
-            panel1.Location = new Point(3, 25);
+            panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(815, 642);
             panel1.TabIndex = 17;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.BackColor = Color.White;
+            flowLayoutPanel1.Location = new Point(20, 57);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(769, 442);
+            flowLayoutPanel1.TabIndex = 36;
             // 
             // dataGridViewHotel
             // 
@@ -55,7 +63,7 @@
             dataGridViewHotel.Location = new Point(20, 57);
             dataGridViewHotel.Name = "dataGridViewHotel";
             dataGridViewHotel.RowHeadersWidth = 51;
-            dataGridViewHotel.Size = new Size(769, 573);
+            dataGridViewHotel.Size = new Size(769, 442);
             dataGridViewHotel.TabIndex = 35;
             dataGridViewHotel.CellContentClick += dataGridViewFoodOrders_CellContentClick;
             // 
@@ -69,14 +77,6 @@
             btnRefresh.Text = "Refresh All Bookings";
             btnRefresh.UseVisualStyleBackColor = true;
             btnRefresh.Click += btnRefresh_Click;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.BackColor = Color.White;
-            flowLayoutPanel1.Location = new Point(20, 57);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(769, 573);
-            flowLayoutPanel1.TabIndex = 36;
             // 
             // ViewHotelControl
             // 

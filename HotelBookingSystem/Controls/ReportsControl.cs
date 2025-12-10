@@ -26,16 +26,17 @@ namespace HotelBookingSystem
             {
                 c.Open();
                 string sql = @"
-                    SELECT TOP 1
-                        CONCAT(h.name, ' - Room ', r.id) AS 'Most Booked Room',
-                        COUNT(*) AS 'Total Bookings',
-                        COUNT(*) * h.default_booking_time * 10 AS 'Revenue ($)'
-                    FROM bookings b
-                    JOIN rooms r ON b.room_id = r.id
-                    JOIN floors f ON r.floor_id = f.id
-                    JOIN hotels h ON f.hotel_id = h.id
-                    GROUP BY r.id, h.name, h.default_booking_time
-                    ORDER BY COUNT(*) DESC";
+            SELECT 
+                CONCAT(h.name, ' - Room ', r.id) AS 'Most Booked Room',
+                COUNT(*) AS 'Total Bookings',
+                COUNT(*) * h.default_booking_time * 10 AS 'Revenue ($)'
+            FROM bookings b
+            JOIN rooms r ON b.room_id = r.id
+            JOIN floors f ON r.floor_id = f.id
+            JOIN hotels h ON f.hotel_id = h.id
+            GROUP BY r.id, h.name, h.default_booking_time
+            ORDER BY COUNT(*) DESC
+            LIMIT 1";
 
                 MySqlDataAdapter da = new MySqlDataAdapter(sql, c);
                 DataTable dt = new DataTable();
@@ -74,14 +75,14 @@ namespace HotelBookingSystem
             {
                 c.Open();
                 string sql = @"
-                    SELECT 
-                        at.type AS 'Asset Type',
-                        at.status AS 'Status',
-                        COUNT(a.id) AS 'Quantity'
-                    FROM assets a
-                    JOIN asset_types at ON a.asset_type = at.id
-                    GROUP BY at.type, at.status
-                    ORDER BY at.type";
+            SELECT 
+                at.type AS 'Asset Type',
+                at.status AS 'Status',
+                COUNT(a.id) AS 'Total Assets'
+            FROM asset_types at
+            LEFT JOIN assets a ON a.asset_type = at.id
+            GROUP BY at.type, at.status
+            ORDER BY at.type";
 
                 MySqlDataAdapter da = new MySqlDataAdapter(sql, c);
                 DataTable dt = new DataTable();
@@ -92,21 +93,7 @@ namespace HotelBookingSystem
 
         private void btnRoomsStatus_Click(object sender, EventArgs e)
         {
-            using (MySqlConnection c = new MySqlConnection(conn))
-            {
-                c.Open();
-                string sql = @"
-                    SELECT 'Working' AS 'Status', COUNT(*) AS 'Count' FROM rooms WHERE status = 'working'
-                    UNION ALL
-                    SELECT 'Under Maintenance', COUNT(*) FROM rooms WHERE status = 'under_maintenance'
-                    UNION ALL
-                    SELECT 'Damaged', COUNT(*) FROM rooms WHERE status = 'damaged'";
-
-                MySqlDataAdapter da = new MySqlDataAdapter(sql, c);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dataGridViewReports.DataSource = dt;
-            }
+            //eliminado
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

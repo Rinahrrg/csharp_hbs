@@ -46,7 +46,7 @@
             panel1.Controls.Add(txtSearchCode);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btnRefresh);
-            panel1.Location = new Point(3, 25);
+            panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(815, 642);
             panel1.TabIndex = 16;

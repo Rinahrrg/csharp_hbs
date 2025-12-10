@@ -216,59 +216,36 @@ namespace HotelBookingSystem
 
                     int customerId = Convert.ToInt32(customerIdObj);
 
-                    // Check if bookings table has food_plan column, if not, insert without it
+                    // Generate a unique booking code
+                    string bookingCode = "BK" + DateTime.Now.ToString("yyyyMMddHHmmss");
+
+                    // Convert food plan to food option (abbreviate)
+                    string foodOption = "None";
+                    if (foodPlan.Contains("Breakfast")) foodOption = "BB";
+                    else if (foodPlan.Contains("Half Board")) foodOption = "HB";
+                    else if (foodPlan.Contains("Full Board")) foodOption = "FB";
+
+                    // Insert booking using your exact table structure
                     string insertSql = @"INSERT INTO bookings
-                        (customer_id, hotel_id, room_id, check_in, check_out, status, booking_date, food_plan)
-                        VALUES (@customerId, @hotelId, @roomId, @checkIn, @checkOut, @status, NOW(), @foodPlan)";
+                        (booking_code, room_id, customer_id, hotel_id, start_time, end_time, food_option)
+                        VALUES (@bookingCode, @roomId, @customerId, @hotelId, @startTime, @endTime, @foodOption)";
 
-                    try
-                    {
-                        MySqlCommand insertCmd = new MySqlCommand(insertSql, conn);
-                        insertCmd.Parameters.AddWithValue("@customerId", customerId);
-                        insertCmd.Parameters.AddWithValue("@hotelId", hotelId);
-                        insertCmd.Parameters.AddWithValue("@roomId", roomId);
-                        insertCmd.Parameters.AddWithValue("@checkIn", checkInDate);
-                        insertCmd.Parameters.AddWithValue("@checkOut", checkOutDate);
-                        insertCmd.Parameters.AddWithValue("@status", "Confirmed");
-                        insertCmd.Parameters.AddWithValue("@foodPlan", foodPlan);
+                    MySqlCommand insertCmd = new MySqlCommand(insertSql, conn);
+                    insertCmd.Parameters.AddWithValue("@bookingCode", bookingCode);
+                    insertCmd.Parameters.AddWithValue("@roomId", roomId);
+                    insertCmd.Parameters.AddWithValue("@customerId", customerId);
+                    insertCmd.Parameters.AddWithValue("@hotelId", hotelId);
+                    insertCmd.Parameters.AddWithValue("@startTime", checkInDate);
+                    insertCmd.Parameters.AddWithValue("@endTime", checkOutDate);
+                    insertCmd.Parameters.AddWithValue("@foodOption", foodOption);
 
-                        insertCmd.ExecuteNonQuery();
-                    }
-                    catch (MySqlException ex) when (ex.Number == 1054) // Unknown column
-                    {
-                        // If food_plan column doesn't exist, insert without it
-                        insertSql = @"INSERT INTO bookings
-                            (customer_id, hotel_id, room_id, check_in, check_out, status, booking_date)
-                            VALUES (@customerId, @hotelId, @roomId, @checkIn, @checkOut, @status, NOW())";
-
-                        MySqlCommand insertCmd = new MySqlCommand(insertSql, conn);
-                        insertCmd.Parameters.AddWithValue("@customerId", customerId);
-                        insertCmd.Parameters.AddWithValue("@hotelId", hotelId);
-                        insertCmd.Parameters.AddWithValue("@roomId", roomId);
-                        insertCmd.Parameters.AddWithValue("@checkIn", checkInDate);
-                        insertCmd.Parameters.AddWithValue("@checkOut", checkOutDate);
-                        insertCmd.Parameters.AddWithValue("@status", "Confirmed");
-
-                        insertCmd.ExecuteNonQuery();
-                    }
-
+                    insertCmd.ExecuteNonQuery();
                     return true;
                 }
             }
-            catch (MySqlException ex) when (ex.Number == 1054) // Unknown column
-            {
-                MessageBox.Show("Database error: The bookings table is missing required columns.\n\n" +
-                              "Please run the following SQL script to fix this:\n" +
-                              "fix_hotel_id_column.sql\n\n" +
-                              "Or manually add the hotel_id column to the bookings table.",
-                              "Database Setup Required", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
             catch (Exception ex)
             {
-                MessageBox.Show("Error creating booking: " + ex.Message + "\n\n" +
-                              "If this is a database column error, please run:\n" +
-                              "fix_hotel_id_column.sql",
+                MessageBox.Show("Error creating booking: " + ex.Message,
                               "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }

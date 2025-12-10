@@ -68,7 +68,7 @@
             panel1.Controls.Add(btnRefresh);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(btnAddAsset);
-            panel1.Location = new Point(3, 25);
+            panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(815, 642);
             panel1.TabIndex = 14;
