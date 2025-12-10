@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,176 +7,277 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace HotelBookingSystem
 {
     public partial class FormRoomSelection : Form
     {
-        private readonly string conn = "server=localhost;database=hotel_system;user=root;password=Hrrg2906_;";
+        private readonly string connectionString = "server=localhost;database=hotel_system;user=root;password=Hrrg2906_;";
         private int hotelId;
-        private int customerId;
+        private string hotelName;
+        private string customerUsername;
+        private DateTime checkInDate;
+        private DateTime checkOutDate;
 
-        public FormRoomSelection(int hotelId, int customerId)
+        public FormRoomSelection(int hotelId, string hotelName, string customerUsername, DateTime checkIn, DateTime checkOut)
         {
             InitializeComponent();
             this.hotelId = hotelId;
-            this.customerId = customerId;
-            LoadFloors();
+            this.hotelName = hotelName;
+            this.customerUsername = customerUsername;
+            this.checkInDate = checkIn;
+            this.checkOutDate = checkOut;
         }
 
-        private void LoadFloors()
+        private void FormRoomSelection_Load(object sender, EventArgs e)
         {
-            using (MySqlConnection c = new MySqlConnection(conn))
+            lblHotelName.Text = hotelName;
+            lblDates.Text = $"📅 {checkInDate.ToShortDateString()} - {checkOutDate.ToShortDateString()}";
+            int nights = (checkOutDate - checkInDate).Days;
+            lblNights.Text = $"🌙 {nights} night{(nights > 1 ? "s" : "")}";
+
+            LoadAvailableRooms();
+        }
+
+        private void dataGridViewRooms_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewRooms.SelectedRows.Count > 0)
             {
-                c.Open();
-                string sql = "SELECT id FROM floors WHERE hotel_id = @hid ORDER BY id";
-                MySqlDataAdapter da = new MySqlDataAdapter(sql, c);
-                da.SelectCommand.Parameters.AddWithValue("@hid", hotelId);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                comboBoxFloor.DataSource = dt;
-                comboBoxFloor.DisplayMember = "id";
-                comboBoxFloor.ValueMember = "id";
+                ShowRoomDetails();
             }
         }
 
-        private void comboBoxFloor_SelectedIndexChanged(object sender, EventArgs e)
+        private void ShowRoomDetails()
         {
-            LoadAvailableRooms();
+            if (dataGridViewRooms.SelectedRows.Count == 0) return;
+
+            DataGridViewRow selectedRow = dataGridViewRooms.SelectedRows[0];
+
+            string roomNumber = selectedRow.Cells["Room Number"].Value.ToString();
+            string beds = selectedRow.Cells["Beds"].Value.ToString();
+            string roomType = selectedRow.Cells["Room Type"].Value.ToString();
+            string amenities = selectedRow.Cells["Amenities"].Value.ToString();
+
+            // Format the details nicely
+            string details = $"📌 {roomNumber}\n\n";
+            details += $"🛏️ Beds: {beds}\n\n";
+            details += $"🏷️ Type: {roomType}\n\n";
+            details += $"✨ Amenities:\n";
+
+            // Split amenities and format as a list
+            if (amenities != "No assets" && !string.IsNullOrEmpty(amenities))
+            {
+                string[] amenityList = amenities.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string amenity in amenityList)
+                {
+                    details += $"  • {amenity}\n";
+                }
+            }
+            else
+            {
+                details += "  • Basic room amenities\n";
+            }
+
+            details += $"\n📅 Stay Duration:\n";
+            details += $"  {checkInDate.ToShortDateString()}\n";
+            details += $"  to {checkOutDate.ToShortDateString()}\n";
+            int nights = (checkOutDate - checkInDate).Days;
+            details += $"  ({nights} night{(nights > 1 ? "s" : "")})";
+
+            lblRoomDetailsContent.Text = details;
         }
 
         private void LoadAvailableRooms()
         {
-            flowLayoutPanelRooms.Controls.Clear(); // limpia el FlowLayoutPanel
-            if (comboBoxFloor.SelectedValue == null) return;
-
-            int floorId = Convert.ToInt32(comboBoxFloor.SelectedValue);
-            DateTime checkIn = dtpCheckin.Value.Date;
-            DateTime checkOut = dtpCheckout.Value.Date;
-
-            using (MySqlConnection c = new MySqlConnection(conn))
+            try
             {
-                c.Open();
-                string sql = @"
-                    SELECT 
-                        r.id,
-                        r.max_beds,
-                        (SELECT GROUP_CONCAT(at.type) 
-                         FROM room_type_assets rta
-                         JOIN assets a ON rta.asset_id = a.id
-                         JOIN asset_types at ON a.asset_type = at.id
-                         WHERE rta.room_id = r.id) AS assets
-                    FROM rooms r
-                    WHERE r.floor_id = @fid
-                    AND r.id NOT IN (
-                        SELECT room_id FROM bookings 
-                        WHERE (start_time < @out AND end_time > @in)
-                    )";
-
-                MySqlCommand cmd = new MySqlCommand(sql, c);
-                cmd.Parameters.AddWithValue("@fid", floorId);
-                cmd.Parameters.AddWithValue("@in", checkIn);
-                cmd.Parameters.AddWithValue("@out", checkOut);
-                MySqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
-                    // CREA UNA TARJETA POR CADA HABITACIÓN
-                    Panel roomCard = new Panel();
-                    roomCard.Width = 400;
-                    roomCard.Height = 120;
-                    roomCard.BorderStyle = BorderStyle.FixedSingle;
+                    conn.Open();
 
-                    Label lblRoom = new Label();
-                    lblRoom.Text = "Room " + reader["id"];
-                    lblRoom.Location = new System.Drawing.Point(10, 10);
-                    lblRoom.AutoSize = true;
+                    // Get all rooms for this hotel
+                    string sql = @"
+                        SELECT
+                            r.id AS 'Room ID',
+                            CONCAT('Floor ', f.id, ' - Room ', r.id) AS 'Room Number',
+                            r.max_beds AS 'Beds',
+                            IFNULL(rt.name, 'Standard') AS 'Room Type',
+                            IFNULL(GROUP_CONCAT(DISTINCT a.name SEPARATOR ', '), 'No assets') AS 'Amenities'
+                        FROM rooms r
+                        JOIN floors f ON r.floor_id = f.id
+                        JOIN hotels h ON f.hotel_id = h.id
+                        LEFT JOIN room_types rt ON rt.bed_count = r.max_beds
+                        LEFT JOIN room_type_assets rta ON r.id = rta.room_id
+                        LEFT JOIN assets a ON rta.asset_id = a.id
+                        WHERE h.id = @hotelId
+                        GROUP BY r.id, f.id, r.max_beds, rt.name
+                        ORDER BY f.id, r.id";
 
-                    Label lblBeds = new Label();
-                    lblBeds.Text = "Beds: " + reader["max_beds"];
-                    lblBeds.Location = new System.Drawing.Point(10, 40);
-                    lblBeds.AutoSize = true;
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
+                    adapter.SelectCommand.Parameters.AddWithValue("@hotelId", hotelId);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
 
-                    Label lblAssets = new Label();
-                    lblAssets.Text = "Assets: " + (reader["assets"] == DBNull.Value ? "None" : reader["assets"]);
-                    lblAssets.Location = new System.Drawing.Point(10, 70);
-                    lblAssets.AutoSize = true;
+                    if (dt.Rows.Count == 0)
+                    {
+                        MessageBox.Show("No rooms available for this hotel. Please contact the administrator.",
+                            "No Rooms Available", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                        return;
+                    }
 
-                    Button btnBook = new Button();
-                    btnBook.Text = "Book";
-                    btnBook.Location = new System.Drawing.Point(300, 40);
-                    btnBook.Tag = reader["id"]; // guarda el ID de la habitación
-                    btnBook.Click += btnBookRoom_Click;
+                    dataGridViewRooms.DataSource = dt;
+                    dataGridViewRooms.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
 
-                    roomCard.Controls.Add(lblRoom);
-                    roomCard.Controls.Add(lblBeds);
-                    roomCard.Controls.Add(lblAssets);
-                    roomCard.Controls.Add(btnBook);
-
-                    flowLayoutPanelRooms.Controls.Add(roomCard); // añade al FlowLayoutPanel
+                    // Hide the Room ID column
+                    if (dataGridViewRooms.Columns["Room ID"] != null)
+                    {
+                        dataGridViewRooms.Columns["Room ID"].Visible = false;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading rooms: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void btnBookRoom_Click(object sender, EventArgs e)
+        private void btnSelectRoom_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            int roomId = Convert.ToInt32(btn.Tag);
-
-            DateTime checkIn = dtpCheckin.Value;
-            DateTime checkOut = dtpCheckout.Value;
-
-            if (checkOut <= checkIn)
+            if (dataGridViewRooms.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Check-out must be after check-in.");
+                MessageBox.Show("Please select a room to book.", "No Room Selected",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string foodOption = "";
-            if (chkBreakfast.Checked) foodOption += "Breakfast ";
-            if (chkLunch.Checked) foodOption += "Lunch ";
-            if (chkDinner.Checked) foodOption += "Dinner ";
-            if (chkFullBoard.Checked) foodOption += "Full Board ";
-            if (chkNone.Checked) foodOption = "None";
-            foodOption = foodOption.Trim();
+            int roomId = Convert.ToInt32(dataGridViewRooms.SelectedRows[0].Cells["Room ID"].Value);
+            string roomNumber = dataGridViewRooms.SelectedRows[0].Cells["Room Number"].Value.ToString();
+            string roomType = dataGridViewRooms.SelectedRows[0].Cells["Room Type"].Value.ToString();
+            string amenities = dataGridViewRooms.SelectedRows[0].Cells["Amenities"].Value.ToString();
 
-            using (MySqlConnection c = new MySqlConnection(conn))
+            // Get selected food plan
+            string foodPlan = GetSelectedFoodPlan();
+
+            // Create the booking
+            bool success = CreateBooking(roomId, foodPlan);
+
+            if (success)
             {
-                c.Open();
+                int nights = (checkOutDate - checkInDate).Days;
 
-                // Generar código único con Random
-                Random rnd = new Random();
-                string code = "BK-" + DateTime.Now.ToString("yyyyMMdd") + "-" + rnd.Next(0, 9999).ToString("D4");
-
-                // Verificar que no exista
-                while (true)
-                {
-                    MySqlCommand check = new MySqlCommand("SELECT COUNT(*) FROM bookings WHERE booking_code = @code", c);
-                    check.Parameters.AddWithValue("@code", code);
-                    if (Convert.ToInt32(check.ExecuteScalar()) == 0) break;
-                    code = "BK-" + DateTime.Now.ToString("yyyyMMdd") + "-" + rnd.Next(0, 9999).ToString("D4");
-                }
-
-                MySqlCommand cmd = new MySqlCommand(@"
-                    INSERT INTO bookings 
-                    (booking_code, room_id, customer_id, start_time, end_time, food_option)
-                    VALUES (@code, @rid, @cid, @in, @out, @food)", c);
-
-                cmd.Parameters.AddWithValue("@code", code);
-                cmd.Parameters.AddWithValue("@rid", roomId);
-                cmd.Parameters.AddWithValue("@cid", customerId);
-                cmd.Parameters.AddWithValue("@in", checkIn);
-                cmd.Parameters.AddWithValue("@out", checkOut);
-                cmd.Parameters.AddWithValue("@food", foodOption);
-                cmd.ExecuteNonQuery();
-
-                lblBookingCode.Text = "Code: " + code;
-                MessageBox.Show($"Booking successful!\nYour code is: {code}", "BOOKIFY");
+                MessageBox.Show($"🎉 Booking Confirmed!\n\n" +
+                              $"Hotel: {hotelName}\n" +
+                              $"Room: {roomNumber}\n" +
+                              $"Type: {roomType}\n" +
+                              $"Amenities: {amenities}\n\n" +
+                              $"Check-in: {checkInDate.ToShortDateString()}\n" +
+                              $"Check-out: {checkOutDate.ToShortDateString()}\n" +
+                              $"Duration: {nights} night{(nights > 1 ? "s" : "")}\n\n" +
+                              $"Food Plan: {foodPlan}\n\n" +
+                              $"Your booking has been saved!\n" +
+                              $"We look forward to welcoming you!",
+                              "Booking Confirmed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
         }
-        private void chkLunch_CheckedChanged(object sender, EventArgs e)
-        {
 
+        private string GetSelectedFoodPlan()
+        {
+            if (radioBreakfast.Checked) return "Bed and Breakfast (BB)";
+            if (radioHalfBoard.Checked) return "Half Board (Breakfast + Dinner)";
+            if (radioFullBoard.Checked) return "Full Board (All Meals)";
+            return "Room Only (No Meals)";
+        }
+
+        private bool CreateBooking(int roomId, string foodPlan)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    // First get the customer ID from username
+                    string getCustomerIdSql = "SELECT id FROM customers WHERE username = @username";
+                    MySqlCommand getCustomerIdCmd = new MySqlCommand(getCustomerIdSql, conn);
+                    getCustomerIdCmd.Parameters.AddWithValue("@username", customerUsername);
+                    object customerIdObj = getCustomerIdCmd.ExecuteScalar();
+
+                    if (customerIdObj == null)
+                    {
+                        MessageBox.Show("Customer account not found. Please log in again.", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+
+                    int customerId = Convert.ToInt32(customerIdObj);
+
+                    // Check if bookings table has food_plan column, if not, insert without it
+                    string insertSql = @"INSERT INTO bookings
+                        (customer_id, hotel_id, room_id, check_in, check_out, status, booking_date, food_plan)
+                        VALUES (@customerId, @hotelId, @roomId, @checkIn, @checkOut, @status, NOW(), @foodPlan)";
+
+                    try
+                    {
+                        MySqlCommand insertCmd = new MySqlCommand(insertSql, conn);
+                        insertCmd.Parameters.AddWithValue("@customerId", customerId);
+                        insertCmd.Parameters.AddWithValue("@hotelId", hotelId);
+                        insertCmd.Parameters.AddWithValue("@roomId", roomId);
+                        insertCmd.Parameters.AddWithValue("@checkIn", checkInDate);
+                        insertCmd.Parameters.AddWithValue("@checkOut", checkOutDate);
+                        insertCmd.Parameters.AddWithValue("@status", "Confirmed");
+                        insertCmd.Parameters.AddWithValue("@foodPlan", foodPlan);
+
+                        insertCmd.ExecuteNonQuery();
+                    }
+                    catch (MySqlException ex) when (ex.Number == 1054) // Unknown column
+                    {
+                        // If food_plan column doesn't exist, insert without it
+                        insertSql = @"INSERT INTO bookings
+                            (customer_id, hotel_id, room_id, check_in, check_out, status, booking_date)
+                            VALUES (@customerId, @hotelId, @roomId, @checkIn, @checkOut, @status, NOW())";
+
+                        MySqlCommand insertCmd = new MySqlCommand(insertSql, conn);
+                        insertCmd.Parameters.AddWithValue("@customerId", customerId);
+                        insertCmd.Parameters.AddWithValue("@hotelId", hotelId);
+                        insertCmd.Parameters.AddWithValue("@roomId", roomId);
+                        insertCmd.Parameters.AddWithValue("@checkIn", checkInDate);
+                        insertCmd.Parameters.AddWithValue("@checkOut", checkOutDate);
+                        insertCmd.Parameters.AddWithValue("@status", "Confirmed");
+
+                        insertCmd.ExecuteNonQuery();
+                    }
+
+                    return true;
+                }
+            }
+            catch (MySqlException ex) when (ex.Number == 1054) // Unknown column
+            {
+                MessageBox.Show("Database error: The bookings table is missing required columns.\n\n" +
+                              "Please run the following SQL script to fix this:\n" +
+                              "fix_hotel_id_column.sql\n\n" +
+                              "Or manually add the hotel_id column to the bookings table.",
+                              "Database Setup Required", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error creating booking: " + ex.Message + "\n\n" +
+                              "If this is a database column error, please run:\n" +
+                              "fix_hotel_id_column.sql",
+                              "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }
