@@ -34,19 +34,27 @@
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            dateTimePicker2 = new DateTimePicker();
+            dtpCheckin = new DateTimePicker();
+            dtpCheckout = new DateTimePicker();
             label5 = new Label();
-            checkBox1 = new CheckBox();
-            checkBox2 = new CheckBox();
-            checkBox3 = new CheckBox();
-            checkBox4 = new CheckBox();
-            checkBox5 = new CheckBox();
+            chkBreakfast = new CheckBox();
+            chkLunch = new CheckBox();
+            chkDinner = new CheckBox();
+            chkFullBoard = new CheckBox();
+            chkNone = new CheckBox();
             label6 = new Label();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            panel1 = new Panel();
-            button1 = new Button();
-            panel1.SuspendLayout();
+            flowLayoutPanelRooms = new FlowLayoutPanel();
+            panelSummary = new Panel();
+            btnBook = new Button();
+            pictureBox1 = new PictureBox();
+            lblPrice = new Label();
+            lblAssets = new Label();
+            lblRoomInfo = new Label();
+            lblBookingCode = new Label();
+            btnConfirm = new Button();
+            flowLayoutPanelRooms.SuspendLayout();
+            panelSummary.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -107,21 +115,21 @@
             label4.TabIndex = 5;
             label4.Text = "Check-out";
             // 
-            // dateTimePicker1
+            // dtpCheckin
             // 
-            dateTimePicker1.CalendarFont = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dateTimePicker1.Location = new Point(105, 108);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(108, 27);
-            dateTimePicker1.TabIndex = 6;
+            dtpCheckin.CalendarFont = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtpCheckin.Location = new Point(105, 108);
+            dtpCheckin.Name = "dtpCheckin";
+            dtpCheckin.Size = new Size(108, 27);
+            dtpCheckin.TabIndex = 6;
             // 
-            // dateTimePicker2
+            // dtpCheckout
             // 
-            dateTimePicker2.CalendarFont = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dateTimePicker2.Location = new Point(339, 108);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(108, 27);
-            dateTimePicker2.TabIndex = 7;
+            dtpCheckout.CalendarFont = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtpCheckout.Location = new Point(339, 108);
+            dtpCheckout.Name = "dtpCheckout";
+            dtpCheckout.Size = new Size(108, 27);
+            dtpCheckout.TabIndex = 7;
             // 
             // label5
             // 
@@ -133,98 +141,165 @@
             label5.TabIndex = 8;
             label5.Text = "Food Plans:";
             // 
-            // checkBox1
+            // chkBreakfast
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox1.Location = new Point(23, 208);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(102, 21);
-            checkBox1.TabIndex = 9;
-            checkBox1.Text = "Breakfast";
-            checkBox1.UseVisualStyleBackColor = true;
+            chkBreakfast.AutoSize = true;
+            chkBreakfast.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            chkBreakfast.Location = new Point(23, 208);
+            chkBreakfast.Name = "chkBreakfast";
+            chkBreakfast.Size = new Size(102, 21);
+            chkBreakfast.TabIndex = 9;
+            chkBreakfast.Text = "Breakfast";
+            chkBreakfast.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // chkLunch
             // 
-            checkBox2.AutoSize = true;
-            checkBox2.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox2.Location = new Point(152, 208);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(75, 21);
-            checkBox2.TabIndex = 10;
-            checkBox2.Text = "Lunch";
-            checkBox2.UseVisualStyleBackColor = true;
+            chkLunch.AutoSize = true;
+            chkLunch.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            chkLunch.Location = new Point(152, 208);
+            chkLunch.Name = "chkLunch";
+            chkLunch.Size = new Size(75, 21);
+            chkLunch.TabIndex = 10;
+            chkLunch.Text = "Lunch";
+            chkLunch.UseVisualStyleBackColor = true;
+            chkLunch.CheckedChanged += chkLunch_CheckedChanged;
             // 
-            // checkBox3
+            // chkDinner
             // 
-            checkBox3.AutoSize = true;
-            checkBox3.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox3.Location = new Point(254, 208);
-            checkBox3.Name = "checkBox3";
-            checkBox3.Size = new Size(79, 21);
-            checkBox3.TabIndex = 11;
-            checkBox3.Text = "Dinner";
-            checkBox3.UseVisualStyleBackColor = true;
+            chkDinner.AutoSize = true;
+            chkDinner.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            chkDinner.Location = new Point(254, 208);
+            chkDinner.Name = "chkDinner";
+            chkDinner.Size = new Size(79, 21);
+            chkDinner.TabIndex = 11;
+            chkDinner.Text = "Dinner";
+            chkDinner.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // chkFullBoard
             // 
-            checkBox4.AutoSize = true;
-            checkBox4.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox4.Location = new Point(371, 208);
-            checkBox4.Name = "checkBox4";
-            checkBox4.Size = new Size(105, 21);
-            checkBox4.TabIndex = 12;
-            checkBox4.Text = "Full Board";
-            checkBox4.UseVisualStyleBackColor = true;
+            chkFullBoard.AutoSize = true;
+            chkFullBoard.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            chkFullBoard.Location = new Point(371, 208);
+            chkFullBoard.Name = "chkFullBoard";
+            chkFullBoard.Size = new Size(105, 21);
+            chkFullBoard.TabIndex = 12;
+            chkFullBoard.Text = "Full Board";
+            chkFullBoard.UseVisualStyleBackColor = true;
             // 
-            // checkBox5
+            // chkNone
             // 
-            checkBox5.AutoSize = true;
-            checkBox5.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox5.Location = new Point(504, 208);
-            checkBox5.Name = "checkBox5";
-            checkBox5.Size = new Size(68, 21);
-            checkBox5.TabIndex = 13;
-            checkBox5.Text = "None";
-            checkBox5.UseVisualStyleBackColor = true;
+            chkNone.AutoSize = true;
+            chkNone.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            chkNone.Location = new Point(504, 208);
+            chkNone.Name = "chkNone";
+            chkNone.Size = new Size(68, 21);
+            chkNone.TabIndex = 13;
+            chkNone.Text = "None";
+            chkNone.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(23, 255);
+            label6.Location = new Point(22, 255);
             label6.Name = "label6";
             label6.Size = new Size(158, 17);
             label6.TabIndex = 14;
             label6.Text = "Available Rooms for ";
             // 
-            // flowLayoutPanel1
+            // flowLayoutPanelRooms
             // 
-            flowLayoutPanel1.Location = new Point(23, 294);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(250, 202);
-            flowLayoutPanel1.TabIndex = 15;
+            flowLayoutPanelRooms.Controls.Add(pictureBox1);
+            flowLayoutPanelRooms.Controls.Add(lblRoomInfo);
+            flowLayoutPanelRooms.Controls.Add(lblAssets);
+            flowLayoutPanelRooms.Controls.Add(lblPrice);
+            flowLayoutPanelRooms.Controls.Add(btnBook);
+            flowLayoutPanelRooms.Location = new Point(23, 294);
+            flowLayoutPanelRooms.Name = "flowLayoutPanelRooms";
+            flowLayoutPanelRooms.Size = new Size(218, 223);
+            flowLayoutPanelRooms.TabIndex = 15;
             // 
-            // panel1
+            // panelSummary
             // 
-            panel1.BackColor = Color.Black;
-            panel1.Controls.Add(button1);
-            panel1.ForeColor = Color.White;
-            panel1.Location = new Point(-1, 552);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(803, 213);
-            panel1.TabIndex = 16;
+            panelSummary.BackColor = Color.Black;
+            panelSummary.Controls.Add(btnConfirm);
+            panelSummary.Controls.Add(lblBookingCode);
+            panelSummary.ForeColor = Color.White;
+            panelSummary.Location = new Point(-1, 552);
+            panelSummary.Name = "panelSummary";
+            panelSummary.Size = new Size(803, 213);
+            panelSummary.TabIndex = 16;
             // 
-            // button1
+            // btnBook
             // 
-            button1.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.Black;
-            button1.Location = new Point(24, 171);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 0;
-            button1.Text = "Book";
-            button1.UseVisualStyleBackColor = true;
+            btnBook.BackColor = Color.Black;
+            btnBook.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnBook.ForeColor = Color.White;
+            btnBook.Location = new Point(3, 175);
+            btnBook.Name = "btnBook";
+            btnBook.Size = new Size(94, 29);
+            btnBook.TabIndex = 0;
+            btnBook.Text = "Book";
+            btnBook.UseVisualStyleBackColor = false;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(3, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(215, 149);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // lblPrice
+            // 
+            lblPrice.AutoSize = true;
+            lblPrice.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPrice.Location = new Point(101, 155);
+            lblPrice.Name = "lblPrice";
+            lblPrice.Size = new Size(43, 17);
+            lblPrice.TabIndex = 17;
+            lblPrice.Text = "label";
+            // 
+            // lblAssets
+            // 
+            lblAssets.AutoSize = true;
+            lblAssets.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblAssets.Location = new Point(52, 155);
+            lblAssets.Name = "lblAssets";
+            lblAssets.Size = new Size(43, 17);
+            lblAssets.TabIndex = 18;
+            lblAssets.Text = "label";
+            // 
+            // lblRoomInfo
+            // 
+            lblRoomInfo.AutoSize = true;
+            lblRoomInfo.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblRoomInfo.Location = new Point(3, 155);
+            lblRoomInfo.Name = "lblRoomInfo";
+            lblRoomInfo.Size = new Size(43, 17);
+            lblRoomInfo.TabIndex = 19;
+            lblRoomInfo.Text = "label";
+            // 
+            // lblBookingCode
+            // 
+            lblBookingCode.AutoSize = true;
+            lblBookingCode.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblBookingCode.Location = new Point(13, 22);
+            lblBookingCode.Name = "lblBookingCode";
+            lblBookingCode.Size = new Size(51, 17);
+            lblBookingCode.TabIndex = 0;
+            lblBookingCode.Text = "Code:";
+            // 
+            // btnConfirm
+            // 
+            btnConfirm.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnConfirm.ForeColor = Color.Black;
+            btnConfirm.Location = new Point(18, 171);
+            btnConfirm.Name = "btnConfirm";
+            btnConfirm.Size = new Size(94, 29);
+            btnConfirm.TabIndex = 1;
+            btnConfirm.Text = "Confirm";
+            btnConfirm.UseVisualStyleBackColor = true;
             // 
             // FormRoomSelection
             // 
@@ -232,17 +307,17 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(800, 764);
-            Controls.Add(panel1);
-            Controls.Add(flowLayoutPanel1);
+            Controls.Add(panelSummary);
+            Controls.Add(flowLayoutPanelRooms);
             Controls.Add(label6);
-            Controls.Add(checkBox5);
-            Controls.Add(checkBox4);
-            Controls.Add(checkBox3);
-            Controls.Add(checkBox2);
-            Controls.Add(checkBox1);
+            Controls.Add(chkNone);
+            Controls.Add(chkFullBoard);
+            Controls.Add(chkDinner);
+            Controls.Add(chkLunch);
+            Controls.Add(chkBreakfast);
             Controls.Add(label5);
-            Controls.Add(dateTimePicker2);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(dtpCheckout);
+            Controls.Add(dtpCheckin);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -252,7 +327,11 @@
             Name = "FormRoomSelection";
             SizeGripStyle = SizeGripStyle.Show;
             Text = "FormRoomSelection";
-            panel1.ResumeLayout(false);
+            flowLayoutPanelRooms.ResumeLayout(false);
+            flowLayoutPanelRooms.PerformLayout();
+            panelSummary.ResumeLayout(false);
+            panelSummary.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -265,17 +344,23 @@
         private Label label2;
         private Label label3;
         private Label label4;
-        private DateTimePicker dateTimePicker1;
-        private DateTimePicker dateTimePicker2;
+        private DateTimePicker dtpCheckin;
+        private DateTimePicker dtpCheckout;
         private Label label5;
-        private CheckBox checkBox1;
-        private CheckBox checkBox2;
-        private CheckBox checkBox3;
-        private CheckBox checkBox4;
-        private CheckBox checkBox5;
+        private CheckBox chkBreakfast;
+        private CheckBox chkLunch;
+        private CheckBox chkDinner;
+        private CheckBox chkFullBoard;
+        private CheckBox chkNone;
         private Label label6;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private Panel panel1;
-        private Button button1;
+        private FlowLayoutPanel flowLayoutPanelRooms;
+        private Panel panelSummary;
+        private Button btnBook;
+        private PictureBox pictureBox1;
+        private Label lblRoomInfo;
+        private Label lblAssets;
+        private Label lblPrice;
+        private Button btnConfirm;
+        private Label lblBookingCode;
     }
 }
