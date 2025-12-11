@@ -291,5 +291,41 @@ namespace HotelBookingSystem
             dateCheckOut.MinDate = dateCheckIn.Value.AddDays(1);
             LoadHotels(destination);
         }
+        private void btnBook_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            int hotelId = Convert.ToInt32(btn.Tag);
+
+            // Validar fechas
+            if (dateCheckOut.Value <= dateCheckIn.Value)
+            {
+                MessageBox.Show("Check-out must be after check-in!", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // ABRIR EL FORMULARIO DE RESERVA
+            FormRoomSelection roomForm = new FormRoomSelection(
+                hotelId,
+                "Hotel Name", // o pásale el nombre desde el card
+                currentUsername,
+                dateCheckIn.Value,
+                dateCheckOut.Value
+            );
+
+            if (roomForm.ShowDialog() == DialogResult.OK)
+            {
+                LoadMyBookings(); // actualiza la lista
+                MessageBox.Show("Booking Done!", "BOOKIFY");
+            }
+        }
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Close Session?", "Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Hide();
+                FormCustomerHotel login = new FormCustomerHotel();
+                login.Show();
+            }
+        }
     }
 }

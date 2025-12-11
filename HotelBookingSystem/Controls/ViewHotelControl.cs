@@ -68,89 +68,74 @@ namespace HotelBookingSystem
         {
             Panel card = new Panel();
             card.Width = 350;
-            card.Height = 280;
             card.BorderStyle = BorderStyle.FixedSingle;
             card.BackColor = Color.White;
             card.Margin = new Padding(10);
 
-            // Hotel Image
+            // --- IMAGEN ---
             PictureBox picHotel = new PictureBox();
             picHotel.Size = new Size(330, 140);
             picHotel.Location = new Point(10, 10);
             picHotel.SizeMode = PictureBoxSizeMode.StretchImage;
             picHotel.BackColor = Color.LightGray;
-
             if (hotelData["image"] != DBNull.Value)
             {
                 byte[] imgBytes = (byte[])hotelData["image"];
                 using (MemoryStream ms = new MemoryStream(imgBytes))
-                {
                     picHotel.Image = Image.FromStream(ms);
-                }
             }
             card.Controls.Add(picHotel);
 
-            // Hotel Name
+            // --- NOMBRE ---
             Label lblName = new Label();
             lblName.Text = hotelData["name"].ToString();
             lblName.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Bold);
             lblName.AutoSize = true;
             lblName.MaximumSize = new Size(330, 0);
-            lblName.Location = new Point(10, 155);
+            lblName.Location = new Point(10, 160);
             card.Controls.Add(lblName);
 
-            // Address
+            // --- DIRECCIÓN (AHORA CON WRAP) ---
             Label lblAddress = new Label();
-            lblAddress.Text = "📍 " + hotelData["address"].ToString();
+            lblAddress.Text = "Location Icon " + hotelData["address"].ToString();
             lblAddress.Font = new Font("Arial", 9F);
             lblAddress.AutoSize = true;
-            lblAddress.MaximumSize = new Size(330, 0);
-            lblAddress.Location = new Point(10, 180);
+            lblAddress.MaximumSize = new Size(330, 0);  // Permite salto de línea
+            lblAddress.Location = new Point(10, lblName.Bottom + 8);
             card.Controls.Add(lblAddress);
 
-            // Stats
+            // --- ESTADÍSTICAS ---
             Label lblStats = new Label();
             lblStats.Text = $"Floors: {hotelData["floors"]} | Rooms: {hotelData["rooms"]} | Default Time: {hotelData["default_booking_time"]}hrs";
             lblStats.Font = new Font("Arial", 9F);
             lblStats.AutoSize = true;
-            lblStats.Location = new Point(10, 205);
+            lblStats.Location = new Point(10, lblAddress.Bottom + 8);
             card.Controls.Add(lblStats);
 
-            // Divider
+            // --- DIVISOR ---
             Panel divider = new Panel();
             divider.Height = 1;
             divider.Width = 330;
             divider.BackColor = Color.LightGray;
-            divider.Location = new Point(10, 230);
+            divider.Location = new Point(10, lblStats.Bottom + 10);
             card.Controls.Add(divider);
 
-            // Hotel ID Label (hidden)
-            Label lblId = new Label();
-            lblId.Text = hotelData["id"].ToString();
-            lblId.Visible = false;
-            lblId.Name = "hotelId";
-            card.Controls.Add(lblId);
-
-            // View Details Button
+            // --- BOTÓN (siempre al final) ---
             Button btnDetails = new Button();
             btnDetails.Text = "View Details";
-            btnDetails.Font = new Font("Arial Rounded MT Bold", 9F);
             btnDetails.Size = new Size(330, 35);
-            btnDetails.Location = new Point(10, 238);
+            btnDetails.Location = new Point(10, divider.Bottom + 10);
             btnDetails.BackColor = Color.Black;
             btnDetails.ForeColor = Color.White;
             btnDetails.FlatStyle = FlatStyle.Flat;
-            btnDetails.Cursor = Cursors.Hand;
             btnDetails.Click += (sender, e) =>
             {
-                MessageBox.Show($"Hotel: {hotelData["name"]}\n" +
-                               $"Address: {hotelData["address"]}\n" +
-                               $"Floors: {hotelData["floors"]}\n" +
-                               $"Rooms: {hotelData["rooms"]}\n" +
-                               $"Default Booking Time: {hotelData["default_booking_time"]} hours",
-                               "Hotel Details", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Hotel: {hotelData["name"]}\nAddress: {hotelData["address"]}\nFloors: {hotelData["floors"]}\nRooms: {hotelData["rooms"]}", "Hotel Details");
             };
             card.Controls.Add(btnDetails);
+
+            // --- ALTURA AUTOMÁTICA ---
+            card.Height = btnDetails.Bottom + 20;
 
             return card;
         }
@@ -169,6 +154,11 @@ namespace HotelBookingSystem
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
