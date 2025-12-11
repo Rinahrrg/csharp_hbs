@@ -18,58 +18,51 @@ namespace HotelBookingSystem
         public FoodOrdersControl()
         {
             InitializeComponent();
-            LoadAllFoodOrders();
-
+            LoadFoodOrders();
             dataGridViewFoodOrders.GridColor = Color.Gray;
             dataGridViewFoodOrders.CellBorderStyle = DataGridViewCellBorderStyle.Single;
         }
 
-        private void LoadAllFoodOrders()
+        private void LoadFoodOrders()
         {
             using (MySqlConnection c = new MySqlConnection(conn))
             {
                 c.Open();
                 string sql = @"
-            SELECT 
-                b.booking_code AS 'Booking Code',
-                c.name AS 'Customer',
-                CONCAT(h.name, ' - Room ', r.id) AS 'Room',
-                GROUP_CONCAT(CONCAT(fo.food_item, ' x', fo.quantity) SEPARATOR ', ') AS 'Items',
-                (SELECT COUNT(*) * 15 FROM food_orders fo2 WHERE fo2.booking_id = b.id) AS 'Total ($)',
-                b.start_time AS 'Order Date'
-            FROM bookings b
-            JOIN customers c ON b.customer_id = c.id
-            JOIN rooms r ON b.room_id = r.id
-            JOIN floors f ON r.floor_id = f.id
-            JOIN hotels h ON f.hotel_id = h.id
-            LEFT JOIN food_orders fo ON fo.booking_id = b.id
-            GROUP BY b.id
-            ORDER BY b.start_time DESC";
+                    SELECT 
+                        b.booking_code AS 'Booking Code',
+                        c.name AS 'Customer',
+                        h.name AS 'Hotel',
+                        CONCAT('Room ', r.id) AS 'Room',
+                        COALESCE(b.food_option, 'None') AS 'Food Plan',
+                        CASE 
+                            WHEN b.food_option LIKE '%Full Board%' THEN '$120'
+                            WHEN b.food_option LIKE '%Half Board%' OR (b.food_option LIKE '%Breakfast%' AND b.food_option LIKE '%Dinner%') THEN '$80'
+                            WHEN b.food_option LIKE '%Breakfast%' THEN '$40'
+                            ELSE '$0'
+                        END AS 'Food Price ($)'
+                    FROM bookings b
+                    JOIN customers c ON b.customer_id = c.id
+                    JOIN rooms r ON b.room_id = r.id
+                    JOIN floors f ON r.floor_id = f.id
+                    JOIN hotels h ON f.hotel_id = h.id
+                    ORDER BY b.start_time DESC";
 
                 MySqlDataAdapter da = new MySqlDataAdapter(sql, c);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-
-                // Si no tiene food orders, mostrar "No food ordered"
-                foreach (DataRow row in dt.Rows)
-                {
-                    if (row["Items"] == DBNull.Value || string.IsNullOrEmpty(row["Items"].ToString()))
-                    {
-                        row["Items"] = "No food ordered";
-                        row["Total ($)"] = 0;
-                    }
-                }
-
                 dataGridViewFoodOrders.DataSource = dt;
             }
         }
 
+        // EL ÚNICO BOTÓN SEARCH QUE DEBE EXISTIR
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string code = txtSearchCode.Text.Trim();
+
             if (string.IsNullOrEmpty(code))
             {
-                LoadAllFoodOrders();
+                LoadFoodOrders();
                 return;
             }
 
@@ -78,14 +71,18 @@ namespace HotelBookingSystem
                 c.Open();
                 string sql = @"
                     SELECT 
-                        b.booking_code,
-                        c.name AS customer,
-                        CONCAT(h.name, ' - Room ', r.id) AS room,
-                        fo.food_item,
-                        fo.quantity,
-                        (fo.quantity * 10) AS price
-                    FROM food_orders fo
-                    JOIN bookings b ON fo.booking_id = b.id
+                        b.booking_code AS 'Booking Code',
+                        c.name AS 'Customer',
+                        h.name AS 'Hotel',
+                        CONCAT('Room ', r.id) AS 'Room',
+                        COALESCE(b.food_option, 'None') AS 'Food Plan',
+                        CASE 
+                            WHEN b.food_option LIKE '%Full Board%' THEN '$120'
+                            WHEN b.food_option LIKE '%Half Board%' OR (b.food_option LIKE '%Breakfast%' AND b.food_option LIKE '%Dinner%') THEN '$80'
+                            WHEN b.food_option LIKE '%Breakfast%' THEN '$40'
+                            ELSE '$0'
+                        END AS 'Food Price ($)'
+                    FROM bookings b
                     JOIN customers c ON b.customer_id = c.id
                     JOIN rooms r ON b.room_id = r.id
                     JOIN floors f ON r.floor_id = f.id
@@ -100,8 +97,8 @@ namespace HotelBookingSystem
 
                 if (dt.Rows.Count == 0)
                 {
-                    MessageBox.Show("No food orders found for this booking code.");
-                    LoadAllFoodOrders();
+                    MessageBox.Show("No booking found with this code.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadFoodOrders();
                 }
                 else
                 {
@@ -113,21 +110,7 @@ namespace HotelBookingSystem
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             txtSearchCode.Clear();
-            LoadAllFoodOrders();
-        }
-
-        private void dataGridViewFoodOrders_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-
-            string code = dataGridViewFoodOrders.Rows[e.RowIndex].Cells["Booking Code"].Value.ToString();
-            MessageBox.Show($"Food Order Details for {code}\n\n" +
-                           $"Customer: {dataGridViewFoodOrders.Rows[e.RowIndex].Cells["Customer"].Value}\n" +
-                           $"Room: {dataGridViewFoodOrders.Rows[e.RowIndex].Cells["Room"].Value}\n" +
-                           $"Items: {dataGridViewFoodOrders.Rows[e.RowIndex].Cells["Items"].Value}\n" +
-                           $"Total: {dataGridViewFoodOrders.Rows[e.RowIndex].Cells["Total"].Value}\n" +
-                           $"Date: {dataGridViewFoodOrders.Rows[e.RowIndex].Cells["Date"].Value}",
-                           "FOOD ORDER - " + code, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadFoodOrders();
         }
         private void txtSearchCode_TextChanged(object sender, EventArgs e)
         {
@@ -135,6 +118,11 @@ namespace HotelBookingSystem
         }
 
         private void btnSearch_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

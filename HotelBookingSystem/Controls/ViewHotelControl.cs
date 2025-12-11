@@ -66,6 +66,8 @@ namespace HotelBookingSystem
             card.Margin = new Padding(10);
             card.Padding = new Padding(10);
 
+            
+
             // Hotel name
             Label lblName = new Label();
             lblName.Text = hotelData["name"].ToString();

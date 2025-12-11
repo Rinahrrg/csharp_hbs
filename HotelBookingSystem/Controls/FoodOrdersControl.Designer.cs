@@ -50,6 +50,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(815, 642);
             panel1.TabIndex = 16;
+            panel1.Paint += panel1_Paint;
             // 
             // btnSearch
             // 
@@ -60,7 +61,7 @@
             btnSearch.TabIndex = 37;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
-            btnSearch.Click += btnSearch_Click_1;
+            btnSearch.Click += btnSearch_Click;
             // 
             // dataGridViewFoodOrders
             // 
@@ -101,6 +102,7 @@
             btnRefresh.TabIndex = 8;
             btnRefresh.Text = "Refresh All Bookings";
             btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // FoodOrdersControl
             // 
