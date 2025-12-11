@@ -35,7 +35,7 @@ namespace HotelBookingSystem
             }
             catch (MySqlException ex) when (ex.Number == 1062)
             {
-                return false; // usuario o email duplicado
+                return false;
             }
         }
 
@@ -69,6 +69,23 @@ namespace HotelBookingSystem
             }
         }
 
+        // NEW METHOD - Get customer ID by username
+        public int GetCustomerId(string username)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "SELECT id FROM customers WHERE username = @u";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@u", username);
+
+                object result = cmd.ExecuteScalar();
+                if (result != null)
+                    return Convert.ToInt32(result);
+                return -1;
+            }
+        }
+
         internal void AddCustomer(FormCustomerHotel customer)
         {
             throw new NotImplementedException();
@@ -84,21 +101,17 @@ namespace HotelBookingSystem
                 {
                     conn.Open();
 
-                    // Query to get bookings for a specific customer using your exact table structure
                     string sql = @"SELECT
                                     b.booking_code AS 'Booking Code',
                                     h.name AS 'Hotel Name',
-                                    h.address AS 'Address',
-                                    DATE(b.start_time) AS 'Check-In',
-                                    DATE(b.end_time) AS 'Check-Out',
-                                    CASE
-                                        WHEN b.food_option = 'BB' THEN 'Bed & Breakfast'
-                                        WHEN b.food_option = 'HB' THEN 'Half Board'
-                                        WHEN b.food_option = 'FB' THEN 'Full Board'
-                                        ELSE 'Room Only'
-                                    END AS 'Food Plan'
+                                    CONCAT('Floor ', f.id, ' - Room ', r.id) AS 'Room',
+                                    b.start_time AS 'Check-In',
+                                    b.end_time AS 'Check-Out',
+                                    b.food_option AS 'Food Option'
                                 FROM bookings b
-                                INNER JOIN hotels h ON b.hotel_id = h.id
+                                INNER JOIN rooms r ON b.room_id = r.id
+                                INNER JOIN floors f ON r.floor_id = f.id
+                                INNER JOIN hotels h ON f.hotel_id = h.id
                                 INNER JOIN customers c ON b.customer_id = c.id
                                 WHERE c.username = @username
                                 ORDER BY b.start_time DESC";
@@ -110,14 +123,11 @@ namespace HotelBookingSystem
             }
             catch (MySqlException ex)
             {
-                // If the bookings table doesn't exist or has different schema, return empty DataTable
-                // This allows the application to work even without the proper bookings table structure
-                if (ex.Number == 1146 || // Table doesn't exist
-                    ex.Number == 1054)   // Unknown column
+                if (ex.Number == 1146 || ex.Number == 1054)
                 {
-                    return dt; // Return empty DataTable
+                    return dt;
                 }
-                throw; // Re-throw other exceptions
+                throw;
             }
 
             return dt;

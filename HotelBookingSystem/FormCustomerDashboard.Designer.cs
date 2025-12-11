@@ -86,13 +86,12 @@ namespace HotelBookingSystem
             // 
             flowLayoutPanelHotels.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             flowLayoutPanelHotels.AutoScroll = true;
-            flowLayoutPanelHotels.BackColor = Color.White;
-            flowLayoutPanelHotels.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            flowLayoutPanelHotels.BackColor = Color.WhiteSmoke;
             flowLayoutPanelHotels.Location = new Point(16, 265);
             flowLayoutPanelHotels.Margin = new Padding(4, 5, 4, 5);
             flowLayoutPanelHotels.Name = "flowLayoutPanelHotels";
             flowLayoutPanelHotels.Padding = new Padding(13, 15, 13, 15);
-            flowLayoutPanelHotels.Size = new Size(1301, 431);
+            flowLayoutPanelHotels.Size = new Size(1028, 480);  // Increased height
             flowLayoutPanelHotels.TabIndex = 3;
             // 
             // panelSearch

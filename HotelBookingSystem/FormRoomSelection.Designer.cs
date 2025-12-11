@@ -2,15 +2,8 @@
 {
     partial class FormRoomSelection
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,316 +15,281 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            lblTitle = new Label();
-            lblHotelName = new Label();
-            lblDatesLabel = new Label();
-            lblDates = new Label();
-            lblNightsLabel = new Label();
-            lblNights = new Label();
-            dataGridViewRooms = new DataGridView();
-            btnSelectRoom = new Button();
-            btnCancel = new Button();
-            lblInstructions = new Label();
-            groupBoxFoodPlan = new GroupBox();
-            radioFullBoard = new RadioButton();
-            radioHalfBoard = new RadioButton();
-            radioBreakfast = new RadioButton();
-            radioNoPlan = new RadioButton();
-            panelRoomDetails = new Panel();
-            lblRoomDetailsContent = new Label();
-            lblRoomDetailsTitle = new Label();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewRooms).BeginInit();
-            groupBoxFoodPlan.SuspendLayout();
-            panelRoomDetails.SuspendLayout();
+            label1 = new Label();
+            comboBoxFloor = new ComboBox();
+            lblHotelnName = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            dtpCheckin = new DateTimePicker();
+            dtpCheckout = new DateTimePicker();
+            label5 = new Label();
+            chkBreakfast = new CheckBox();
+            chkLunch = new CheckBox();
+            chkDinner = new CheckBox();
+            chkFullBoard = new CheckBox();
+            chkNone = new CheckBox();
+            label6 = new Label();
+            flowLayoutPanelRooms = new FlowLayoutPanel();
+            panelSummary = new Panel();
+            btnConfirm = new Button();
+            lblBookingCode = new Label();
+            panelSummary.SuspendLayout();
             SuspendLayout();
             // 
-            // lblTitle
+            // label1
             // 
-            lblTitle.AutoSize = true;
-            lblTitle.Font = new Font("Arial Rounded MT Bold", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTitle.ForeColor = Color.Black;
-            lblTitle.Location = new Point(16, 14);
-            lblTitle.Margin = new Padding(4, 0, 4, 0);
-            lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(259, 32);
-            lblTitle.TabIndex = 0;
-            lblTitle.Text = "Select Your Room";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label1.Location = new Point(12, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(95, 21);
+            label1.TabIndex = 0;
+            label1.Text = "BOOKING - ";
             // 
-            // lblHotelName
+            // comboBoxFloor
             // 
-            lblHotelName.AutoSize = true;
-            lblHotelName.Font = new Font("Arial Rounded MT Bold", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblHotelName.ForeColor = Color.DarkBlue;
-            lblHotelName.Location = new Point(16, 69);
-            lblHotelName.Margin = new Padding(4, 0, 4, 0);
-            lblHotelName.Name = "lblHotelName";
-            lblHotelName.Size = new Size(174, 32);
-            lblHotelName.TabIndex = 1;
-            lblHotelName.Text = "Hotel Name";
+            comboBoxFloor.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxFloor.Font = new Font("Segoe UI", 10F);
+            comboBoxFloor.FormattingEnabled = true;
+            comboBoxFloor.Location = new Point(75, 52);
+            comboBoxFloor.Name = "comboBoxFloor";
+            comboBoxFloor.Size = new Size(120, 25);
+            comboBoxFloor.TabIndex = 1;
             // 
-            // lblDatesLabel
+            // lblHotelnName
             // 
-            lblDatesLabel.AutoSize = true;
-            lblDatesLabel.Font = new Font("Arial Rounded MT Bold", 12F);
-            lblDatesLabel.Location = new Point(16, 123);
-            lblDatesLabel.Margin = new Padding(4, 0, 4, 0);
-            lblDatesLabel.Name = "lblDatesLabel";
-            lblDatesLabel.Size = new Size(73, 23);
-            lblDatesLabel.TabIndex = 2;
-            lblDatesLabel.Text = "Dates:";
+            lblHotelnName.AutoSize = true;
+            lblHotelnName.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblHotelnName.ForeColor = Color.FromArgb(0, 122, 204);
+            lblHotelnName.Location = new Point(113, 9);
+            lblHotelnName.Name = "lblHotelnName";
+            lblHotelnName.Size = new Size(0, 21);
+            lblHotelnName.TabIndex = 2;
             // 
-            // lblDates
+            // label2
             // 
-            lblDates.AutoSize = true;
-            lblDates.Font = new Font("Arial Rounded MT Bold", 12F);
-            lblDates.Location = new Point(97, 123);
-            lblDates.Margin = new Padding(4, 0, 4, 0);
-            lblDates.Name = "lblDates";
-            lblDates.Size = new Size(167, 23);
-            lblDates.TabIndex = 3;
-            lblDates.Text = "MM/DD - MM/DD";
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 10F);
+            label2.Location = new Point(18, 55);
+            label2.Name = "label2";
+            label2.Size = new Size(51, 19);
+            label2.TabIndex = 3;
+            label2.Text = "Floor:";
             // 
-            // lblNightsLabel
+            // label3
             // 
-            lblNightsLabel.AutoSize = true;
-            lblNightsLabel.Font = new Font("Arial Rounded MT Bold", 12F);
-            lblNightsLabel.Location = new Point(333, 123);
-            lblNightsLabel.Margin = new Padding(4, 0, 4, 0);
-            lblNightsLabel.Name = "lblNightsLabel";
-            lblNightsLabel.Size = new Size(100, 23);
-            lblNightsLabel.TabIndex = 4;
-            lblNightsLabel.Text = "Duration:";
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 10F);
+            label3.Location = new Point(220, 55);
+            label3.Name = "label3";
+            label3.Size = new Size(68, 19);
+            label3.TabIndex = 4;
+            label3.Text = "Check-in:";
             // 
-            // lblNights
+            // label4
             // 
-            lblNights.AutoSize = true;
-            lblNights.Font = new Font("Arial Rounded MT Bold", 12F);
-            lblNights.Location = new Point(445, 123);
-            lblNights.Margin = new Padding(4, 0, 4, 0);
-            lblNights.Name = "lblNights";
-            lblNights.Size = new Size(87, 23);
-            lblNights.TabIndex = 5;
-            lblNights.Text = "X nights";
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10F);
+            label4.Location = new Point(430, 55);
+            label4.Name = "label4";
+            label4.Size = new Size(78, 19);
+            label4.TabIndex = 5;
+            label4.Text = "Check-out:";
             // 
-            // dataGridViewRooms
+            // dtpCheckin
             // 
-            dataGridViewRooms.AllowUserToAddRows = false;
-            dataGridViewRooms.AllowUserToDeleteRows = false;
-            dataGridViewRooms.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewRooms.BackgroundColor = Color.White;
-            dataGridViewRooms.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewRooms.Location = new Point(16, 223);
-            dataGridViewRooms.Margin = new Padding(4, 5, 4, 5);
-            dataGridViewRooms.MultiSelect = false;
-            dataGridViewRooms.Name = "dataGridViewRooms";
-            dataGridViewRooms.ReadOnly = true;
-            dataGridViewRooms.RowHeadersVisible = false;
-            dataGridViewRooms.RowHeadersWidth = 51;
-            dataGridViewRooms.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewRooms.Size = new Size(667, 385);
-            dataGridViewRooms.TabIndex = 6;
-            dataGridViewRooms.SelectionChanged += dataGridViewRooms_SelectionChanged;
+            dtpCheckin.Font = new Font("Segoe UI", 10F);
+            dtpCheckin.Format = DateTimePickerFormat.Short;
+            dtpCheckin.Location = new Point(294, 52);
+            dtpCheckin.Name = "dtpCheckin";
+            dtpCheckin.Size = new Size(120, 25);
+            dtpCheckin.TabIndex = 6;
             // 
-            // btnSelectRoom
+            // dtpCheckout
             // 
-            btnSelectRoom.BackColor = Color.Black;
-            btnSelectRoom.FlatStyle = FlatStyle.Flat;
-            btnSelectRoom.Font = new Font("Arial Rounded MT Bold", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnSelectRoom.ForeColor = Color.White;
-            btnSelectRoom.Location = new Point(784, 715);
-            btnSelectRoom.Margin = new Padding(4, 5, 4, 5);
-            btnSelectRoom.Name = "btnSelectRoom";
-            btnSelectRoom.Size = new Size(267, 69);
-            btnSelectRoom.TabIndex = 7;
-            btnSelectRoom.Text = "Confirm Booking";
-            btnSelectRoom.UseVisualStyleBackColor = false;
-            btnSelectRoom.Click += btnSelectRoom_Click;
+            dtpCheckout.Font = new Font("Segoe UI", 10F);
+            dtpCheckout.Format = DateTimePickerFormat.Short;
+            dtpCheckout.Location = new Point(514, 52);
+            dtpCheckout.Name = "dtpCheckout";
+            dtpCheckout.Size = new Size(120, 25);
+            dtpCheckout.TabIndex = 7;
             // 
-            // btnCancel
+            // label5
             // 
-            btnCancel.BackColor = Color.Gray;
-            btnCancel.FlatStyle = FlatStyle.Flat;
-            btnCancel.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCancel.ForeColor = Color.White;
-            btnCancel.Location = new Point(707, 715);
-            btnCancel.Margin = new Padding(4, 5, 4, 5);
-            btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(67, 69);
-            btnCancel.TabIndex = 8;
-            btnCancel.Text = "✕";
-            btnCancel.UseVisualStyleBackColor = false;
-            btnCancel.Click += btnCancel_Click;
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label5.Location = new Point(18, 95);
+            label5.Name = "label5";
+            label5.Size = new Size(89, 19);
+            label5.TabIndex = 8;
+            label5.Text = "Food Plans:";
             // 
-            // lblInstructions
+            // chkBreakfast
             // 
-            lblInstructions.AutoSize = true;
-            lblInstructions.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblInstructions.ForeColor = Color.Gray;
-            lblInstructions.Location = new Point(16, 177);
-            lblInstructions.Margin = new Padding(4, 0, 4, 0);
-            lblInstructions.Name = "lblInstructions";
-            lblInstructions.Size = new Size(497, 20);
-            lblInstructions.TabIndex = 9;
-            lblInstructions.Text = "Select a room from the list below and click Confirm Booking";
+            chkBreakfast.AutoSize = true;
+            chkBreakfast.Font = new Font("Segoe UI", 9F);
+            chkBreakfast.Location = new Point(120, 96);
+            chkBreakfast.Name = "chkBreakfast";
+            chkBreakfast.Size = new Size(76, 19);
+            chkBreakfast.TabIndex = 9;
+            chkBreakfast.Text = "Breakfast";
+            chkBreakfast.UseVisualStyleBackColor = true;
             // 
-            // groupBoxFoodPlan
+            // chkLunch
             // 
-            groupBoxFoodPlan.BackColor = Color.White;
-            groupBoxFoodPlan.Controls.Add(radioFullBoard);
-            groupBoxFoodPlan.Controls.Add(radioHalfBoard);
-            groupBoxFoodPlan.Controls.Add(radioBreakfast);
-            groupBoxFoodPlan.Controls.Add(radioNoPlan);
-            groupBoxFoodPlan.Font = new Font("Arial Rounded MT Bold", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBoxFoodPlan.Location = new Point(16, 631);
-            groupBoxFoodPlan.Margin = new Padding(4, 5, 4, 5);
-            groupBoxFoodPlan.Name = "groupBoxFoodPlan";
-            groupBoxFoodPlan.Padding = new Padding(4, 5, 4, 5);
-            groupBoxFoodPlan.Size = new Size(667, 154);
-            groupBoxFoodPlan.TabIndex = 10;
-            groupBoxFoodPlan.TabStop = false;
-            groupBoxFoodPlan.Text = "Select Food Plan";
+            chkLunch.AutoSize = true;
+            chkLunch.Font = new Font("Segoe UI", 9F);
+            chkLunch.Location = new Point(210, 96);
+            chkLunch.Name = "chkLunch";
+            chkLunch.Size = new Size(58, 19);
+            chkLunch.TabIndex = 10;
+            chkLunch.Text = "Lunch";
+            chkLunch.UseVisualStyleBackColor = true;
             // 
-            // radioFullBoard
+            // chkDinner
             // 
-            radioFullBoard.AutoSize = true;
-            radioFullBoard.Font = new Font("Arial Rounded MT Bold", 9F);
-            radioFullBoard.Location = new Point(347, 77);
-            radioFullBoard.Margin = new Padding(4, 5, 4, 5);
-            radioFullBoard.Name = "radioFullBoard";
-            radioFullBoard.Size = new Size(250, 21);
-            radioFullBoard.TabIndex = 3;
-            radioFullBoard.Text = "Full Board (All Meals Included)";
-            radioFullBoard.UseVisualStyleBackColor = true;
+            chkDinner.AutoSize = true;
+            chkDinner.Font = new Font("Segoe UI", 9F);
+            chkDinner.Location = new Point(285, 96);
+            chkDinner.Name = "chkDinner";
+            chkDinner.Size = new Size(61, 19);
+            chkDinner.TabIndex = 11;
+            chkDinner.Text = "Dinner";
+            chkDinner.UseVisualStyleBackColor = true;
             // 
-            // radioHalfBoard
+            // chkFullBoard
             // 
-            radioHalfBoard.AutoSize = true;
-            radioHalfBoard.Font = new Font("Arial Rounded MT Bold", 9F);
-            radioHalfBoard.Location = new Point(347, 38);
-            radioHalfBoard.Margin = new Padding(4, 5, 4, 5);
-            radioHalfBoard.Name = "radioHalfBoard";
-            radioHalfBoard.Size = new Size(259, 21);
-            radioHalfBoard.TabIndex = 2;
-            radioHalfBoard.Text = "Half Board (Breakfast + Dinner)";
-            radioHalfBoard.UseVisualStyleBackColor = true;
+            chkFullBoard.AutoSize = true;
+            chkFullBoard.Font = new Font("Segoe UI", 9F);
+            chkFullBoard.Location = new Point(360, 96);
+            chkFullBoard.Name = "chkFullBoard";
+            chkFullBoard.Size = new Size(80, 19);
+            chkFullBoard.TabIndex = 12;
+            chkFullBoard.Text = "Full Board";
+            chkFullBoard.UseVisualStyleBackColor = true;
             // 
-            // radioBreakfast
+            // chkNone
             // 
-            radioBreakfast.AutoSize = true;
-            radioBreakfast.Font = new Font("Arial Rounded MT Bold", 9F);
-            radioBreakfast.Location = new Point(20, 77);
-            radioBreakfast.Margin = new Padding(4, 5, 4, 5);
-            radioBreakfast.Name = "radioBreakfast";
-            radioBreakfast.Size = new Size(201, 21);
-            radioBreakfast.TabIndex = 1;
-            radioBreakfast.Text = "Bed and Breakfast (BB)";
-            radioBreakfast.UseVisualStyleBackColor = true;
+            chkNone.AutoSize = true;
+            chkNone.Font = new Font("Segoe UI", 9F);
+            chkNone.Location = new Point(455, 96);
+            chkNone.Name = "chkNone";
+            chkNone.Size = new Size(54, 19);
+            chkNone.TabIndex = 13;
+            chkNone.Text = "None";
+            chkNone.UseVisualStyleBackColor = true;
             // 
-            // radioNoPlan
+            // label6
             // 
-            radioNoPlan.AutoSize = true;
-            radioNoPlan.Checked = true;
-            radioNoPlan.Font = new Font("Arial Rounded MT Bold", 9F);
-            radioNoPlan.Location = new Point(20, 38);
-            radioNoPlan.Margin = new Padding(4, 5, 4, 5);
-            radioNoPlan.Name = "radioNoPlan";
-            radioNoPlan.Size = new Size(188, 21);
-            radioNoPlan.TabIndex = 0;
-            radioNoPlan.TabStop = true;
-            radioNoPlan.Text = "Room Only (No Meals)";
-            radioNoPlan.UseVisualStyleBackColor = true;
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label6.Location = new Point(18, 130);
+            label6.Name = "label6";
+            label6.Size = new Size(130, 19);
+            label6.TabIndex = 14;
+            label6.Text = "Available Rooms:";
             // 
-            // panelRoomDetails
+            // flowLayoutPanelRooms
             // 
-            panelRoomDetails.BackColor = Color.FromArgb(245, 248, 250);
-            panelRoomDetails.BorderStyle = BorderStyle.FixedSingle;
-            panelRoomDetails.Controls.Add(lblRoomDetailsContent);
-            panelRoomDetails.Controls.Add(lblRoomDetailsTitle);
-            panelRoomDetails.Location = new Point(707, 223);
-            panelRoomDetails.Margin = new Padding(4, 5, 4, 5);
-            panelRoomDetails.Name = "panelRoomDetails";
-            panelRoomDetails.Size = new Size(343, 384);
-            panelRoomDetails.TabIndex = 11;
+            flowLayoutPanelRooms.AutoScroll = true;
+            flowLayoutPanelRooms.BackColor = Color.WhiteSmoke;
+            flowLayoutPanelRooms.BorderStyle = BorderStyle.FixedSingle;
+            flowLayoutPanelRooms.Location = new Point(18, 155);
+            flowLayoutPanelRooms.Name = "flowLayoutPanelRooms";
+            flowLayoutPanelRooms.Size = new Size(420, 380);
+            flowLayoutPanelRooms.TabIndex = 15;
             // 
-            // lblRoomDetailsContent
+            // panelSummary
             // 
-            lblRoomDetailsContent.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblRoomDetailsContent.Location = new Point(13, 62);
-            lblRoomDetailsContent.Margin = new Padding(4, 0, 4, 0);
-            lblRoomDetailsContent.Name = "lblRoomDetailsContent";
-            lblRoomDetailsContent.Size = new Size(315, 308);
-            lblRoomDetailsContent.TabIndex = 1;
-            lblRoomDetailsContent.Text = "Select a room to view details";
+            panelSummary.BackColor = Color.FromArgb(30, 30, 30);
+            panelSummary.Controls.Add(btnConfirm);
+            panelSummary.Controls.Add(lblBookingCode);
+            panelSummary.Location = new Point(450, 155);
+            panelSummary.Name = "panelSummary";
+            panelSummary.Size = new Size(330, 380);
+            panelSummary.TabIndex = 16;
             // 
-            // lblRoomDetailsTitle
+            // btnConfirm
             // 
-            lblRoomDetailsTitle.AutoSize = true;
-            lblRoomDetailsTitle.Font = new Font("Arial Rounded MT Bold", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblRoomDetailsTitle.Location = new Point(13, 15);
-            lblRoomDetailsTitle.Margin = new Padding(4, 0, 4, 0);
-            lblRoomDetailsTitle.Name = "lblRoomDetailsTitle";
-            lblRoomDetailsTitle.Size = new Size(127, 21);
-            lblRoomDetailsTitle.TabIndex = 0;
-            lblRoomDetailsTitle.Text = "Room Details";
+            btnConfirm.BackColor = Color.FromArgb(0, 122, 204);
+            btnConfirm.Enabled = false;
+            btnConfirm.FlatStyle = FlatStyle.Flat;
+            btnConfirm.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnConfirm.ForeColor = Color.White;
+            btnConfirm.Location = new Point(20, 320);
+            btnConfirm.Name = "btnConfirm";
+            btnConfirm.Size = new Size(290, 45);
+            btnConfirm.TabIndex = 1;
+            btnConfirm.Text = "✓ CONFIRM BOOKING";
+            btnConfirm.UseVisualStyleBackColor = false;
+            btnConfirm.Click += btnConfirm_Click;
+            // 
+            // lblBookingCode
+            // 
+            lblBookingCode.Font = new Font("Segoe UI", 10F);
+            lblBookingCode.ForeColor = Color.White;
+            lblBookingCode.Location = new Point(15, 15);
+            lblBookingCode.Name = "lblBookingCode";
+            lblBookingCode.Size = new Size(300, 290);
+            lblBookingCode.TabIndex = 0;
+            lblBookingCode.Text = "Select a room to continue...";
             // 
             // FormRoomSelection
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Azure;
-            ClientSize = new Size(1067, 808);
-            Controls.Add(panelRoomDetails);
-            Controls.Add(groupBoxFoodPlan);
-            Controls.Add(lblInstructions);
-            Controls.Add(btnCancel);
-            Controls.Add(btnSelectRoom);
-            Controls.Add(dataGridViewRooms);
-            Controls.Add(lblNights);
-            Controls.Add(lblNightsLabel);
-            Controls.Add(lblDates);
-            Controls.Add(lblDatesLabel);
-            Controls.Add(lblHotelName);
-            Controls.Add(lblTitle);
-            Margin = new Padding(4, 5, 4, 5);
+            BackColor = Color.White;
+            ClientSize = new Size(800, 550);
+            Controls.Add(panelSummary);
+            Controls.Add(flowLayoutPanelRooms);
+            Controls.Add(label6);
+            Controls.Add(chkNone);
+            Controls.Add(chkFullBoard);
+            Controls.Add(chkDinner);
+            Controls.Add(chkLunch);
+            Controls.Add(chkBreakfast);
+            Controls.Add(label5);
+            Controls.Add(dtpCheckout);
+            Controls.Add(dtpCheckin);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(lblHotelnName);
+            Controls.Add(comboBoxFloor);
+            Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "FormRoomSelection";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Room Selection - Hotel Booking System";
-            Load += FormRoomSelection_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridViewRooms).EndInit();
-            groupBoxFoodPlan.ResumeLayout(false);
-            groupBoxFoodPlan.PerformLayout();
-            panelRoomDetails.ResumeLayout(false);
-            panelRoomDetails.PerformLayout();
+            Text = "Select Room - BOOKIFY";
+            panelSummary.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
-
         }
 
         #endregion
 
-        private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Label lblHotelName;
-        private System.Windows.Forms.Label lblDatesLabel;
-        private System.Windows.Forms.Label lblDates;
-        private System.Windows.Forms.Label lblNightsLabel;
-        private System.Windows.Forms.Label lblNights;
-        private System.Windows.Forms.DataGridView dataGridViewRooms;
-        private System.Windows.Forms.Button btnSelectRoom;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label lblInstructions;
-        private System.Windows.Forms.GroupBox groupBoxFoodPlan;
-        private System.Windows.Forms.RadioButton radioFullBoard;
-        private System.Windows.Forms.RadioButton radioHalfBoard;
-        private System.Windows.Forms.RadioButton radioBreakfast;
-        private System.Windows.Forms.RadioButton radioNoPlan;
-        private System.Windows.Forms.Panel panelRoomDetails;
-        private System.Windows.Forms.Label lblRoomDetailsContent;
-        private System.Windows.Forms.Label lblRoomDetailsTitle;
+        private Label label1;
+        private ComboBox comboBoxFloor;
+        private Label lblHotelnName;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private DateTimePicker dtpCheckin;
+        private DateTimePicker dtpCheckout;
+        private Label label5;
+        private CheckBox chkBreakfast;
+        private CheckBox chkLunch;
+        private CheckBox chkDinner;
+        private CheckBox chkFullBoard;
+        private CheckBox chkNone;
+        private Label label6;
+        private FlowLayoutPanel flowLayoutPanelRooms;
+        private Panel panelSummary;
+        private Button btnConfirm;
+        private Label lblBookingCode;
     }
 }
