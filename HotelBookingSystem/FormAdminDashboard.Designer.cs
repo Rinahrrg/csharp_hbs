@@ -16,6 +16,7 @@
         private void InitializeComponent()
         {
             panelMenu = new Panel();
+            btnAdminManagement = new Button();
             btnReports = new Button();
             btnViewHotels = new Button();
             btnFoodOrder = new Button();
@@ -35,7 +36,9 @@
             // 
             // panelMenu
             // 
+            panelMenu.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             panelMenu.BackColor = Color.Black;
+            panelMenu.Controls.Add(btnAdminManagement);
             panelMenu.Controls.Add(btnReports);
             panelMenu.Controls.Add(btnViewHotels);
             panelMenu.Controls.Add(btnFoodOrder);
@@ -46,11 +49,21 @@
             panelMenu.Controls.Add(btnRooms);
             panelMenu.Controls.Add(btnAssets);
             panelMenu.Controls.Add(pictureLogo);
-            panelMenu.Dock = DockStyle.Left;
             panelMenu.Location = new Point(0, 0);
             panelMenu.Name = "panelMenu";
             panelMenu.Size = new Size(180, 693);
             panelMenu.TabIndex = 1;
+            // 
+            // btnAdminManagement
+            // 
+            btnAdminManagement.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAdminManagement.Location = new Point(12, 573);
+            btnAdminManagement.Name = "btnAdminManagement";
+            btnAdminManagement.Size = new Size(150, 40);
+            btnAdminManagement.TabIndex = 9;
+            btnAdminManagement.Text = "Manage Admins";
+            btnAdminManagement.UseVisualStyleBackColor = true;
+            btnAdminManagement.Click += btnAdminManagement_Click;
             // 
             // btnReports
             // 
@@ -98,8 +111,9 @@
             // 
             // button1
             // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             button1.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(12, 611);
+            button1.Location = new Point(12, 640);
             button1.Name = "button1";
             button1.Size = new Size(150, 40);
             button1.TabIndex = 0;
@@ -169,9 +183,9 @@
             // 
             // panelCentral
             // 
+            panelCentral.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panelCentral.BackColor = Color.White;
             panelCentral.BackgroundImageLayout = ImageLayout.Center;
-            panelCentral.Dock = DockStyle.Bottom;
             panelCentral.Location = new Point(180, 96);
             panelCentral.Name = "panelCentral";
             panelCentral.Size = new Size(820, 597);
@@ -190,6 +204,7 @@
             // 
             // dateTimePicker1
             // 
+            dateTimePicker1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             dateTimePicker1.CalendarFont = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dateTimePicker1.CalendarMonthBackground = Color.Black;
             dateTimePicker1.Location = new Point(676, 39);
@@ -205,6 +220,7 @@
             Controls.Add(label1);
             Controls.Add(panelCentral);
             Controls.Add(panelMenu);
+            MinimumSize = new Size(900, 600);
             Name = "FormAdminDashboard";
             Text = "Admin Dashboard";
             panelMenu.ResumeLayout(false);
@@ -229,5 +245,6 @@
         private Button btnViewHotels;
         private Button btnFoodOrder;
         private Button btnBookings;
+        private Button btnAdminManagement;
     }
 }

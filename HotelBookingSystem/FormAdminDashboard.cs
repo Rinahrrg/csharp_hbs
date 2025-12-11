@@ -22,22 +22,19 @@ namespace HotelBookingSystem
             LoadControl(new AddHotelControl());
         }
 
-        // Método que carga cualquier UserControl en panelCentral
         private void LoadControl(UserControl control)
         {
-            panelCentral.Controls.Clear(); // limpia lo que estaba antes
+            panelCentral.Controls.Clear();
             control.Dock = DockStyle.Fill;
             panelCentral.Controls.Add(control);
         }
 
         private void panelCentral_Paint(object sender, PaintEventArgs e)
         {
-            // Si no necesitas hacer nada al pintar, déjalo vacío
         }
 
         private void FormAdminDashboard_Load(object sender, EventArgs e)
         {
-            // Si quieres cargar algo al iniciar, hazlo aquí. Si no, déjalo vacío.
         }
 
         private void btnFloors_Click(object sender, EventArgs e)
@@ -75,6 +72,11 @@ namespace HotelBookingSystem
             LoadControl(new ReportsControl());
         }
 
+        private void btnAdminManagement_Click(object sender, EventArgs e)
+        {
+            LoadControl(new AdminManagementControl());
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -84,7 +86,6 @@ namespace HotelBookingSystem
 
         private void pictureLogo_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

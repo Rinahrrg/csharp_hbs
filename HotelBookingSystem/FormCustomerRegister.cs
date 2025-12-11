@@ -17,7 +17,6 @@ namespace HotelBookingSystem
         public FormCustomerRegister()
         {
             InitializeComponent();
-
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -28,7 +27,34 @@ namespace HotelBookingSystem
             string password = textPassword.Text;
             string confirmPassword = textConfirmPassword.Text;
 
-            // validaciones (las tienes bien)
+            // Validations
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(username) ||
+                string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("All fields are required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Password minimum length validation
+            if (password.Length < 8)
+            {
+                MessageBox.Show("Password must be at least 8 characters long.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Password confirmation validation
+            if (password != confirmPassword)
+            {
+                MessageBox.Show("Passwords do not match.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Email format validation
+            if (!email.Contains("@") || !email.Contains("."))
+            {
+                MessageBox.Show("Please enter a valid email address.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             bool success = customerRepo.RegisterCustomer(name, username, email, password);
 
@@ -48,26 +74,22 @@ namespace HotelBookingSystem
 
         private void FormCustomerRegister_Load(object sender, EventArgs e)
         {
-
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
-
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
-
         }
+
         private void textName_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

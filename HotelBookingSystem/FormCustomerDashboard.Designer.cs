@@ -56,8 +56,7 @@
             lblTitle.Size = new Size(117, 27);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "BOOKIFY";
-            lblTitle.Click += lblTitle_Click;
-            // 
+            
             // txtDestination
             // 
             txtDestination.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);

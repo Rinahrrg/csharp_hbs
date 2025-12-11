@@ -54,6 +54,7 @@
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(769, 442);
             flowLayoutPanel1.TabIndex = 36;
+            flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
             // dataGridViewHotel
             // 
