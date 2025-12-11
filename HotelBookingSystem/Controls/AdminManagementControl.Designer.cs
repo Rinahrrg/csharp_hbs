@@ -55,11 +55,10 @@
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(3, 25);
+            panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(815, 642);
             panel1.TabIndex = 14;
-//            panel1.Paint += this.panel1_Paint;
             // 
             // checkBoxShowPassword
             // 
@@ -72,10 +71,11 @@
             checkBoxShowPassword.TabIndex = 41;
             checkBoxShowPassword.Text = "Show Password";
             checkBoxShowPassword.UseVisualStyleBackColor = true;
+            checkBoxShowPassword.CheckedChanged += checkBoxShowPassword_CheckedChanged;
             // 
             // txtConfirmPassword
             // 
-            txtConfirmPassword.Location = new Point(186, 160);
+            txtConfirmPassword.Location = new Point(187, 160);
             txtConfirmPassword.Name = "txtConfirmPassword";
             txtConfirmPassword.PasswordChar = '•';
             txtConfirmPassword.Size = new Size(280, 27);
@@ -101,6 +101,7 @@
             btnDelete.TabIndex = 38;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnUpdate
             // 
@@ -111,6 +112,7 @@
             btnUpdate.TabIndex = 37;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnEdit
             // 
@@ -121,6 +123,7 @@
             btnEdit.TabIndex = 36;
             btnEdit.Text = "Edit";
             btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Click += btnEdit_Click;
             // 
             // btnAdd
             // 
@@ -131,6 +134,7 @@
             btnAdd.TabIndex = 35;
             btnAdd.Text = "Add Admin";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // btnRefresh
             // 
@@ -141,6 +145,7 @@
             btnRefresh.TabIndex = 8;
             btnRefresh.Text = "Refresh";
             btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // dataGridViewAdmins
             // 
@@ -155,7 +160,7 @@
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(186, 115);
+            txtPassword.Location = new Point(187, 115);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '•';
             txtPassword.Size = new Size(280, 27);
@@ -163,14 +168,14 @@
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(186, 70);
+            txtUsername.Location = new Point(187, 70);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(280, 27);
             txtUsername.TabIndex = 31;
             // 
             // txtName
             // 
-            txtName.Location = new Point(186, 25);
+            txtName.Location = new Point(187, 25);
             txtName.Name = "txtName";
             txtName.Size = new Size(280, 27);
             txtName.TabIndex = 19;

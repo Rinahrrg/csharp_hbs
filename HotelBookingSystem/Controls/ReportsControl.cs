@@ -18,6 +18,9 @@ namespace HotelBookingSystem
         public ReportsControl()
         {
             InitializeComponent();
+
+            dataGridViewReports.GridColor = Color.Gray;
+            dataGridViewReports.CellBorderStyle = DataGridViewCellBorderStyle.Single;
         }
 
         private void btnMostBookedRoom_Click(object sender, EventArgs e)

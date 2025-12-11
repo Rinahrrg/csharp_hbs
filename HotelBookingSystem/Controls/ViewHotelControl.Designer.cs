@@ -20,13 +20,18 @@
             base.Dispose(disposing);
         }
 
+        private void InitializeComponent()
+        {
+            InitializeComponent(flowLayoutPanel1);
+        }
+
         #region Código generado por el Diseñador de componentes
 
         /// <summary> 
         /// Método necesario para admitir el Diseñador. No se puede modificar
         /// el contenido de este método con el editor de código.
         /// </summary>
-        private void InitializeComponent()
+        private void InitializeComponent(FlowLayoutPanel flowLayoutPanel1)
         {
             panel1 = new Panel();
             flowLayoutPanel1 = new FlowLayoutPanel();
@@ -98,5 +103,6 @@
         private DataGridView dataGridViewHotel;
         private Button btnRefresh;
         private FlowLayoutPanel flowLayoutPanel1;
+        private PaintEventHandler flowLayoutPanel1_Paint;
     }
 }

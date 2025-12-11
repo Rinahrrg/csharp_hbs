@@ -64,7 +64,7 @@ namespace HotelBookingSystem
             }
         }
 
-        private Panel CreateHotelCard(DataRow hotelData)
+        private static Panel CreateHotelCard(DataRow hotelData)
         {
             Panel card = new Panel();
             card.Width = 350;

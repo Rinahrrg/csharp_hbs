@@ -19,7 +19,19 @@ namespace HotelBookingSystem
         public AdminManagementControl()
         {
             InitializeComponent();
-            LoadAdmins();
+
+            // ESTAS 4 LÍNEAS HACEN QUE SE VEAN LAS LÍNEAS PERFECTO
+            dataGridViewAdmins.GridColor = Color.Gray;
+            dataGridViewAdmins.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dataGridViewAdmins.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewAdmins.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            // Opcional: fondo blanco para mejor contraste
+            dataGridViewAdmins.BackgroundColor = Color.White;
+            dataGridViewAdmins.DefaultCellStyle.BackColor = Color.White;
+            dataGridViewAdmins.DefaultCellStyle.ForeColor = Color.Black;
+
+            LoadAdmins(); // o LoadAssets(), LoadBookings(), etc.
         }
 
         private void LoadAdmins()
@@ -27,7 +39,10 @@ namespace HotelBookingSystem
             using (MySqlConnection c = new MySqlConnection(conn))
             {
                 c.Open();
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT id, name AS 'Name', username AS 'Username' FROM admin", c);
+                // SOLO username (tu tabla NO tiene 'name')
+                MySqlDataAdapter da = new MySqlDataAdapter(
+                    "SELECT id, username AS 'Username' FROM admin ORDER BY id", c);
+
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dataGridViewAdmins.DataSource = dt;
@@ -36,10 +51,9 @@ namespace HotelBookingSystem
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtName.Text) || string.IsNullOrWhiteSpace(txtUsername.Text) ||
-                string.IsNullOrWhiteSpace(txtPassword.Text))
+            if (string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
             {
-                MessageBox.Show("All fields are required!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Username and Password are required!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -48,7 +62,6 @@ namespace HotelBookingSystem
                 MessageBox.Show("Password must be at least 8 characters long.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             if (txtPassword.Text != txtConfirmPassword.Text)
             {
                 MessageBox.Show("Passwords do not match.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -61,34 +74,34 @@ namespace HotelBookingSystem
                 {
                     c.Open();
 
-                    // Check if username already exists
+                    // Verificar si el username ya existe
                     MySqlCommand checkCmd = new MySqlCommand("SELECT COUNT(*) FROM admin WHERE username = @u", c);
                     checkCmd.Parameters.AddWithValue("@u", txtUsername.Text.Trim());
                     int count = Convert.ToInt32(checkCmd.ExecuteScalar());
 
                     if (count > 0)
                     {
-                        MessageBox.Show("Username already exists. Please choose a different username.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Username already exists. Choose another one.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
-                    MySqlCommand cmd = new MySqlCommand("INSERT INTO admin (name, username, password) VALUES (@n, @u, @p)", c);
-                    cmd.Parameters.AddWithValue("@n", txtName.Text.Trim());
-                    cmd.Parameters.AddWithValue("@u", txtUsername.Text.Trim());
-                    cmd.Parameters.AddWithValue("@p", txtPassword.Text);
-                    cmd.ExecuteNonQuery();
+            // INSERTAR SIN COLUMNA 'name' (porque NO existe en tu tabla)
+            MySqlCommand cmd = new MySqlCommand(
+                "INSERT INTO admin (username, password) VALUES (@u, @p)", c);
+            cmd.Parameters.AddWithValue("@u", txtUsername.Text.Trim());
+            cmd.Parameters.AddWithValue("@p", txtPassword.Text);
+            cmd.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show("Admin added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadAdmins();
+            ClearForm();
                 }
-
-                MessageBox.Show("Admin added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadAdmins();
-                ClearForm();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error adding admin: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error adding admin: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
         }
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
             if (dataGridViewAdmins.SelectedRows.Count == 0)

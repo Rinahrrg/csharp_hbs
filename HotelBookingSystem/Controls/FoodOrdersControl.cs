@@ -19,6 +19,9 @@ namespace HotelBookingSystem
         {
             InitializeComponent();
             LoadAllFoodOrders();
+
+            dataGridViewFoodOrders.GridColor = Color.Gray;
+            dataGridViewFoodOrders.CellBorderStyle = DataGridViewCellBorderStyle.Single;
         }
 
         private void LoadAllFoodOrders()
@@ -127,6 +130,11 @@ namespace HotelBookingSystem
                            "FOOD ORDER - " + code, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void txtSearchCode_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSearch_Click_1(object sender, EventArgs e)
         {
 
         }

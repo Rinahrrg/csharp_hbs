@@ -116,6 +116,7 @@
             dataGridViewAssets.RowHeadersWidth = 51;
             dataGridViewAssets.Size = new Size(769, 260);
             dataGridViewAssets.TabIndex = 35;
+            dataGridViewAssets.CellContentClick += dataGridViewAssets_CellContentClick;
             // 
             // comboBoxStatus
             // 

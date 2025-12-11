@@ -19,6 +19,9 @@ namespace HotelBookingSystem
         {
             InitializeComponent();
             LoadAllBookings();
+
+            dataGridViewBookings.GridColor = Color.Gray;
+            dataGridViewBookings.CellBorderStyle = DataGridViewCellBorderStyle.Single;
         }
 
         private void LoadAllBookings()

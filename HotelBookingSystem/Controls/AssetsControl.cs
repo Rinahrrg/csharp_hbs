@@ -22,6 +22,9 @@ namespace HotelBookingSystem
             LoadAssetTypes();
             LoadAssets();
             LoadStatusCombo();
+
+            dataGridViewAssets.GridColor = Color.Gray;
+            dataGridViewAssets.CellBorderStyle = DataGridViewCellBorderStyle.Single;
         }
 
         private void LoadAssetTypes()
@@ -33,9 +36,9 @@ namespace HotelBookingSystem
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                comboBoxAssetType.DisplayMember = "type";  
-                comboBoxAssetType.ValueMember = "id";     
-                comboBoxAssetType.DataSource = dt;        
+                comboBoxAssetType.DisplayMember = "type";
+                comboBoxAssetType.ValueMember = "id";
+                comboBoxAssetType.DataSource = dt;
             }
         }
 
@@ -175,7 +178,12 @@ namespace HotelBookingSystem
             txtAssetName.Clear();
             txtDescription.Clear();
             txtBrand.Clear();
-            comboBoxAssetType.SelectedIndex = -1;  
+            comboBoxAssetType.SelectedIndex = -1;
+        }
+
+        private void dataGridViewAssets_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
