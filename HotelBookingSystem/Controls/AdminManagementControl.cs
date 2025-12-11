@@ -112,12 +112,15 @@ namespace HotelBookingSystem
 
             var row = dataGridViewAdmins.SelectedRows[0];
             editingAdminId = Convert.ToInt32(row.Cells["id"].Value);
-            txtName.Text = row.Cells["Name"].Value.ToString();
+
+            // SOLO CARGAR USERNAME (NO HAY 'Name')
             txtUsername.Text = row.Cells["Username"].Value.ToString();
+
             txtPassword.Clear();
             txtConfirmPassword.Clear();
 
-            MessageBox.Show("Admin loaded. Make changes and click Update.\nLeave password fields empty to keep current password.", "Edit Mode", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Admin loaded. Change username and/or password, then click Update.\nLeave password blank to keep current one.",
+                "Edit Mode", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -128,13 +131,14 @@ namespace HotelBookingSystem
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(txtName.Text) || string.IsNullOrWhiteSpace(txtUsername.Text))
+            // SOLO VALIDAR USERNAME (tu tabla NO tiene 'name')
+            if (string.IsNullOrWhiteSpace(txtUsername.Text))
             {
-                MessageBox.Show("Name and Username are required!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Username is required!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // If password is provided, validate it
+            // Validar contraseña solo si se ingresó
             if (!string.IsNullOrEmpty(txtPassword.Text))
             {
                 if (txtPassword.Text.Length < 8)
@@ -142,7 +146,6 @@ namespace HotelBookingSystem
                     MessageBox.Show("Password must be at least 8 characters long.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
                 if (txtPassword.Text != txtConfirmPassword.Text)
                 {
                     MessageBox.Show("Passwords do not match.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -161,17 +164,18 @@ namespace HotelBookingSystem
 
                     if (!string.IsNullOrEmpty(txtPassword.Text))
                     {
-                        sql = "UPDATE admin SET name=@n, username=@u, password=@p WHERE id=@id";
+                        // Actualizar username + password
+                        sql = "UPDATE admin SET username = @u, password = @p WHERE id = @id";
                         cmd = new MySqlCommand(sql, c);
                         cmd.Parameters.AddWithValue("@p", txtPassword.Text);
                     }
                     else
                     {
-                        sql = "UPDATE admin SET name=@n, username=@u WHERE id=@id";
+                        // Solo actualizar username
+                        sql = "UPDATE admin SET username = @u WHERE id = @id";
                         cmd = new MySqlCommand(sql, c);
                     }
 
-                    cmd.Parameters.AddWithValue("@n", txtName.Text.Trim());
                     cmd.Parameters.AddWithValue("@u", txtUsername.Text.Trim());
                     cmd.Parameters.AddWithValue("@id", editingAdminId);
                     cmd.ExecuteNonQuery();
@@ -195,7 +199,6 @@ namespace HotelBookingSystem
                 return;
             }
 
-            // Check if there's more than one admin
             using (MySqlConnection c = new MySqlConnection(conn))
             {
                 c.Open();
@@ -210,9 +213,9 @@ namespace HotelBookingSystem
             }
 
             int adminId = Convert.ToInt32(dataGridViewAdmins.SelectedRows[0].Cells["id"].Value);
-            string adminName = dataGridViewAdmins.SelectedRows[0].Cells["Name"].Value.ToString();
+            string adminUsername = dataGridViewAdmins.SelectedRows[0].Cells["Username"].Value.ToString();
 
-            if (MessageBox.Show($"Are you sure you want to delete admin '{adminName}'?", "Confirm Delete",
+            if (MessageBox.Show($"Are you sure you want to delete admin '{adminUsername}'?", "Confirm Delete",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try

@@ -43,9 +43,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(14, 12);
             label1.Name = "label1";
-            label1.Size = new Size(95, 21);
+            label1.Size = new Size(124, 28);
             label1.TabIndex = 0;
             label1.Text = "BOOKING - ";
             // 
@@ -54,9 +54,10 @@
             comboBoxFloor.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxFloor.Font = new Font("Segoe UI", 10F);
             comboBoxFloor.FormattingEnabled = true;
-            comboBoxFloor.Location = new Point(75, 52);
+            comboBoxFloor.Location = new Point(86, 69);
+            comboBoxFloor.Margin = new Padding(3, 4, 3, 4);
             comboBoxFloor.Name = "comboBoxFloor";
-            comboBoxFloor.Size = new Size(120, 25);
+            comboBoxFloor.Size = new Size(137, 31);
             comboBoxFloor.TabIndex = 1;
             // 
             // lblHotelnName
@@ -64,18 +65,18 @@
             lblHotelnName.AutoSize = true;
             lblHotelnName.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblHotelnName.ForeColor = Color.FromArgb(0, 122, 204);
-            lblHotelnName.Location = new Point(113, 9);
+            lblHotelnName.Location = new Point(129, 12);
             lblHotelnName.Name = "lblHotelnName";
-            lblHotelnName.Size = new Size(0, 21);
+            lblHotelnName.Size = new Size(0, 28);
             lblHotelnName.TabIndex = 2;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F);
-            label2.Location = new Point(18, 55);
+            label2.Location = new Point(21, 73);
             label2.Name = "label2";
-            label2.Size = new Size(51, 19);
+            label2.Size = new Size(52, 23);
             label2.TabIndex = 3;
             label2.Text = "Floor:";
             // 
@@ -83,9 +84,9 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F);
-            label3.Location = new Point(220, 55);
+            label3.Location = new Point(251, 73);
             label3.Name = "label3";
-            label3.Size = new Size(68, 19);
+            label3.Size = new Size(81, 23);
             label3.TabIndex = 4;
             label3.Text = "Check-in:";
             // 
@@ -93,9 +94,9 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10F);
-            label4.Location = new Point(430, 55);
+            label4.Location = new Point(491, 73);
             label4.Name = "label4";
-            label4.Size = new Size(78, 19);
+            label4.Size = new Size(93, 23);
             label4.TabIndex = 5;
             label4.Text = "Check-out:";
             // 
@@ -103,27 +104,29 @@
             // 
             dtpCheckin.Font = new Font("Segoe UI", 10F);
             dtpCheckin.Format = DateTimePickerFormat.Short;
-            dtpCheckin.Location = new Point(294, 52);
+            dtpCheckin.Location = new Point(336, 69);
+            dtpCheckin.Margin = new Padding(3, 4, 3, 4);
             dtpCheckin.Name = "dtpCheckin";
-            dtpCheckin.Size = new Size(120, 25);
+            dtpCheckin.Size = new Size(137, 30);
             dtpCheckin.TabIndex = 6;
             // 
             // dtpCheckout
             // 
             dtpCheckout.Font = new Font("Segoe UI", 10F);
             dtpCheckout.Format = DateTimePickerFormat.Short;
-            dtpCheckout.Location = new Point(514, 52);
+            dtpCheckout.Location = new Point(587, 69);
+            dtpCheckout.Margin = new Padding(3, 4, 3, 4);
             dtpCheckout.Name = "dtpCheckout";
-            dtpCheckout.Size = new Size(120, 25);
+            dtpCheckout.Size = new Size(137, 30);
             dtpCheckout.TabIndex = 7;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label5.Location = new Point(18, 95);
+            label5.Location = new Point(21, 127);
             label5.Name = "label5";
-            label5.Size = new Size(89, 19);
+            label5.Size = new Size(101, 23);
             label5.TabIndex = 8;
             label5.Text = "Food Plans:";
             // 
@@ -131,9 +134,10 @@
             // 
             chkBreakfast.AutoSize = true;
             chkBreakfast.Font = new Font("Segoe UI", 9F);
-            chkBreakfast.Location = new Point(120, 96);
+            chkBreakfast.Location = new Point(137, 128);
+            chkBreakfast.Margin = new Padding(3, 4, 3, 4);
             chkBreakfast.Name = "chkBreakfast";
-            chkBreakfast.Size = new Size(76, 19);
+            chkBreakfast.Size = new Size(92, 24);
             chkBreakfast.TabIndex = 9;
             chkBreakfast.Text = "Breakfast";
             chkBreakfast.UseVisualStyleBackColor = true;
@@ -142,9 +146,10 @@
             // 
             chkLunch.AutoSize = true;
             chkLunch.Font = new Font("Segoe UI", 9F);
-            chkLunch.Location = new Point(210, 96);
+            chkLunch.Location = new Point(240, 128);
+            chkLunch.Margin = new Padding(3, 4, 3, 4);
             chkLunch.Name = "chkLunch";
-            chkLunch.Size = new Size(58, 19);
+            chkLunch.Size = new Size(69, 24);
             chkLunch.TabIndex = 10;
             chkLunch.Text = "Lunch";
             chkLunch.UseVisualStyleBackColor = true;
@@ -153,20 +158,23 @@
             // 
             chkDinner.AutoSize = true;
             chkDinner.Font = new Font("Segoe UI", 9F);
-            chkDinner.Location = new Point(285, 96);
+            chkDinner.Location = new Point(326, 128);
+            chkDinner.Margin = new Padding(3, 4, 3, 4);
             chkDinner.Name = "chkDinner";
-            chkDinner.Size = new Size(61, 19);
+            chkDinner.Size = new Size(75, 24);
             chkDinner.TabIndex = 11;
             chkDinner.Text = "Dinner";
             chkDinner.UseVisualStyleBackColor = true;
+            chkDinner.CheckedChanged += chkDinner_CheckedChanged;
             // 
             // chkFullBoard
             // 
             chkFullBoard.AutoSize = true;
             chkFullBoard.Font = new Font("Segoe UI", 9F);
-            chkFullBoard.Location = new Point(360, 96);
+            chkFullBoard.Location = new Point(411, 128);
+            chkFullBoard.Margin = new Padding(3, 4, 3, 4);
             chkFullBoard.Name = "chkFullBoard";
-            chkFullBoard.Size = new Size(80, 19);
+            chkFullBoard.Size = new Size(98, 24);
             chkFullBoard.TabIndex = 12;
             chkFullBoard.Text = "Full Board";
             chkFullBoard.UseVisualStyleBackColor = true;
@@ -175,9 +183,10 @@
             // 
             chkNone.AutoSize = true;
             chkNone.Font = new Font("Segoe UI", 9F);
-            chkNone.Location = new Point(455, 96);
+            chkNone.Location = new Point(520, 128);
+            chkNone.Margin = new Padding(3, 4, 3, 4);
             chkNone.Name = "chkNone";
-            chkNone.Size = new Size(54, 19);
+            chkNone.Size = new Size(67, 24);
             chkNone.TabIndex = 13;
             chkNone.Text = "None";
             chkNone.UseVisualStyleBackColor = true;
@@ -186,9 +195,9 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label6.Location = new Point(18, 130);
+            label6.Location = new Point(21, 173);
             label6.Name = "label6";
-            label6.Size = new Size(130, 19);
+            label6.Size = new Size(148, 23);
             label6.TabIndex = 14;
             label6.Text = "Available Rooms:";
             // 
@@ -197,9 +206,10 @@
             flowLayoutPanelRooms.AutoScroll = true;
             flowLayoutPanelRooms.BackColor = Color.WhiteSmoke;
             flowLayoutPanelRooms.BorderStyle = BorderStyle.FixedSingle;
-            flowLayoutPanelRooms.Location = new Point(18, 155);
+            flowLayoutPanelRooms.Location = new Point(21, 207);
+            flowLayoutPanelRooms.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanelRooms.Name = "flowLayoutPanelRooms";
-            flowLayoutPanelRooms.Size = new Size(420, 380);
+            flowLayoutPanelRooms.Size = new Size(480, 506);
             flowLayoutPanelRooms.TabIndex = 15;
             // 
             // panelSummary
@@ -207,9 +217,10 @@
             panelSummary.BackColor = Color.FromArgb(30, 30, 30);
             panelSummary.Controls.Add(btnConfirm);
             panelSummary.Controls.Add(lblBookingCode);
-            panelSummary.Location = new Point(450, 155);
+            panelSummary.Location = new Point(514, 207);
+            panelSummary.Margin = new Padding(3, 4, 3, 4);
             panelSummary.Name = "panelSummary";
-            panelSummary.Size = new Size(330, 380);
+            panelSummary.Size = new Size(377, 507);
             panelSummary.TabIndex = 16;
             // 
             // btnConfirm
@@ -219,9 +230,10 @@
             btnConfirm.FlatStyle = FlatStyle.Flat;
             btnConfirm.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             btnConfirm.ForeColor = Color.White;
-            btnConfirm.Location = new Point(20, 320);
+            btnConfirm.Location = new Point(23, 427);
+            btnConfirm.Margin = new Padding(3, 4, 3, 4);
             btnConfirm.Name = "btnConfirm";
-            btnConfirm.Size = new Size(290, 45);
+            btnConfirm.Size = new Size(331, 60);
             btnConfirm.TabIndex = 1;
             btnConfirm.Text = "✓ CONFIRM BOOKING";
             btnConfirm.UseVisualStyleBackColor = false;
@@ -231,18 +243,18 @@
             // 
             lblBookingCode.Font = new Font("Segoe UI", 10F);
             lblBookingCode.ForeColor = Color.White;
-            lblBookingCode.Location = new Point(15, 15);
+            lblBookingCode.Location = new Point(17, 20);
             lblBookingCode.Name = "lblBookingCode";
-            lblBookingCode.Size = new Size(300, 290);
+            lblBookingCode.Size = new Size(343, 387);
             lblBookingCode.TabIndex = 0;
             lblBookingCode.Text = "Select a room to continue...";
             // 
             // FormRoomSelection
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(800, 550);
+            ClientSize = new Size(914, 733);
             Controls.Add(panelSummary);
             Controls.Add(flowLayoutPanelRooms);
             Controls.Add(label6);
@@ -261,6 +273,7 @@
             Controls.Add(comboBoxFloor);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             Name = "FormRoomSelection";
             StartPosition = FormStartPosition.CenterParent;

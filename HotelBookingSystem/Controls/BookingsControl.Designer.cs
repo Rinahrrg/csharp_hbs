@@ -100,6 +100,7 @@
             btnRefresh.TabIndex = 8;
             btnRefresh.Text = "Refresh All Bookings";
             btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // BookingsControl
             // 

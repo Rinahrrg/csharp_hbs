@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace HotelBookingSystem
 {
@@ -78,28 +79,41 @@ namespace HotelBookingSystem
         }
         private void btnAddAsset_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtAssetName.Text))
+            if (string.IsNullOrWhiteSpace(txtAssetName.Text) ||
+                string.IsNullOrWhiteSpace(txtBrand.Text) ||
+                comboBoxAssetType.SelectedValue == null)
             {
-                MessageBox.Show("Asset name is required!");
+                MessageBox.Show("Name, Brand and Type are required!", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            using (MySqlConnection c = new MySqlConnection(conn))
+            try
             {
-                c.Open();
-                MySqlCommand cmd = new MySqlCommand(
-                    "INSERT INTO assets (name, description, brand, asset_type, status) VALUES (@name, @desc, @brand, @type, @status)", c);
-                cmd.Parameters.AddWithValue("@name", txtAssetName.Text.Trim());
-                cmd.Parameters.AddWithValue("@desc", txtDescription.Text.Trim());
-                cmd.Parameters.AddWithValue("@brand", txtBrand.Text.Trim());
-                cmd.Parameters.AddWithValue("@type", Convert.ToInt32(comboBoxAssetType.SelectedValue));
-                cmd.Parameters.AddWithValue("@status", comboBoxStatus.SelectedItem.ToString()); // Aseguramos que se usa el estado seleccionado
-                cmd.ExecuteNonQuery();
-            }
+                using (MySqlConnection c = new MySqlConnection(conn))
+                {
+                    c.Open();
 
-            MessageBox.Show("Asset added successfully!");
-            LoadAssets();
-            ClearForm();
+                    // INSERTAR EN assets (SIN status → status está en asset_types)
+                    string sql = @"
+                INSERT INTO assets (name, description, brand, asset_type)
+                VALUES (@name, @desc, @brand, @type)";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, c);
+                    cmd.Parameters.AddWithValue("@name", txtAssetName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@desc", txtDescription.Text.Trim());
+                    cmd.Parameters.AddWithValue("@brand", txtBrand.Text.Trim());
+                    cmd.Parameters.AddWithValue("@type", Convert.ToInt32(comboBoxAssetType.SelectedValue));
+                    cmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Asset added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadAssets();
+                ClearForm();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error adding asset: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void btnEditAsset_Click(object sender, EventArgs e)
         {

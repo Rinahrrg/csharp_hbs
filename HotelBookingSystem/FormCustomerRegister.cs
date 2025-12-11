@@ -100,7 +100,11 @@ namespace HotelBookingSystem
 
         private void Close_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Hide();
+
+            FormCustomerHotel chooseRoleForm = new FormCustomerHotel();
+            chooseRoleForm.FormClosed += (s, args) => this.Close();
+            chooseRoleForm.Show();
         }
     }
 }

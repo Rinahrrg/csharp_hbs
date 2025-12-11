@@ -410,5 +410,10 @@ namespace HotelBookingSystem
         {
             // Handled by FoodOption_CheckedChanged
         }
+
+        private void chkDinner_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
