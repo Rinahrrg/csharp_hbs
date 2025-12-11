@@ -20,6 +20,8 @@ namespace HotelBookingSystem
         {
             InitializeComponent();
             LoadHotels();
+
+
         }
 
         private void LoadHotels()
@@ -166,6 +168,11 @@ namespace HotelBookingSystem
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadHotels();
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

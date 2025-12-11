@@ -20,67 +20,65 @@
             base.Dispose(disposing);
         }
 
-        private void InitializeComponent()
-        {
-            InitializeComponent(flowLayoutPanel1);
-        }
-
         #region Código generado por el Diseñador de componentes
 
         /// <summary> 
         /// Método necesario para admitir el Diseñador. No se puede modificar
         /// el contenido de este método con el editor de código.
         /// </summary>
-        private void InitializeComponent(FlowLayoutPanel flowLayoutPanel1)
+        private void InitializeComponent()
         {
             panel1 = new Panel();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            dataGridViewHotel = new DataGridView();
+            lblTitle = new Label();
             btnRefresh = new Button();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewHotel).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.Black;
             panel1.Controls.Add(flowLayoutPanel1);
-            panel1.Controls.Add(dataGridViewHotel);
+            panel1.Controls.Add(lblTitle);
             panel1.Controls.Add(btnRefresh);
-            panel1.Location = new Point(3, 3);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(815, 642);
+            panel1.Size = new Size(821, 693);
             panel1.TabIndex = 17;
             // 
             // flowLayoutPanel1
             // 
+            flowLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.BackColor = Color.White;
-            flowLayoutPanel1.Location = new Point(20, 57);
+            flowLayoutPanel1.Location = new Point(20, 70);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(769, 442);
+            flowLayoutPanel1.Padding = new Padding(10);
+            flowLayoutPanel1.Size = new Size(781, 610);
             flowLayoutPanel1.TabIndex = 36;
             flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
-            // dataGridViewHotel
+            // lblTitle
             // 
-            dataGridViewHotel.BackgroundColor = Color.White;
-            dataGridViewHotel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewHotel.GridColor = Color.White;
-            dataGridViewHotel.Location = new Point(20, 57);
-            dataGridViewHotel.Name = "dataGridViewHotel";
-            dataGridViewHotel.RowHeadersWidth = 51;
-            dataGridViewHotel.Size = new Size(769, 442);
-            dataGridViewHotel.TabIndex = 35;
-            dataGridViewHotel.CellContentClick += dataGridViewFoodOrders_CellContentClick;
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Arial Rounded MT Bold", 14F);
+            lblTitle.ForeColor = Color.White;
+            lblTitle.Location = new Point(20, 25);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(187, 28);
+            lblTitle.TabIndex = 37;
+            lblTitle.Text = "All Hotels View";
             // 
             // btnRefresh
             // 
-            btnRefresh.Font = new Font("Arial Rounded MT Bold", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnRefresh.Location = new Point(20, 22);
+            btnRefresh.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnRefresh.Font = new Font("Arial Rounded MT Bold", 9F);
+            btnRefresh.Location = new Point(700, 20);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(94, 29);
+            btnRefresh.Size = new Size(100, 35);
             btnRefresh.TabIndex = 8;
-            btnRefresh.Text = "Refresh All Bookings";
+            btnRefresh.Text = "Refresh";
             btnRefresh.UseVisualStyleBackColor = true;
             btnRefresh.Click += btnRefresh_Click;
             // 
@@ -93,16 +91,15 @@
             Name = "ViewHotelControl";
             Size = new Size(821, 693);
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridViewHotel).EndInit();
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel panel1;
-        private DataGridView dataGridViewHotel;
-        private Button btnRefresh;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private PaintEventHandler flowLayoutPanel1_Paint;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Label lblTitle;
     }
 }
