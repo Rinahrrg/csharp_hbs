@@ -20,8 +20,6 @@ namespace HotelBookingSystem
         {
             InitializeComponent();
             LoadHotels();
-
-
         }
 
         private void LoadHotels()

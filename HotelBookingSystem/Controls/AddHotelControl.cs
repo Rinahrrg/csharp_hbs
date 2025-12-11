@@ -1,13 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HotelBookingSystem
@@ -39,7 +34,7 @@ namespace HotelBookingSystem
         private void btnBrowsePhoto_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Images|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+            ofd.Filter = "Images|*.jpg;*.jpeg;*.png;*.bmp";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 pictureBox1.Image = Image.FromFile(ofd.FileName);
@@ -64,7 +59,8 @@ namespace HotelBookingSystem
             using (MySqlConnection c = new MySqlConnection(conn))
             {
                 c.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO hotels (name, address, default_booking_time, image) VALUES (@n, @a, @t, @img)", c);
+                MySqlCommand cmd = new MySqlCommand(
+                    "INSERT INTO hotels (name, address, default_booking_time, image) VALUES (@n, @a, @t, @img)", c);
                 cmd.Parameters.AddWithValue("@n", txtName.Text.Trim());
                 cmd.Parameters.AddWithValue("@a", txtAddress.Text.Trim());
                 cmd.Parameters.AddWithValue("@t", numericUpDownFloors.Value);
@@ -91,7 +87,7 @@ namespace HotelBookingSystem
             txtAddress.Text = row.Cells["Address"].Value.ToString();
             numericUpDownFloors.Value = Convert.ToInt32(row.Cells["Default Booking Time (hrs)"].Value);
 
-            // Load image if exists
+            // Load image
             using (MySqlConnection c = new MySqlConnection(conn))
             {
                 c.Open();
@@ -128,7 +124,8 @@ namespace HotelBookingSystem
             using (MySqlConnection c = new MySqlConnection(conn))
             {
                 c.Open();
-                MySqlCommand cmd = new MySqlCommand("UPDATE hotels SET name=@n, address=@a, default_booking_time=@t, image=@img WHERE id=@id", c);
+                MySqlCommand cmd = new MySqlCommand(
+                    "UPDATE hotels SET name=@n, address=@a, default_booking_time=@t, image=@img WHERE id=@id", c);
                 cmd.Parameters.AddWithValue("@n", txtName.Text.Trim());
                 cmd.Parameters.AddWithValue("@a", txtAddress.Text.Trim());
                 cmd.Parameters.AddWithValue("@t", numericUpDownFloors.Value);
@@ -157,8 +154,7 @@ namespace HotelBookingSystem
             int hotelId = Convert.ToInt32(dataGridViewHotels.SelectedRows[0].Cells["id"].Value);
             string hotelName = dataGridViewHotels.SelectedRows[0].Cells["Hotel Name"].Value.ToString();
 
-            if (MessageBox.Show($"Are you sure you want to delete hotel \"{hotelName}\"?\n\n" +
-                "ALL floors, rooms, and bookings of this hotel will be deleted permanently.",
+            if (MessageBox.Show($"Are you sure you want to delete hotel \"{hotelName}\"?\n\nALL floors, rooms, and bookings will be deleted.",
                 "CONFIRM DELETION", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
                 try
@@ -180,7 +176,6 @@ namespace HotelBookingSystem
             }
         }
 
-        private void btnViewHotels_Click(object sender, EventArgs e) => LoadHotels();
         private void btnRefresh_Click(object sender, EventArgs e) => LoadHotels();
 
         private void ClearForm()
@@ -193,25 +188,11 @@ namespace HotelBookingSystem
             currentImageBytes = null;
         }
 
-        private void dataGridViewHotels_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                var row = dataGridViewHotels.Rows[e.RowIndex];
-                editingId = Convert.ToInt32(row.Cells["id"].Value);
-                txtName.Text = row.Cells["Hotel Name"].Value.ToString();
-                txtAddress.Text = row.Cells["Address"].Value.ToString();
-                numericUpDownFloors.Value = Convert.ToInt32(row.Cells["Default Booking Time (hrs)"].Value);
-            }
-        }
-
+        // Empty event handlers
         private void label2_Click(object sender, EventArgs e) { }
-        private void pictureBox1_Click(object sender, EventArgs e) { }
-        private void dataGridViewHotels_CellContentClick_1(object sender, DataGridViewCellEventArgs e) { }
+        private void pictureBox1_Click_2(object sender, EventArgs e) { }
         private void label4_Click(object sender, EventArgs e) { }
         private void label5_Click(object sender, EventArgs e) { }
-        private void pictureBox1_Click_1(object sender, EventArgs e) { }
-        private void pictureBox1_Click_2(object sender, EventArgs e) { }
         private void numericUpDownFloors_ValueChanged(object sender, EventArgs e) { }
         private void dataGridViewHotels_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
     }
