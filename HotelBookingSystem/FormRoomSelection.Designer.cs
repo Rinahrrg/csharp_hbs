@@ -59,6 +59,7 @@
             comboBoxFloor.Name = "comboBoxFloor";
             comboBoxFloor.Size = new Size(137, 31);
             comboBoxFloor.TabIndex = 1;
+            comboBoxFloor.SelectedIndexChanged += comboBoxFloor_SelectedIndexChanged_1;
             // 
             // lblHotelnName
             // 

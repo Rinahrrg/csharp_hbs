@@ -195,5 +195,10 @@ namespace HotelBookingSystem
         private void label5_Click(object sender, EventArgs e) { }
         private void numericUpDownFloors_ValueChanged(object sender, EventArgs e) { }
         private void dataGridViewHotels_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

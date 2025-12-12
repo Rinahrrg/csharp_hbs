@@ -149,6 +149,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(814, 687);
             panel1.TabIndex = 15;
+            panel1.Paint += panel1_Paint;
             // 
             // numericUpDownFloors
             // 

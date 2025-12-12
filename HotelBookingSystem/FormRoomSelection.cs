@@ -19,7 +19,6 @@ namespace HotelBookingSystem
         private string hotelName;
         private int? selectedRoomId = null;
 
-        // Updated constructor with more parameters
         public FormRoomSelection(int hotelId, int customerId, string hotelName, DateTime checkIn, DateTime checkOut)
         {
             InitializeComponent();
@@ -27,10 +26,8 @@ namespace HotelBookingSystem
             this.customerId = customerId;
             this.hotelName = hotelName;
 
-            // Set the hotel name in the label
             lblHotelnName.Text = hotelName;
 
-            // Set the dates
             dtpCheckin.Value = checkIn;
             dtpCheckout.Value = checkOut;
             dtpCheckin.MinDate = DateTime.Today;
@@ -412,6 +409,11 @@ namespace HotelBookingSystem
         }
 
         private void chkDinner_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxFloor_SelectedIndexChanged_1(object sender, EventArgs e)
         {
 
         }
