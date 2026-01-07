@@ -327,6 +327,15 @@ Program.cs
 
 ---
 
+<img width="595" height="446" alt="image" src="https://github.com/user-attachments/assets/215193d0-e9b8-426b-9f7d-1fc8372b27d0" />
+<img width="582" height="397" alt="image" src="https://github.com/user-attachments/assets/d4271aa4-040b-4410-9d91-5f5c81028c91" />
+<img width="572" height="406" alt="image" src="https://github.com/user-attachments/assets/aab5d3ed-815e-4884-b1b9-72e06b4cc36f" />
+<img width="1323" height="977" alt="image" src="https://github.com/user-attachments/assets/6b676d93-9655-4f2c-99cf-58a2156ace25" />
+<img width="900" height="723" alt="image" src="https://github.com/user-attachments/assets/a3817957-a760-4ad1-aa74-752cc66f3cdc" />
+<img width="578" height="400" alt="image" src="https://github.com/user-attachments/assets/5e3aede3-1e9f-41b4-b6cf-eff0487006de" />
+<img width="991" height="691" alt="image" src="https://github.com/user-attachments/assets/6cc0587a-412f-4242-a6f3-e9e098ccb9ec" />
+
+
 ## 🎨 Design Decisions
 
 ### Why Windows Forms?
